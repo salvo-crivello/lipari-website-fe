@@ -27,11 +27,6 @@ jobs:
     name: Deploy to production
     runs-on: ubuntu-latest
     needs: [validate]
-    # Configure required reviewers on the "production" environment in repo
-    # settings — that's what turns this into a manual-approval gate.
-    # Requires VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID set as secrets
-    # on the "production" GitHub Environment, pointing at the Vercel
-    # Production project (a separate Vercel project from UAT).
     environment: production
     steps:
       - uses: actions/checkout@v4
