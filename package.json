@@ -1,7 +1,8 @@
 {
   "name": "lipari-website-fe",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
+  "packageManager": "yarn@4.9.1",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,14 +13,6 @@
     "test": "vitest",
     "test:e2e": "playwright test",
     "prepare": "husky"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix"
-    ],
-    "*.{ts,tsx,js,jsx,md,json,css}": [
-      "prettier --write"
-    ]
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
