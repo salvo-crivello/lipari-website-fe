@@ -19,9 +19,9 @@ state manager, no barrel re-exports, Zod-validated env at boot.
 
 ## Status
 
-Scaffold complete: routing, tooling (lint/format/test/e2e/git hooks), and
-folder structure are in place. Pages are placeholders pending section
-components. Open: deploy target (Vercel vs self-host).
+Scaffold complete: routing, tooling (lint/format/test/e2e/git hooks), CI/CD
+(GitHub Actions, deploying to Vercel), and folder structure are in place.
+Pages are placeholders pending section components.
 
 ## Development
 
