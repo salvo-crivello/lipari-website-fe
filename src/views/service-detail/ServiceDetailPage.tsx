@@ -6,5 +6,5 @@ export function ServiceDetailPage({ slug }: { slug: string }) {
         Figma frame 531:852 (Single-Service) — pending sections build-out + prev/next nav.
       </p>
     </main>
-  );
+  )
 }

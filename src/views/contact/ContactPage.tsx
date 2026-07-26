@@ -7,5 +7,5 @@ export function ContactPage() {
         Zod).
       </p>
     </main>
-  );
+  )
 }

@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata } from "next"
 
-import { HomePage } from "@/views/home/HomePage";
+import { HomePage } from "@/views/home/HomePage"
 
 export const metadata: Metadata = {
-  title: "Home",
-};
+  title: "Home"
+}
 
 export default function Page() {
-  return <HomePage />;
+  return <HomePage />
 }

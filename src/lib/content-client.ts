@@ -1,5 +1,5 @@
-import { fallbackLabels } from "@/content/labels";
-import type { TNestedLabels } from "@/types/labels.types";
+import { fallbackLabels } from "@/content/labels"
+import type { TNestedLabels } from "@/types/labels.types"
 
 function nestLabels(flat: typeof fallbackLabels): TNestedLabels {
   return {
@@ -8,12 +8,12 @@ function nestLabels(flat: typeof fallbackLabels): TNestedLabels {
       about: flat["nav.about"],
       cultureCareer: flat["nav.cultureCareer"],
       contact: flat["nav.contact"],
-      cta: flat["nav.cta"],
+      cta: flat["nav.cta"]
     },
     footer: {
-      valueStatement: flat["footer.valueStatement"],
-    },
-  };
+      valueStatement: flat["footer.valueStatement"]
+    }
+  }
 }
 
 /**
@@ -24,5 +24,5 @@ function nestLabels(flat: typeof fallbackLabels): TNestedLabels {
  * Never call this from a Client Component.
  */
 export async function getLabels(): Promise<TNestedLabels> {
-  return nestLabels(fallbackLabels);
+  return nestLabels(fallbackLabels)
 }

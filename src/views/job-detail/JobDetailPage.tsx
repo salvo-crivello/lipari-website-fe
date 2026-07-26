@@ -7,5 +7,5 @@ export function JobDetailPage({ slug }: { slug: string }) {
         recruiter links), pending sections build-out.
       </p>
     </main>
-  );
+  )
 }

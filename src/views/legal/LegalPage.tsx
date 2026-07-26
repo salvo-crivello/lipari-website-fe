@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from "react"
 
 /**
  * Single reusable template for the 6 footer-only legal pages — no unique
@@ -10,5 +10,5 @@ export function LegalPage({ title, children }: { title: string; children: ReactN
       <h1 className="text-3xl font-semibold">{title}</h1>
       <div className="prose prose-slate max-w-none">{children}</div>
     </main>
-  );
+  )
 }

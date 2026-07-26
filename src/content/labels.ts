@@ -1,4 +1,4 @@
-import type { TLabels } from "@/types/labels.types";
+import type { TLabels } from "@/types/labels.types"
 
 /**
  * Frontend-only-phase placeholder, sourced from the Figma copy.
@@ -10,5 +10,5 @@ export const fallbackLabels: TLabels = {
   "nav.cultureCareer": "Culture & Career",
   "nav.contact": "Contact",
   "nav.cta": "Lavora con noi",
-  "footer.valueStatement": "Il valore in ognuno di noi",
-};
+  "footer.valueStatement": "Il valore in ognuno di noi"
+}

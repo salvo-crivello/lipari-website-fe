@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata } from "next"
 
-import { ServicesPage } from "@/views/services/ServicesPage";
+import { ServicesPage } from "@/views/services/ServicesPage"
 
 export const metadata: Metadata = {
-  title: "Services",
-};
+  title: "Services"
+}
 
 export default function Page() {
-  return <ServicesPage />;
+  return <ServicesPage />
 }
