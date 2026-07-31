@@ -33,6 +33,8 @@
   --font-sans: var(--font-roboto);
   --font-mono: var(--font-roboto-mono);
   --font-condensed: var(--font-roboto-condensed);
+
+  --text-md: 1rem;
 }
 
 body {

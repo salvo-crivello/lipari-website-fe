@@ -9,6 +9,7 @@ export type TMainProps = HtmlHTMLAttributes<HTMLElement> & {
 }
 
 export type TSectionProps = HtmlHTMLAttributes<HTMLElement> & {
+  removePadding?: boolean
   children: ReactNode
 }
 

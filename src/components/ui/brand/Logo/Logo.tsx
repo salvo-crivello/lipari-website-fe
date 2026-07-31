@@ -1,53 +1,76 @@
-import LipariLogo from "@/assets/svg/LipariLogo"
+import type { CSSProperties } from "react"
+import LipariLogo, { LIPARI_LOGO_RATIO, LipariLogoType } from "@/assets/svg/LipariLogo"
+import { cn } from "@/utils"
 
-export function Logo() {
+import type { TLogoProps, TLogoLayerProps } from "./Logo.types"
+
+export function Logo({ size = 80, className }: TLogoProps) {
+  const iconWidth = size * 0.4
+  const iconHeight = iconWidth * LIPARI_LOGO_RATIO
+
   return (
-    <div className="h-20 w-20 perspective-[600px]">
-      <div className="relative h-full w-full">
-        <div
-          id="layer1"
-          className="absolute inset-0 z-40 rounded-sm transition-transform duration-1000 ease-in-out transform-3d group-hover:z-10 group-hover:transform-[rotateY(180deg)_rotateZ(90deg)]"
-        >
-          {/* LAYER 1 */}
-          <div className="absolute inset-0 transform-[translateZ(30px)] transform-3d">
-            {/* FRONT */}
-            <div className="bg-brand-blue-950 text-brand-green absolute inset-0 flex items-center justify-center rounded-sm backface-hidden">
-              <LipariLogo className="size-11" />
-            </div>
+    <div className={cn("perspective-[600px]", className)} style={{ width: size, height: size }}>
+      <div className="relative h-full w-full transition-transform duration-1000 ease-in-out transform-3d group-hover:transform-[rotateY(180deg)_rotateZ(90deg)]">
+        <LogoLayer
+          order={0}
+          className="transform-[translateZ(30px)]"
+          frontClassName="bg-brand-blue-950 text-brand-green flex items-center justify-center"
+          backClassName="bg-brand-blue-900"
+          frontChildren={<LipariLogo width={iconWidth} height={iconHeight} />}
+        />
 
-            {/* BACK */}
-            <div className="bg-brand-blue-900 absolute inset-0 transform-[rotateY(180deg)] rounded-sm backface-hidden" />
-          </div>
+        <LogoLayer
+          order={1}
+          className="transform-[translateZ(20px)]"
+          frontClassName="bg-brand-green"
+          backClassName="bg-brand-green-800"
+        />
 
-          {/* LAYER 2 */}
-          <div className="absolute inset-0 transform-[translateZ(20px)] transform-3d">
-            {/* FRONT */}
-            <div className="bg-brand-green absolute inset-0 rounded-sm backface-hidden" />
+        <LogoLayer
+          order={2}
+          className="transform-[translateZ(10px)]"
+          frontClassName="bg-brand-green-800"
+          backClassName="bg-brand-green"
+        />
 
-            {/* BACK */}
-            <div className="bg-brand-green-800 absolute inset-0 transform-[rotateY(180deg)] rounded-sm backface-hidden" />
-          </div>
+        <LogoLayer
+          order={3}
+          className="transform-[rotateZ(270deg)]"
+          frontClassName="bg-brand-blue-900"
+          backClassName="bg-brand-blue-950 flex justify-end p-2 pb-3"
+          backChildren={<LipariLogoType size={size} className="text-slate-50" />}
+        />
+      </div>
+    </div>
+  )
+}
 
-          <div className="absolute inset-0 transform-[translateZ(10px)] transform-3d">
-            {/* FRONT */}
-            <div className="bg-brand-green-800 absolute inset-0 rounded-sm backface-hidden" />
+// =============================================================================================
+// LogoLayer: a single layer of the Logo stack, with front/back faces and a z-index
+// =============================================================================================
 
-            {/* BACK */}
-            <div className="bg-brand-green absolute inset-0 transform-[rotateY(180deg)] rounded-sm backface-hidden" />
-          </div>
+function LogoLayer({
+  order,
+  className,
+  frontClassName,
+  backClassName,
+  frontChildren,
+  backChildren
+}: TLogoLayerProps) {
+  const zIndex: CSSProperties["zIndex"] = 30 - order * 10
 
-          {/* LAYER 3 */}
-          <div className="absolute inset-0 transform-[rotateZ(270deg)] transform-3d">
-            {/* FRONT */}
-            <div className="bg-brand-blue-900 absolute inset-0 rounded-sm backface-hidden" />
-
-            {/* BACK */}
-            <div className="bg-brand-blue-950 absolute inset-0 flex transform-[rotateY(180deg)] flex-col items-start justify-end rounded-sm p-2 pb-3 text-left text-slate-50 backface-hidden">
-              <p className="font-condensed text-2xl leading-none font-bold uppercase">Lipari</p>
-              <p className="font-condensed text-xs leading-tight font-bold uppercase">Consulting</p>
-            </div>
-          </div>
-        </div>
+  return (
+    <div className={cn("absolute inset-0 transform-3d", className)} style={{ zIndex }}>
+      <div className={cn("absolute inset-0 rounded-sm backface-hidden", frontClassName)}>
+        {frontChildren}
+      </div>
+      <div
+        className={cn(
+          "absolute inset-0 transform-[rotateY(180deg)] rounded-sm backface-hidden",
+          backClassName
+        )}
+      >
+        {backChildren}
       </div>
     </div>
   )
