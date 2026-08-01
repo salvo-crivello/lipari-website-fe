@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer"
 import { Header } from "@/components/layout/Header"
 
 import "./globals.css"
+import { BodyOverlay } from "@/components/layout/MainComponents"
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -45,6 +46,7 @@ export default function RootLayout({
       className={`${roboto.variable} ${robotoMono.variable} ${robotoCondensed.variable} h-full antialiased`}
     >
       <body className="text-brand-blue-950 flex min-h-full flex-col bg-slate-100 font-sans">
+        <BodyOverlay />
         <Header />
         {children}
         <Footer />

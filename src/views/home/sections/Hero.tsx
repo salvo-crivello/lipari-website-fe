@@ -9,30 +9,36 @@ export async function Hero() {
   const LL = homepage.hero
 
   return (
-    <Section removePadding className="flex flex-1 flex-col">
-      <div
-        data-aurora-scroll-root
-        className="bg-brand-blue-950 deborder1 relative flex flex-col overflow-visible px-4 pt-40 contain-paint sm:px-10"
-      >
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="deborder2 sticky top-0 h-screen overflow-hidden">
-            <HeroAurora className="h-full w-full" />
-          </div>
+    <div data-aurora-scroll-root className="bg-brand-blue-950 contain-paint">
+      <div className="absolute inset-0 -z-10">
+        <div className="deborder2 sticky top-0 h-screen overflow-hidden">
+          <HeroAurora className="h-full w-full" />
         </div>
-        <SubSection className="items-end justify-between">
-          <Typo.H1 text={LL.title} />
-          <Typo.P text={LL.subtitle} />
-        </SubSection>
-        <SubSection className="items-start justify-between">
-          <Typo.H4 text={LL.caption} className="min-w-40" />
-          <div className="flex flex-col">
-            <Typo.H3 className="mb-20" text={LL.heading1} />
-            <Typo.P className="mb-10 w-[40%] max-w-125" text={LL.paragraph1} />
-            <Typo.P className="w-[40%] max-w-125 self-end" text={LL.paragraph2} />
-          </div>
-        </SubSection>
-        <HeroGallery />
       </div>
-    </Section>
+
+      <Section className="min-h-screen grid-rows-[1fr_auto] sm:items-end" fullScreen>
+        <Typo.H1 text={LL.title} className="col-span-12 flex-1 sm:col-span-9" />
+        <Typo.P
+          text={LL.subtitle}
+          className="col-span-8 text-right max-sm:col-start-5 sm:col-span-3"
+        />
+      </Section>
+      <Section>
+        <Typo.H4 text={LL.caption} className="col-span-4 md:col-span-2" />
+        <Typo.H3
+          className="col-span-12 md:col-span-10 2xl:col-span-9 2xl:col-start-4"
+          text={LL.heading1}
+        />
+        <Typo.P
+          className="col-span-10 max-md:col-end-13 md:col-span-5 md:col-start-3 2xl:col-span-3 2xl:col-start-4"
+          text={LL.paragraph1}
+        />
+        <Typo.P
+          className="col-span-10 max-md:col-end-13 md:col-span-5 md:col-start-8 md:row-start-3 2xl:col-span-3 2xl:col-start-7"
+          text={LL.paragraph2}
+        />
+      </Section>
+      <HeroGallery />
+    </div>
   )
 }

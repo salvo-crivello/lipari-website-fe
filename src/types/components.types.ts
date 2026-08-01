@@ -10,6 +10,7 @@ export type TMainProps = HtmlHTMLAttributes<HTMLElement> & {
 
 export type TSectionProps = HtmlHTMLAttributes<HTMLElement> & {
   removePadding?: boolean
+  fullScreen?: boolean
   children: ReactNode
 }
 
@@ -17,9 +18,7 @@ export type TFooterProps = HtmlHTMLAttributes<HTMLElement> & {
   children: ReactNode
 }
 
-export type TDivProps = HtmlHTMLAttributes<HTMLDivElement> & {
-  children: ReactNode
-}
+export type TDivProps = HtmlHTMLAttributes<HTMLDivElement>
 
 export type TButtonHtmlProps = ButtonHTMLAttributes<HTMLButtonElement>
 
