@@ -55,7 +55,7 @@ export const buttonVariants = cva(
         variant: "fill",
         color: "tertiary",
         surface: "light",
-        class: "bg-slate-200 text-slate-900 hover:bg-slate-300"
+        class: "bg-slate-300 text-slate-900 hover:bg-slate-400"
       },
 
       // OUTLINE

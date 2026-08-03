@@ -1,11 +1,12 @@
 import { Section } from "@/components/layout/MainComponents"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
-import MethodsGallery from "@/features/home/MethodsGallery"
+import TeamGrid from "@/features/home/TeamGrid"
+import TeamRoster from "@/features/home/TeamRoster"
 import { getLabels } from "@/lib/content-client"
 
-async function Methods() {
+async function Team() {
   const { homepage } = await getLabels()
-  const { eyebrow, title, description, cards } = homepage.methods
+  const { eyebrow, title, description, members } = homepage.team
 
   return (
     <Section>
@@ -20,9 +21,10 @@ async function Methods() {
         text={description}
         className="col-span-10 col-end-13 md:col-span-8 md:col-end-13 lg:col-span-6 lg:col-end-13 2xl:col-span-4 2xl:col-end-12"
       />
-      <MethodsGallery cards={cards} />
+      <TeamGrid members={members} />
+      <TeamRoster members={members} />
     </Section>
   )
 }
 
-export default Methods
+export default Team

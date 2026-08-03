@@ -2,31 +2,31 @@ import { cn } from "@/utils"
 import type { ReactElement } from "react"
 import type { TTypoVariants, TTypo, TTypoTag } from "./Typo.types"
 import { typoVariants } from "./Typo.styles"
+import { MotionTextSplit } from "@/components/motion/MotionTextSplit"
+
+const defaultVariant = {
+  h1: "display",
+  h2: "sectionTitle",
+  h3: "sectionStatement",
+  h4: "eyebrow",
+  h5: "body",
+  p: "body",
+  span: "caption"
+} satisfies Record<string, TTypoVariants["variant"]>
 
 function createTypo<T extends TTypoTag>(tag: T) {
-  const defaultVariant = {
-    h1: "display",
-    h2: "sectionTitle",
-    h3: "sectionStatement",
-    h4: "eyebrow",
-    h5: "body",
-    p: "body",
-    span: "caption"
-  } satisfies Record<string, TTypoVariants["variant"]>
-
   function TypoComponent({
     variant = defaultVariant[String(tag) as keyof typeof defaultVariant],
     color = "light",
     className,
     text,
-    children,
     ...props
   }: TTypo): ReactElement {
     const Tag = tag as TTypoTag
 
     return (
       <Tag className={cn(typoVariants({ variant, color }), className)} {...props}>
-        {text ?? children}
+        {typeof text === "string" && <MotionTextSplit text={text} />}
       </Tag>
     )
   }

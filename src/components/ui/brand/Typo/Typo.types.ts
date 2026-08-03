@@ -8,9 +8,8 @@ type TTypoTag = keyof Pick<JSX.IntrinsicElements, "h1" | "h2" | "h3" | "h4" | "h
 
 type TTypoProps<T extends TTypoTag> = {
   text?: string
-  children?: ReactNode
   className?: string
-} & Omit<ComponentPropsWithoutRef<T>, "children" | "className">
+} & ComponentPropsWithoutRef<T>
 
 type TTypo = TTypoProps<TTypoTag> & TTypoVariants
 

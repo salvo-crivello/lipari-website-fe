@@ -135,9 +135,9 @@ type THeroAuroraProps = {
 export function HeroAurora({
   className,
   colorStops = ["#2F54D9", "#9BE868", "#001A29"],
-  amplitude = 1.0,
-  blend = 0.5,
-  speed = 0.6
+  amplitude = 0.8,
+  blend = 1,
+  speed = 0.3
 }: THeroAuroraProps) {
   const containerRef = useRef<HTMLDivElement>(null)
 

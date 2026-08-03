@@ -7,9 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * True when code is running in a browser environment.
+ * @returns `true` when code is running in a browser environment.
  */
-export const isBrowser = typeof window !== "undefined"
+export const isBrowser = () => typeof window !== "undefined"
 
 /**
  * Checks whether a value is `null` or `undefined`.

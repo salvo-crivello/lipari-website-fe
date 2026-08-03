@@ -30,12 +30,12 @@ them without the user explicitly reopening the topic.
 | Path aliases mandatory (`@/components`, `@/content`, `@/lib`, ...)                                                                                                                                                                                                                                                                                      | No `../../../../` relative import chains.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Env validation with Zod at boot (`lib/env.ts`)                                                                                                                                                                                                                                                                                                          | Crash immediately on a missing var instead of a silent runtime `undefined`. Complements, doesn't replace, `.env`/`.env.local` — those hold the raw values, `env.ts` validates/types them.                                                                                                                                                                                                                                                                                                                      |
 | Route-level `error.tsx` / `not-found.tsx` / `loading.tsx` per segment                                                                                                                                                                                                                                                                                   | No single global catch-all.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| No barrel `index.ts` re-export files                                                                                                                                                                                                                                                                                                                    | Barrels cause circular deps and break tree-shaking at scale — import directly from source. (Exception: `utils/index.ts` _is_ the utils module, not a re-export barrel — see §3.)                                                                                                                                                                                                                                                                                                                               |
+| No barrel `index.ts` re-export files                                                                                                                                                                                                                                                                                                                    | Barrels cause circular deps and break tree-shaking at scale — import directly from source. (Exception: `utils/index.ts` _is_ the utils module, not a re-export barrel — see `docs/architecture.md`.)                                                                                                                                                                                                                                                                                                           |
 | No global state manager for now                                                                                                                                                                                                                                                                                                                         | Redux Toolkit rejected as overkill for a mostly-static site. If a stateful feature shows up later (e.g. the AI chat widget), reach for **Zustand**, not Redux Toolkit.                                                                                                                                                                                                                                                                                                                                         |
 | Tailwind stays primary, not SCSS                                                                                                                                                                                                                                                                                                                        | SCSS was considered and rejected — it would lose the single source of truth for design tokens, purge, and consistency. If SCSS ever comes back, it's a colocated `.module.scss` next to the one component that needs it (complex keyframes, 3rd-party override) — never a full replace of Tailwind.                                                                                                                                                                                                            |
 | `type` only, never `interface`; every type alias is `T`-prefixed PascalCase (`Labels` → `TLabels`, `DeepPartial` → `TDeepPartial`)                                                                                                                                                                                                                      | Enforced as ESLint rules (`@typescript-eslint/consistent-type-definitions` + `@typescript-eslint/naming-convention` in `eslint.config.mjs`), not just a convention — lint fails on a violation, it doesn't rely on review catching it.                                                                                                                                                                                                                                                                         |
 | Type-only files end in `.types.ts`. Global/cross-cutting types (`types/labels.types.ts`) are lowercase; types colocated inside a component folder match that component's casing (`Button/Button.types.ts`, PascalCase)                                                                                                                                  | Global types live in a shared folder addressed by concern, not by component — lowercase matches that folder's existing convention. Colocated types are siblings of the component file they describe, so they take its casing instead.                                                                                                                                                                                                                                                                          |
-| `components/ui/*` primitives (design-system components with variants, e.g. `Button`) get their own folder: `Button.tsx`, `Button.test.tsx`, `Button.types.ts`, `Button.styles.ts` (the `cva` variant definition, isolated from markup/logic)                                                                                                            | These are the shared visual contract of the whole site and tend to accumulate variants over time — separating style from logic pays off here. One-off `views/*/sections/` components don't get this treatment (no variants to isolate, would be overhead) — see §3.                                                                                                                                                                                                                                            |
+| `components/ui/*` primitives (design-system components with variants, e.g. `Button`) get their own folder: `Button.tsx`, `Button.test.tsx`, `Button.types.ts`, `Button.styles.ts` (the `cva` variant definition, isolated from markup/logic)                                                                                                            | These are the shared visual contract of the whole site and tend to accumulate variants over time — separating style from logic pays off here. One-off `views/*/sections/` components don't get this treatment (no variants to isolate, would be overhead) — see `docs/architecture.md`.                                                                                                                                                                                                                        |
 | No separate `ui/basic/` vs `ui/complex/` folders for compound components (e.g. a `Card` with `CardHeader`/`CardTitle`/`CardBody`)                                                                                                                                                                                                                       | The basic/complex boundary is fuzzy and churns as a component grows. A compound component just exports multiple named parts from its own folder (`Card/Card.tsx` exports `Card`, `CardHeader`, `CardTitle`, ...) — complexity is a detail inside the component's folder, not a routing decision between two top-level directories.                                                                                                                                                                             |
 | One-off brand assets (e.g. `Logo`) live in `components/ui/brand/`, separate from reusable design-system primitives                                                                                                                                                                                                                                      | A `Logo` isn't a primitive with variants meant for reuse across arbitrary contexts — it's a fixed brand asset. Keeping it out of the flat `ui/` primitives list avoids conflating "reusable design-system piece" with "the one logo the company has".                                                                                                                                                                                                                                                          |
 | `Logo` accepts `width`/`height`/`className` directly (`TLogoProps = TSvgProps`, reusing the global type instead of a bespoke one), sizing its own root element — callers don't wrap it in an externally-sized `<div>`                                                                                                                                   | `TSvgProps` (`components.types.ts`) is the established shape for anything icon/logo-like, reused rather than redeclared. Default `80` (matches the original hardcoded `h-20 w-20`); `Header` passes `56` for the compact nav context.                                                                                                                                                                                                                                                                          |
@@ -76,218 +76,7 @@ Tailwind v4 has no v3-style `DEFAULT` key.
 
 ---
 
-## 3. Architecture: layered, not feature-first
-
-Confirmed explicitly: the site is ~6-8 pages, not a multi-team platform.
-Feature-first would fragment shared sections for no benefit at this scale.
-
-**The layers, top (routing) to bottom (pure utilities):**
-
-1. **`app/`** — routing only. Each `page.tsx` is a thin wrapper: import the
-   matching component from `views/`, export `metadata`, render it. Zero
-   business logic, zero JSX beyond the one render call.
-2. **`views/`** — one folder per page (`home/`, `about/`, `services/`,
-   `service-detail/`, `culture-career/`, `job-detail/`, `contact/`,
-   `legal/`), each holding the page's composition component
-   (`HomePage.tsx`, ...) plus its own `sections/` subfolder for section
-   components used only by that page. A Hero built for the homepage isn't
-   reused anywhere else — most "sections" are page-specific, not shared.
-   _Note: not named `pages/` — Next.js reserves that exact directory name
-   for its legacy Pages Router and will try to route/type-check anything
-   inside it, even alongside App Router. Learned this the hard way; keep
-   the name `views/`._
-3. **`components/`** — only what's genuinely cross-page: `layout/`
-   (real `Header.tsx`/`Footer.tsx`, plus `MainComponents.tsx` — generic
-   `Header`/`Main`/`Section`/`Footer` layout primitives that the real
-   Header/Footer compose their content inside of, instead of writing raw
-   `<header>`/`<footer>` tags with padding/max-width repeated per file),
-   `ui/` (Button, Card, Container, Input, Badge — primitives, each in its
-   own folder — see §1), `ui/brand/` (Logo and other one-off brand assets,
-   not reusable primitives), `motion/` (FadeIn, ScrollReveal, Parallax). No
-   `components/sections/` — that's what `views/*/sections/` replaced.
-4. **`hooks/`**, **`content/`**, **`types/`**, **`constant/`**, **`utils/`** —
-   cross-cutting support, no page/routing awareness:
-   - `hooks/` — reusable hooks (`useMediaQuery`, `useReducedMotion`, `useScrollProgress`)
-   - `content/` — typed _data only_ (`labels.ts`, later `services.ts`, `team.ts`, job listings). No types, no functions defined here — imports its types from `types/`.
-   - `types/` — global TypeScript types shared across the app, one `<name>.types.ts` file per concern (`labels.types.ts` exports `TLabels`, later `service.types.ts` exports `TService`, ...) — see the type-naming rule in §1.
-   - `constant/` — static config values (`routes.ts`: nav items, legal page list)
-   - `utils/` — `index.ts` holds every pure utility function (`cn`, `getLabel`, future `formatDate`/`slugify`/...); `typeUtils.ts` holds generic TS type helpers (e.g. `TDeepPartial<T>`). `index.ts` here is the module itself, not a re-export barrel — the no-barrel rule in §1 is about files that only re-export _other_ modules.
-5. **`lib/`** — infrastructure/integration code, not generic helpers: `env.ts`
-   (Zod validation of `process.env` at boot) and `content-client.ts`
-   (server-side data fetchers — `getLabels()` today returns a local fixture,
-   swapping it for a real backend `fetch` later is a one-file change, see §5).
-
-**Dependency rule — imports only ever point downward, never sideways or up:**
-
-```
-app
- └──> views
-       └──> components (layout / ui / motion)
-             └──> hooks / content / types / constant / utils
-                   └──> lib
-```
-
-`views/` and `app/` (the composition layers) are also allowed to call
-`lib/` directly for data fetching — that's normal for a composition layer,
-not a rule violation.
-
-- `ui/` never imports from `views/` — a primitive doesn't know business context.
-- `content/` never imports components — it's a leaf, pure typed data.
-- `lib/` never imports anything above it — pure infrastructure only.
-
-```
-lipari-website-fe/
-├── public/
-├── src/
-│   ├── app/
-│   │   ├── (public)/
-│   │   │   ├── page.tsx                    # /
-│   │   │   ├── about/page.tsx
-│   │   │   ├── services/
-│   │   │   │   ├── page.tsx
-│   │   │   │   └── [slug]/page.tsx
-│   │   │   ├── culture-career/
-│   │   │   │   ├── page.tsx
-│   │   │   │   └── [slug]/page.tsx
-│   │   │   ├── contact/page.tsx
-│   │   │   ├── (legal)/
-│   │   │   │   ├── whistleblowing/page.tsx
-│   │   │   │   ├── code-of-ethics/page.tsx
-│   │   │   │   ├── gender-equality-policy/page.tsx
-│   │   │   │   ├── privacy-policy/page.tsx
-│   │   │   │   ├── cookie-policy/page.tsx
-│   │   │   │   └── terms-and-conditions/page.tsx
-│   │   │   ├── error.tsx
-│   │   │   ├── not-found.tsx
-│   │   │   └── loading.tsx
-│   │   └── layout.tsx
-│   ├── views/
-│   │   ├── home/{HomePage.tsx, sections/}
-│   │   ├── about/{AboutPage.tsx, sections/}
-│   │   ├── services/{ServicesPage.tsx, sections/}
-│   │   ├── service-detail/{ServiceDetailPage.tsx, sections/}
-│   │   ├── culture-career/{CultureCareerPage.tsx, sections/}
-│   │   ├── job-detail/{JobDetailPage.tsx, sections/}
-│   │   ├── contact/{ContactPage.tsx, sections/}
-│   │   └── legal/LegalPage.tsx
-│   ├── components/
-│   │   ├── layout/           # Header.tsx, Footer.tsx
-│   │   ├── ui/
-│   │   │   ├── Button/{Button.tsx, Button.test.tsx, Button.types.ts, Button.styles.ts}
-│   │   │   └── brand/
-│   │   │       └── Logo/{Logo.tsx, Logo.test.tsx, Logo.types.ts}
-│   │   └── motion/
-│   ├── content/
-│   ├── types/
-│   │   └── labels.types.ts
-│   ├── constant/
-│   ├── utils/
-│   │   ├── index.ts
-│   │   └── typeUtils.ts             # TDeepPartial<T>, ...
-│   ├── hooks/
-│   └── lib/
-│       ├── env.ts
-│       └── content-client.ts
-├── e2e/
-├── package.json, tsconfig.json, eslint.config.mjs, next.config.ts,
-│   postcss.config.mjs, vitest.config.ts, playwright.config.ts,
-│   .prettierrc.json, .env.example
-└── CLAUDE.md, README.md
-```
-
----
-
-## 4. Site map
-
-Source: Figma file, page `website` (`341:2`). Shared on every page: nav
-(Services / About / Culture & Career / Contact + "LAVORA CON NOI" CTA) and a
-dark-navy footer with the link groups shown below.
-
-**Primary pages** (all have a Figma design):
-
-| Route                    | Figma frame              | Notes                                                                                                                                                                 |
-| ------------------------ | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                      | HOMEPAGE `443:1183`      | Hi-fi. A stale lo-fi frame also exists under "Desktop - 2" `345:709`, named `HOME` — **ignore it**, it's an old wireframe.                                            |
-| `/about`                 | `476:1263`               | Mission/vision, timeline 2007→2024, leader board                                                                                                                      |
-| `/services`              | `479:1374`               | Consulting/Technology split, accordion service list                                                                                                                   |
-| `/services/[slug]`       | Single-Service `531:852` | Detail template, prev/next nav between services                                                                                                                       |
-| `/culture-career`        | `483:1654`               | Culture value blocks, logo strip, open-positions grid                                                                                                                 |
-| `/culture-career/[slug]` | Single-Job `537:1651`    | Styled as an overlay w/ close-X in Figma, but **decided: real standalone page, own URL** — SEO for job postings and shareable recruiter links outweigh the modal look |
-| `/contact`               | `504:2651`               | Form (Proposta/Domanda tabs)                                                                                                                                          |
-
-**Satellite / legal pages** — footer links only, **no Figma design exists for
-these** (confirmed with user). Use one reusable "legal page" template
-(`views/legal/LegalPage.tsx`): title + rich-text body. Route slugs are
-English regardless of the Italian label shown in the UI:
-
-| Route                     | Footer label (IT, as designed) |
-| ------------------------- | ------------------------------ |
-| `/whistleblowing`         | Whistleblowing                 |
-| `/code-of-ethics`         | Codice Etico                   |
-| `/gender-equality-policy` | Politica di Parità di Genere   |
-| `/privacy-policy`         | Privacy Policy                 |
-| `/cookie-policy`          | Cookie Policy                  |
-| `/terms-and-conditions`   | Termini e Condizioni           |
-
-**Design tokens observed in Figma:** dark navy + neon-lime accent palette,
-halftone/dither texture overlay on photos, display-sans headlines mixed with
-monospace-style micro-labels.
-
-**Figma file reference** (for `get_metadata` / `get_design_context` lookups)
-— top-level pages in the file: `0:1` project-feux, `137:439` Components,
-`341:2` **website** (the one in use, contains all frames above), `7:2`
-project-salamandra-2.0 (a different, unrelated project — don't confuse it
-with this one).
-
----
-
-## 5. Content & language model
-
-**Decided:** all page copy — and dynamic lists like which job positions are
-currently open — will ultimately be provided by a backend, in a separate
-project, and can be set to any language (English or otherwise) from there.
-This is not a frontend i18n-routing concern: the backend decides what
-language text comes back as, so there is **no need for an `app/[locale]/...`
-route segment**.
-
-**Label/copy resolution — confirmed shape:** the backend resolves locale
-server-side and returns already-translated flat key→string pairs (e.g.
-`{ "hero.title": "Dalla consulenza on-demand..." }`). The frontend never
-receives a per-language object and never picks a language itself — no
-country/locale matching logic lives in this repo.
-
-- Fetching happens **server-side** (Server Component / `generateMetadata`),
-  via `fetch(url, { next: { revalidate } })` for ISR caching — not
-  client-side `useEffect`, and **not browser storage** (localStorage/
-  sessionStorage). This is marketing copy: it must be in the initial HTML
-  for SEO and to avoid a flash-of-empty-content; storage would only earn
-  its keep for user-specific/session-bound data, which this isn't.
-- `getLabel(labels, key, fallback?)` (in `utils/index.ts`) is a dumb lookup
-  - dev-console-warn on a missing key — not a language resolver. All
-    resolution already happened before the fetch.
-
-```
-lib/content-client.ts     # getLabels(), getServices()... server-side fetchers
-types/labels.types.ts     # type TLabels = Record<string, string>  (flat, namespaced keys: "hero.title", "footer.cta")
-content/labels.ts         # the actual data — fixture today, backend response shape tomorrow
-utils/index.ts            # getLabel(labels: TLabels, key: string, fallback?: string): string
-```
-
-- Right now (frontend-only phase, no backend yet) `content/` holds typed
-  static fixtures (`labels.ts`, later `services.ts`, `caseStudies.ts`,
-  `team.ts`, job listings) so the UI can be built and tested end-to-end.
-- Everything above is shaped behind the same typed interfaces
-  (`getServices(): Promise<TService[]>`, `getLabels(): Promise<TLabels>`)
-  rather than components importing raw arrays directly, so swapping a
-  static fixture for a real backend fetch later is a one-file change, not a
-  rewrite across `views/`.
-- Don't build the real API client, retries, or loading/error states for
-  this yet — just don't paint components into a corner that assumes data
-  is synchronous and always local.
-
----
-
-## 6. Deployment
+## 3. Deployment
 
 **Vercel.** Two separate Vercel projects, one per environment:
 
@@ -302,120 +91,27 @@ protection rules (the `environment: production` gate on the deploy job in
 
 ---
 
-## 7. Commit message convention
+## 4. Further reading (chained)
 
-Conventional Commits, with a custom prefix format:
-
-```
-<version> <[JIRA-ID | GitHub-Issue]> <type>: <description>
-```
-
-- `<version>` — project version/release identifier (`v1.0.0`, `v0.2.0`, ...).
-  Only bump `package.json` (and this prefix) when the commit changes the
-  **deployed artifact's behavior** — see the bump rule below. Otherwise
-  reuse the current version unchanged; never omit the prefix.
-- `<[JIRA-ID | GitHub-Issue]>` — `[LIP-123]` or `[#42]`. Omit the brackets
-  entirely if no task exists for the change.
-- `<type>` — one of: `feat`, `fix`, `refactor`, `chore`, `docs`, `test`,
-  `style`, `build`, `ci`, `perf`.
-- `<description>` — short, imperative (`add`, `fix`, `update`, not `added`/
-  `fixes`), ideally under 72 chars. Describes intent, not a file list.
-
-**Version bump rule** — versioning exists to let every environment map to
-an exact release, so it only moves when what's actually shipped changes:
-
-- **Bumps the version:** `feat` (minor), `fix` (patch), `perf` (patch),
-  `refactor` (patch), `build` (patch — only if it changes the built
-  artifact, e.g. bundler output; not for tooling-only build config).
-- **Does not bump the version:** `chore`, `docs`, `style`, `test`, `ci` —
-  these never touch what's deployed (CI workflow edits, formatting,
-  documentation, test-only changes all land here). Reuse the current
-  version in the commit prefix.
-
-```
-v1.0.0 [LIP-12] chore: setup frontend architecture and development tooling
-v1.0.0 [#50] ci: add UAT and production deploy workflows
-v1.1.0 [LIP-18] feat: implement home hero section
-v1.1.1 [#34] fix: resolve responsive navigation issue
-v1.1.1 [LIP-25] refactor: extract reusable section layout
-v1.1.1 [#41] docs: update project architecture
-```
-
-One commit = one logical change. No generic descriptions (`update`,
-`changes`, `fix stuff`).
+- `@docs/architecture.md` — layer breakdown, dependency rule, full directory tree
+- `@docs/sitemap.md` — routes, Figma frame references, legal pages
+- `@docs/content-model.md` — copy/label resolution, i18n decision, fixture-to-backend path
+- `@docs/commit-convention.md` — commit prefix format, version-bump rule
+- `@docs/git-workflow.md` — branch strategy, CI/CD pipelines, required manual GitHub setup
 
 ---
 
-## 8. Git workflow & branch strategy
+## Behavioral Guidelines
 
-Enterprise-oriented branching: separate development, UAT, and production
-flows, each promoted through a Pull Request — never pushed directly.
+1. **Think Before Coding** — read the relevant section above (and its
+   chained doc) before touching a file; this project's structure encodes
+   deliberate decisions, not defaults.
+2. **Simplicity First** — match §1's standing rule: no overengineering, no
+   scaffolding for the not-yet-built backend/AI parts.
+3. **Surgical Changes** — respect the layering and dependency rule in
+   `docs/architecture.md`; don't introduce sideways or upward imports.
+4. **Goal-Driven Execution** — this is a portfolio piece; changes should
+   move it toward the stated visual/engineering bar, not just toward
+   "done."
 
-**Branches** (all protected: no deletion, no force-push, PR required):
-
-| Branch        | Purpose                                                                                                                                       |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `main`        | Production baseline / release history — last validated, stable production version. Updated **only** after a successful production deployment. |
-| `develop`     | Main integration branch — all completed features merge here first.                                                                            |
-| `deploy/uat`  | Triggers the UAT deployment pipeline.                                                                                                         |
-| `deploy/prod` | Triggers the production deployment pipeline. Requires PR + approval — production must never deploy accidentally.                              |
-
-**Flow:**
-
-```
-feature/<name>  --PR-->  develop  --PR-->  deploy/uat  --PR + approval-->  deploy/prod  --successful deploy-->  main
-```
-
-- Feature branches: `feature/<feature-name>` (e.g. `feature/homepage-hero`,
-  `feature/contact-form`), always branched from `develop`, always merged
-  back to `develop` via PR.
-- If a `deploy/prod` release fails, `main` stays on the previous stable
-  version — it only advances on a _successful_ production deploy. (e.g.
-  `deploy/prod` at `v1.3.0` fails → `main` stays at `v1.2.0`.)
-
-**CI/CD per branch:** `develop` runs code-quality/integration checks;
-`deploy/uat` runs the UAT deploy pipeline; `deploy/prod` runs the
-production deploy pipeline; `main` is release history / stable baseline.
-Pipeline steps (current + planned): install, lint, typecheck, test, build,
-version validation, deployment automation, release tracking.
-
-**Versioning:** semantic (`MAJOR.MINOR.PATCH`), tracked through CI/CD so
-every environment maps to an exact release version; each deployed
-environment must expose its running version. Ties into the `<version>`
-prefix in commit messages (§7) — bump `package.json` alongside the commit
-that earns a new version.
-
-**Implemented as GitHub Actions:**
-
-- `.github/actions/setup/` — composite action: Node 24, Corepack/Yarn,
-  cache restore, `yarn install --immutable`. Used by every job below to
-  avoid repeating the same 4 steps in each one.
-- `.github/workflows/ci.yml` — lint, typecheck, unit tests, build, and e2e
-  (Playwright, chromium only) run in parallel on PRs into `develop` /
-  `deploy/uat` / `deploy/prod` / `main`, and on push to `develop` /
-  `deploy/uat` / `deploy/prod`.
-- `.github/workflows/deploy-uat.yml` — on push to `deploy/uat`: re-runs
-  validation, then deploys to the Vercel UAT project via the Vercel CLI
-  (`pull` → `build` → `deploy --prebuilt`), gated on the `uat` GitHub
-  Environment.
-- `.github/workflows/deploy-prod.yml` — on push to `deploy/prod`: re-runs
-  validation, then deploys to the Vercel Production project the same way
-  (with `--prod` flags), gated on the `production` GitHub Environment, then
-  fast-forwards `main` to the deployed commit only after that job succeeds
-  (mirrors the "main only advances on successful deploy" rule above — uses
-  `git merge --ff-only`, refuses if history diverged).
-
-**Still needs manual, GitHub-side setup (not something committed YAML can do):**
-
-- Required reviewers configured on GitHub Environments (repo Settings →
-  Environments): **`uat` has 0 required reviewers** (deploys automatically
-  on push to `deploy/uat`, by design — that's the whole point of UAT being
-  fast to iterate on) — **`production` has required reviewers** (that's
-  what turns `environment: production` in the workflow into an actual
-  manual-approval gate, matching the branch-strategy rule that prod must
-  never deploy accidentally).
-- Set `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID` as secrets on
-  **both** the `uat` and `production` Environments (same secret names,
-  different values — `VERCEL_PROJECT_ID` differs because UAT and
-  Production are separate Vercel projects, per §6).
-- Set the `UAT_SITE_URL` / `PRODUCTION_SITE_URL` repo variables.
+Full guidance: `~/.claude/skills/karpathy-guidelines/SKILL.md`.

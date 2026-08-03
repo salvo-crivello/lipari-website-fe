@@ -1,10 +1,11 @@
 "use client"
 
-import { cloneElement } from "react"
+import { cloneElement, useState } from "react"
 import { isBlankOrEmpty, isNotNullOrUndefined, isNotBlankOrEmpty, cn } from "@/utils"
 import { buttonVariants } from "./Button.styles"
 import type { TButton, TButtonLink, TButtonProps } from "./Button.types"
 import { motion } from "motion/react"
+import { MotionTextScramble } from "@/components/motion/MotionTextScramble"
 import Link from "next/link"
 
 function renderIcon(icon: TButtonProps["icon"], marginClassName: string) {
@@ -30,6 +31,7 @@ function Button({
   const onlyIcon = isBlankOrEmpty(text) && isNotNullOrUndefined(icon)
   const isLeftIcon = isNotNullOrUndefined(icon) && iconPos === "left"
   const isRightIcon = isNotNullOrUndefined(icon) && iconPos === "right"
+  const [isHovering, setIsHovering] = useState(false)
 
   return (
     <motion.button
@@ -38,10 +40,12 @@ function Button({
         buttonVariants({ variant, color, surface, bodyText, size, onlyIcon }),
         className
       )}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
       {...props}
     >
       {isLeftIcon && renderIcon(icon, isNotBlankOrEmpty(text) ? "mr-2" : "")}
-      {text}
+      {isNotBlankOrEmpty(text) && <MotionTextScramble text={text} trigger={isHovering} />}
       {isRightIcon && renderIcon(icon, isNotBlankOrEmpty(text) ? "ml-2" : "")}
     </motion.button>
   )
@@ -50,8 +54,8 @@ function Button({
 export function ButtonLink({
   className,
   variant,
-  color,
-  surface,
+  color = "primary",
+  surface = "dark",
   bodyText,
   size = "lg",
   text = "",
@@ -63,6 +67,7 @@ export function ButtonLink({
   const onlyIcon = isBlankOrEmpty(text) && isNotNullOrUndefined(icon)
   const isLeftIcon = isNotNullOrUndefined(icon) && iconPos === "left"
   const isRightIcon = isNotNullOrUndefined(icon) && iconPos === "right"
+  const [isHovering, setIsHovering] = useState(false)
 
   return (
     <Link
@@ -72,10 +77,12 @@ export function ButtonLink({
         buttonVariants({ variant, color, surface, bodyText, size, onlyIcon }),
         className
       )}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
       {...props}
     >
       {isLeftIcon && renderIcon(icon, isNotBlankOrEmpty(text) ? "mr-2" : "")}
-      {text}
+      {isNotBlankOrEmpty(text) && <MotionTextScramble text={text} trigger={isHovering} />}
       {isRightIcon && renderIcon(icon, isNotBlankOrEmpty(text) ? "ml-2" : "")}
     </Link>
   )
