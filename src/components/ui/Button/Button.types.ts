@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactElement } from "react"
+import type { ComponentProps, ElementType } from "react"
 import type { VariantProps } from "class-variance-authority"
 import type { buttonVariants } from "./Button.styles"
 import { HTMLMotionProps } from "motion/react"
@@ -9,7 +9,7 @@ type TButtonVariants = VariantProps<typeof buttonVariants>
 
 type TButtonProps = {
   text?: string
-  icon?: ReactElement<{ className?: string; size?: string | number }>
+  icon?: ElementType
   iconPos?: "left" | "right"
 }
 

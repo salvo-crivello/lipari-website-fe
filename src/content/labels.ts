@@ -29,24 +29,39 @@ export const labels = {
       areas: [
         {
           title: "Governance",
-          content: ""
+          slug: "governance",
+          content:
+            "Garantiamo il governo efficace dei progetti, assicurando metodo, controllo e trasparenza in ogni fase di delivery."
         },
         {
           title: "Business Intelligence",
+          slug: "business-intelligence",
           content:
             "Supportiamo il decision making con soluzioni analitiche avanzate, trasformando i dati in insight strategici per orientare scelte consapevoli."
         },
         {
+          title: "Data & Visualization",
+          slug: "data-visualization",
+          content:
+            "Diamo forma ai dati attraverso strumenti di reporting e dashboarding, per rendere immediata la comprensione e l'utilizzo delle informazioni chiave."
+        },
+        {
           title: "Automation",
-          content: ""
+          slug: "automation",
+          content:
+            "Disegniamo e implementiamo soluzioni di automazione – dai processi RPA alle applicazioni AI – per aumentare l'efficienza operativa e liberare tempo e risorse a maggior valore aggiunto."
         },
         {
           title: "Software Development",
-          content: ""
+          slug: "software-development",
+          content:
+            "Accompagniamo i clienti lungo l'intero ciclo di vita del software – mobile, web, replatforming – con un approccio ibrido che integra consulenza organizzativa e tecnologica."
         },
         {
           title: "Expertise verticali e di settore",
-          content: ""
+          slug: "expertise-verticali",
+          content:
+            "Abbiamo una solida expertise nel Financial Services, dove supportiamo processi complessi, tecnologie abilitanti e compliance normativa: un know-how oggi applicabile anche ad altri settori."
         }
       ]
     },
@@ -100,9 +115,9 @@ export const labels = {
         "Le nostre sedi rappresentano punti di riferimento complementari: dalla vicinanza ai clienti alla progettazione tecnologica, ogni location contribuisce allo sviluppo delle competenze e alla realizzazione dei progetti.",
       cities: [
         { name: "Milano", address: "Corso Vittorio Emanuele II, 30, 20122 Milano (MI)" },
-        { name: "Palermo" },
-        { name: "Messina" },
-        { name: "Alcamo" }
+        { name: "Palermo", address: "Via Principe di Belmonte, 101, 90139 Palermo (PA)" },
+        { name: "Messina", address: "Via Messina, 101, 98122 Messina (ME)" },
+        { name: "Alcamo", address: "Via Giuseppe Garibaldi, 30, 91011 Alcamo (TP)" }
       ]
     },
     contactCta: {

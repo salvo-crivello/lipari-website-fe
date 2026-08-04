@@ -1,4 +1,4 @@
-import { cn } from "@/utils"
+import { cn, isNotBlankOrEmpty } from "@/utils"
 import type { ReactElement } from "react"
 import type { TTypoVariants, TTypo, TTypoTag } from "./Typo.types"
 import { typoVariants } from "./Typo.styles"
@@ -20,13 +20,14 @@ function createTypo<T extends TTypoTag>(tag: T) {
     color = "light",
     className,
     text,
+    disableMotion = false,
     ...props
   }: TTypo): ReactElement {
     const Tag = tag as TTypoTag
 
     return (
       <Tag className={cn(typoVariants({ variant, color }), className)} {...props}>
-        {typeof text === "string" && <MotionTextSplit text={text} />}
+        {!disableMotion && isNotBlankOrEmpty(text) ? <MotionTextSplit text={text} /> : text}
       </Tag>
     )
   }

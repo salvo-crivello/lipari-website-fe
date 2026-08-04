@@ -87,7 +87,7 @@ export const buttonVariants = cva(
         variant: "outline",
         color: "tertiary",
         surface: "light",
-        class: "border-slate-300 text-slate-700 hover:bg-slate-100"
+        class: "border-slate-300 text-slate-700 hover:bg-slate-200 hover:text-brand-blue"
       },
       {
         variant: "outline",
