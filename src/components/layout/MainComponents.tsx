@@ -19,7 +19,7 @@ export function BodyOverlay({ className, ...props }: TDivProps) {
 export function Header({ children, className, ...props }: THeaderProps) {
   return (
     <header
-      className={cn("fixed top-0 z-50 mx-auto flex w-full px-4 py-4 sm:px-10 sm:py-10", className)}
+      className={cn("fixed top-0 z-50 mx-auto flex w-full px-4 py-4 sm:px-10", className)}
       {...props}
     >
       {children}

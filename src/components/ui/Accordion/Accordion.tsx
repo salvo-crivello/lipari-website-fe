@@ -95,7 +95,7 @@ const Header = forwardRef<HTMLButtonElement, TAccordionHeaderProps>(
       <button
         ref={ref}
         className={cn(
-          "flex w-full cursor-pointer items-center justify-between gap-4 py-10 text-2xl font-bold uppercase transition-all duration-500",
+          "flex w-full cursor-pointer items-center justify-between gap-4 py-6 text-2xl font-bold uppercase transition-all duration-500",
           className
         )}
         onClick={toggle}

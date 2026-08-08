@@ -37,7 +37,7 @@ export function Logo({ size = 80, className }: TLogoProps) {
           order={3}
           className="transform-[rotateZ(270deg)]"
           frontClassName="bg-brand-blue-900"
-          backClassName="bg-brand-blue-950 flex justify-end p-2 pb-3"
+          backClassName="bg-brand-blue-950 flex items-center justify-center"
           backChildren={<LipariLogoType size={size} className="text-slate-50" />}
         />
       </div>

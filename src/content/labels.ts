@@ -1,5 +1,6 @@
 export const labels = {
   nav: {
+    home: "Home",
     services: "Services",
     about: "About",
     cultureCareer: "Culture & Career",
@@ -165,6 +166,7 @@ export const labels = {
     vatNumber: "P.IVA 05594830969",
     address: "Ugo Foscolo, 17 - 20099 Sesto San Giovanni (MI)",
     navRoutes: {
+      home: "Home",
       services: "Services",
       about: "About",
       cultureCareer: "Culture & Career",

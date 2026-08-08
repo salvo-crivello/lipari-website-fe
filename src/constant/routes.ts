@@ -13,6 +13,7 @@ export const ROUTES = {
 } as const
 
 export const NAV_ROUTES = [
+  { href: ROUTES.HOME, navKey: "home" },
   { href: ROUTES.SERVICES, navKey: "services" },
   { href: ROUTES.ABOUT, navKey: "about" },
   { href: ROUTES.CULTURE_CAREER, navKey: "cultureCareer" },

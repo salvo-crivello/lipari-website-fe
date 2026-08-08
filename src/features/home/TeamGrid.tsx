@@ -2,18 +2,15 @@
 import Image from "next/image"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
 import { useWindowSize } from "@/hooks/useWindowSize"
+import type { TLabels } from "@/types/labels.types"
 
-type TTeamMember = {
-  name: string
-  role?: string
-  photo?: string
-}
+type TTeamMember = TLabels["homepage"]["team"]["members"][number]
 
 type TTeamGridProps = {
-  members: readonly TTeamMember[]
+  labels: readonly TTeamMember[]
 }
 
-function TeamGrid({ members }: TTeamGridProps) {
+function TeamGrid({ labels: members }: TTeamGridProps) {
   const { isMobile } = useWindowSize()
 
   if (!isMobile) return null

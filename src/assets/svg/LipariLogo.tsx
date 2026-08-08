@@ -22,11 +22,11 @@ function LipariLogo({ className, width, height, ...props }: TSvgProps) {
 
 export const LipariLogoType = ({ size = 80, className }: { size?: number; className?: string }) => {
   return (
-    <div className={cn("flex flex-col items-start justify-end", className)}>
+    <div className={cn("flex h-fit flex-col items-start", className)}>
       <LipariLogo
         width={size * 0.2}
-        height={size * 0.3 * LIPARI_LOGO_RATIO}
-        className="text-brand-green mb-1"
+        height={size * 0.2 * LIPARI_LOGO_RATIO}
+        className="text-brand-green mb-1 shrink-0"
       />
       <p
         className="font-condensed leading-none font-bold uppercase"

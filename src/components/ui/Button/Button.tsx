@@ -25,6 +25,11 @@ function Button({
   const isRightIcon = isNotNullOrUndefined(Icon) && iconPos === "right"
   const [isHovering, setIsHovering] = useState(false)
 
+  const handleMouseEnter = () => {
+    if (props.disabled) return
+    setIsHovering(true)
+  }
+
   return (
     <motion.button
       aria-label={isNotBlankOrEmpty(text) ? text : Icon ? "icon button" : "button"}
@@ -32,7 +37,7 @@ function Button({
         buttonVariants({ variant, color, surface, bodyText, size, onlyIcon }),
         className
       )}
-      onMouseEnter={() => setIsHovering(true)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={() => setIsHovering(false)}
       {...props}
     >
@@ -61,16 +66,23 @@ export function ButtonLink({
   const isRightIcon = isNotNullOrUndefined(Icon) && iconPos === "right"
   const [isHovering, setIsHovering] = useState(false)
 
+  const handleMouseEnter = () => {
+    if (props.disabled) return
+    setIsHovering(true)
+  }
+
   return (
     <Link
-      href={href ?? "#"}
+      href={props.disabled ? {} : (href ?? "#")}
       aria-label={isNotBlankOrEmpty(text) ? text : Icon ? "icon button" : "button"}
       className={cn(
         buttonVariants({ variant, color, surface, bodyText, size, onlyIcon }),
         className
       )}
-      onMouseEnter={() => setIsHovering(true)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={() => setIsHovering(false)}
+      aria-disabled={props.disabled}
+      onClick={(e) => props.disabled && (e.preventDefault(), e.stopPropagation())}
       {...props}
     >
       {isLeftIcon && <Icon className={cn(isNotBlankOrEmpty(text) && "mr-2")} />}

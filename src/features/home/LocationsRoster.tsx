@@ -2,18 +2,16 @@
 
 import { useState } from "react"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
+import type { TLabels } from "@/types/labels.types"
 import { cn } from "@/utils"
 
-type TCity = {
-  name: string
-  address?: string
-}
+type TCity = TLabels["homepage"]["locations"]["cities"][number]
 
 type TLocationsRosterProps = {
-  cities: readonly TCity[]
+  labels: readonly TCity[]
 }
 
-function LocationsRoster({ cities }: TLocationsRosterProps) {
+function LocationsRoster({ labels: cities }: TLocationsRosterProps) {
   const defaultIndex = Math.max(
     cities.findIndex((city) => city.address),
     0

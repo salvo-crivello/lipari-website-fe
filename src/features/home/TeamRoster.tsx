@@ -6,20 +6,17 @@ import { Typo } from "@/components/ui/brand/Typo/Typo"
 import { usePointerScrollEffect } from "@/hooks/usePointerScrollEffect"
 import { cn } from "@/utils"
 import { useWindowSize } from "@/hooks/useWindowSize"
+import type { TLabels } from "@/types/labels.types"
 
-type TTeamMember = {
-  name: string
-  role?: string
-  photo?: string
-}
+type TTeamMember = TLabels["homepage"]["team"]["members"][number]
 
 type TTeamRosterProps = {
-  members: readonly TTeamMember[]
+  labels: readonly TTeamMember[]
 }
 
 const DATA_SELECTOR = "data-member-index" as const
 
-function TeamRoster({ members }: TTeamRosterProps) {
+function TeamRoster({ labels: members }: TTeamRosterProps) {
   const { isMobile } = useWindowSize()
   const [activeIndex, setActiveIndex] = useState(0)
   const active = members[activeIndex]

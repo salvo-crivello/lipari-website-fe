@@ -21,7 +21,7 @@ async function Locations() {
         className="col-span-10 col-end-13 md:col-span-8 md:col-end-13 lg:col-span-6 lg:col-end-13 2xl:col-span-4 2xl:col-end-12"
       />
 
-      <LocationsRoster cities={cities} />
+      <LocationsRoster labels={cities} />
     </Section>
   )
 }

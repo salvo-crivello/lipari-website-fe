@@ -10,7 +10,7 @@ import { cn } from "@/utils"
 type TMethodCard = TLabels["homepage"]["methods"]["cards"][number]
 
 type TMethodsGalleryProps = {
-  cards: readonly TMethodCard[]
+  labels: readonly TMethodCard[]
 }
 
 // Card visuals aren't in the labels fixture (labels is copy-only) — index-matched
@@ -21,7 +21,7 @@ const CARD_STYLES = [
   { icon: Blocks, bg: "bg-brand-blue-950", title: "light", desc: "text-slate-300" }
 ] as const
 
-function MethodsGallery({ cards }: TMethodsGalleryProps) {
+function MethodsGallery({ labels: cards }: TMethodsGalleryProps) {
   return (
     <div className="col-span-12 mt-10 grid gap-6 lg:mt-16 lg:grid-cols-3 2xl:mt-20">
       {cards.map((card, index) => (

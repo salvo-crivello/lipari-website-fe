@@ -11,7 +11,7 @@ export type TMainProps = HtmlHTMLAttributes<HTMLElement> & {
 export type TSectionProps = HtmlHTMLAttributes<HTMLElement> & {
   removePadding?: boolean
   fullScreen?: boolean
-  children: ReactNode
+  children?: ReactNode
 }
 
 export type TFooterProps = HtmlHTMLAttributes<HTMLElement> & {

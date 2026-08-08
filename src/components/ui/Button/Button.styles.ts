@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority"
 
 export const buttonVariants = cva(
-  "inline-flex w-fit items-center justify-center gap-2 rounded-full font-mono text-sm font-medium tracking-wide uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex w-fit items-center justify-center gap-2 rounded-full font-mono text-sm font-medium tracking-wide uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer disabled:cursor-default aria-disabled:cursor-default",
   {
     variants: {
       // Shape: button shape style.
@@ -23,6 +23,7 @@ export const buttonVariants = cva(
         light: ""
       },
       size: {
+        sm: "h-6 px-4 py-2",
         md: "h-12 px-6 py-4",
         lg: "h-14 px-8 py-4 text-sm"
       },
@@ -139,37 +140,37 @@ export const buttonVariants = cva(
         variant: "text",
         color: "primary",
         surface: "light",
-        class: "!p-0 !h-fit text-brand-blue hover:underline"
+        class: "!p-0 !h-fit text-brand-blue"
       },
       {
         variant: "text",
         color: "primary",
         surface: "dark",
-        class: "!p-0 !h-fit text-brand-blue-400 hover:underline"
+        class: "!p-0 !h-fit text-brand-blue-400"
       },
       {
         variant: "text",
         color: "secondary",
         surface: "light",
-        class: "!p-0 !h-fit text-brand-green-700 hover:underline"
+        class: "!p-0 !h-fit text-brand-green-700"
       },
       {
         variant: "text",
         color: "secondary",
         surface: "dark",
-        class: "!p-0 !h-fit text-brand-green hover:underline"
+        class: "!p-0 !h-fit text-brand-green"
       },
       {
         variant: "text",
         color: "tertiary",
         surface: "light",
-        class: "!p-0 !h-fit text-slate-700 hover:underline"
+        class: "!p-0 !h-fit text-slate-700"
       },
       {
         variant: "text",
         color: "tertiary",
         surface: "dark",
-        class: "!p-0 !h-fit text-slate-50 hover:underline"
+        class: "!p-0 !h-fit text-slate-50"
       }
     ],
     defaultVariants: {
