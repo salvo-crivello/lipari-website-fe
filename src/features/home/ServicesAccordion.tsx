@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { ArrowUpRight } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 import { AccordionItem, AccordionRoot, useAccordionRoot } from "@/components/ui/Accordion/Accordion"
@@ -53,10 +53,6 @@ function ServicesAccordionList({ labels: areas }: TServicesAccordionProps) {
   usePointerScrollEffect<HTMLElement>(HOVER_SELECTOR, (el) => {
     setHoveredIndex(Number(el.dataset.areaIndex))
   })
-
-  useEffect(() => {
-    console.log("hover states:", { openId, hoveredIndex })
-  }, [openId, hoveredIndex])
 
   return (
     <ul className="col-span-12 mt-10 flex flex-col lg:col-span-8 lg:col-start-6">
@@ -138,17 +134,12 @@ function ServicesAccordionList({ labels: areas }: TServicesAccordionProps) {
 
 const ServicesImage = ({ labels: areas }: TServicesAccordionProps) => {
   const { openId } = useAccordionRoot()
-  const [isHovering, setIsHovering] = useState(false)
   const openIndex = areas.findIndex((area) => area.slug === openId)
   const activeImage = AREA_IMAGES[openIndex === -1 ? 0 : openIndex]
 
   return (
     <div className="relative col-span-12 mt-10 lg:col-span-4 lg:mt-16">
-      <div
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-        className="sticky top-40 aspect-square w-full overflow-hidden rounded-sm"
-      >
+      <div className="sticky top-40 aspect-square w-full overflow-hidden rounded-sm">
         <AnimatePresence initial={false}>
           <motion.div
             key={activeImage}
@@ -158,7 +149,7 @@ const ServicesImage = ({ labels: areas }: TServicesAccordionProps) => {
             transition={{ duration: 0.4 }}
             className="absolute inset-0"
           >
-            <DitherImage src={activeImage} dithered={!isHovering} className="h-full w-full" />
+            <DitherImage src={activeImage} dithered className="h-full w-full" />
             <div className="bg-brand-green absolute inset-0 mix-blend-multiply" />
           </motion.div>
         </AnimatePresence>

@@ -76,10 +76,7 @@ export function SubSection({ children, className, ...props }: TDivProps) {
 
 export function Footer({ children, className, ...props }: TFooterProps) {
   return (
-    <footer
-      className={cn("z-50 mx-auto flex w-full px-4 py-4 sm:px-10 sm:py-10", className)}
-      {...props}
-    >
+    <footer className={cn("z-50 mx-auto flex w-full px-4 py-10 sm:px-10", className)} {...props}>
       {children}
     </footer>
   )

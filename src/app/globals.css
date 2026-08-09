@@ -43,11 +43,11 @@ body {
 
 /* utils classes */
 
-.deborder1 {
+html[data-env="development"] .deborder1 {
   border: 1px solid red;
 }
 
-.deborder2 {
+html[data-env="development"] .deborder2 {
   border: 1px solid green;
 }
 

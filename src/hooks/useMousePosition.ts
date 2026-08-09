@@ -7,13 +7,13 @@ type TPointerPosition = { x: number; y: number }
 type TUseMousePosition = {
   pointerPositionRef: RefObject<TPointerPosition>
 }
+
 /**
  * Tracks the latest pointer position without triggering a re-render on
  * every move — read `.current` inside an effect or callback, not render.
  *
  * @returns pointerPositionRef, a ref holding the current pointer coordinates.
  */
-
 export function useMousePosition(): TUseMousePosition {
   const pointerPositionRef = useRef<TPointerPosition>({ x: -1, y: -1 })
 

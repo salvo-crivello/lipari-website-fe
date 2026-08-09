@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header"
 
 import "./globals.css"
 import { BodyOverlay } from "@/components/layout/MainComponents"
+import { ScrollToTop } from "@/components/motion/ScrollToTop"
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -43,9 +44,11 @@ export default function RootLayout({
   return (
     <html
       lang="it"
+      data-env={process.env.NODE_ENV}
       className={`${roboto.variable} ${robotoMono.variable} ${robotoCondensed.variable} h-full antialiased`}
     >
       <body className="text-brand-blue-950 flex min-h-full flex-col bg-slate-100 font-sans">
+        <ScrollToTop />
         <BodyOverlay />
         <Header />
         {children}

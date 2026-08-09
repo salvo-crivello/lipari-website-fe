@@ -19,10 +19,13 @@ const AccordionRootContext = createContext<TAccordionRootContext>({
   setOpenId: () => {}
 })
 
+/**
+ * Returns the AccordionRoot context.
+ */
 export const useAccordionRoot = () => useContext(AccordionRootContext)
 
 /**
- * Root container that coordinates the expanded AccordionItem.
+ * Root container that manages the expanded accordion item.
  */
 export function AccordionRoot({ children, defaultOpenId = null }: TAccordionRootProps) {
   const [openId, setOpenId] = useState<string | null>(defaultOpenId)
@@ -45,10 +48,13 @@ const AccordionItemContext = createContext<TAccordionItemContext>({
   handleKeyDown: () => {}
 })
 
+/**
+ * Returns the current AccordionItem context.
+ */
 export const useAccordionItem = () => useContext(AccordionItemContext)
 
 /**
- * A single accordion item provider.
+ * Accordion item that can be expanded or collapsed.
  */
 const AccordionItemBase = forwardRef<HTMLDivElement, TAccordionItemProps>(
   ({ children, id, variant, size, className, ...props }, ref) => {
@@ -85,7 +91,7 @@ const AccordionItemBase = forwardRef<HTMLDivElement, TAccordionItemProps>(
 // ========================================================================
 
 /**
- * Clickable accordion header.
+ * Clickable header that toggles the accordion item.
  */
 const Header = forwardRef<HTMLButtonElement, TAccordionHeaderProps>(
   ({ children, className, hideChevron = false }, ref) => {
@@ -117,7 +123,7 @@ const Header = forwardRef<HTMLButtonElement, TAccordionHeaderProps>(
 )
 
 /**
- * Expandable accordion content.
+ * Expandable content displayed when the item is open.
  */
 const Content = forwardRef<HTMLDivElement, TAccordionContentProps>(
   ({ children, className }, ref) => {

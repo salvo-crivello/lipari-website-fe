@@ -9,16 +9,14 @@ type TUseHeaderShowReturn = {
   showBackground: boolean
   showHeader: boolean
 }
+
 /**
- * Tracks scroll direction/amount to drive a hide-on-scroll-down,
- * show-on-scroll-up header, plus a background toggle once scrolled past
- * the tracked element's height.
+ * Controls header visibility and background based on scroll position.
  *
- * @param elementRef - Ref to the element whose `clientHeight` is used as
- * the `showBackground` trigger threshold.
- * @returns {{showBackground, showHeader}} (`showBackground` is `true` once scrolled past `elementRef`'s
- * height) and `showHeader` (`false` after a fast scroll down, `true`
- * again after a scroll up).
+ * @param elementRef - Optional ref used as the background trigger threshold.
+ * @returns An object containing:
+ * - `showBackground` - `true` when the page has scrolled past the element height, otherwise `false`.
+ * - `showHeader` - `true` when the header should be visible, otherwise `false`.
  */
 export const useHeaderShow = ({ elementRef }: TUseHeaderShowProps = {}): TUseHeaderShowReturn => {
   const [showBackground, setShowBackground] = useState(false)

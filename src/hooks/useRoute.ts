@@ -8,19 +8,21 @@ type TUseRoute = {
 }
 
 /**
- * Checks whether `href` matches the current route.
- * `/` requires an exact match (it would otherwise match every route);
- * any other path also matches its nested routes (e.g. `/services`
- * stays active on `/services/[slug]`).
+ * Provides route-related utilities based on the current pathname.
  *
- * @returns `true` if `href` is (or is a parent of) the current route.
+ * @returns An object containing the `isCurrentPage` function.
  */
-
 export default function useRoute(): TUseRoute {
   const pathname = usePathname()
 
+  /**
+   * Checks whether the given route is the current page or a parent route
+   * of the current pathname.
+   *
+   * @param href - The route path to check.
+   * @returns `true` if the route is currently active, otherwise `false`.
+   */
   function isCurrentPage(href: string): boolean {
-    console.log("pathname", { pathname, href })
     if (href === ROUTES.HOME) return pathname === ROUTES.HOME
     return pathname === href || pathname.startsWith(`${href}/`)
   }

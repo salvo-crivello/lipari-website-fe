@@ -114,11 +114,27 @@ export const labels = {
       eyebrow: "La nostra presenza",
       description:
         "Le nostre sedi rappresentano punti di riferimento complementari: dalla vicinanza ai clienti alla progettazione tecnologica, ogni location contribuisce allo sviluppo delle competenze e alla realizzazione dei progetti.",
-      cities: [
-        { name: "Milano", address: "Corso Vittorio Emanuele II, 30, 20122 Milano (MI)" },
-        { name: "Palermo", address: "Via Principe di Belmonte, 101, 90139 Palermo (PA)" },
-        { name: "Messina", address: "Via Messina, 101, 98122 Messina (ME)" },
-        { name: "Alcamo", address: "Via Giuseppe Garibaldi, 30, 91011 Alcamo (TP)" }
+      locationsDetails: [
+        {
+          name: "Milano",
+          address: "Corso Vittorio Emanuele II, 30, 20122 Milano (MI)",
+          position: { lat: 45.4656284, lng: 9.1964153 }
+        },
+        {
+          name: "Palermo",
+          address: "Via Principe di Belmonte, 103/C (Piano 2), 90139 Palermo (PA)",
+          position: { lat: 38.1240754, lng: 13.3576852 }
+        },
+        {
+          name: "Messina",
+          address: "Viale San Martino, 296, 98123 Messina (ME)",
+          position: { lat: 38.179832, lng: 15.5504364 }
+        },
+        {
+          name: "Alcamo",
+          address: "Corso VI Aprile, 32, 91011 Alcamo (TP)",
+          position: { lat: 37.9804039, lng: 12.9601649 }
+        }
       ]
     },
     contactCta: {

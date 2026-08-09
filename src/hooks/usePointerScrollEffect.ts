@@ -6,13 +6,11 @@ import { useMousePosition } from "@/hooks/useMousePosition"
 type TPointerScrollEffectCallback<T extends Element> = (element: T) => void
 
 /**
- * Calls `callback` with the element matching `selector` under the pointer —
- * on pointer move, and again on every scroll frame (rAF-throttled) using the
- * last known pointer position. Covers what mouseenter/hover misses: the
- * cursor sitting still while content scrolls underneath it.
+ * Calls `callback` when the element matching `selector` is under the pointer,
+ * including while the page is scrolling.
  *
- * @param selector - CSS selector (e.g. "[data-member-index]") identifying hoverable elements.
- * @param callback - Called with the matched element whenever it's under the pointer.
+ * @param selector - CSS selector used to identify the target element.
+ * @param callback - Called with the matching element.
  */
 export function usePointerScrollEffect<T extends Element>(
   selector: string,
