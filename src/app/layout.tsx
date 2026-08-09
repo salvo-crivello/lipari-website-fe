@@ -1,35 +1,59 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from "next"
+import { Roboto, Roboto_Condensed, Roboto_Mono } from "next/font/google"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import { Footer } from "@/components/layout/Footer"
+import { Header } from "@/components/layout/Header"
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+import "./globals.css"
+import { BodyOverlay } from "@/components/layout/MainComponents"
+import { ScrollToTop } from "@/components/motion/ScrollToTop"
+
+const roboto = Roboto({
+  variable: "--font-roboto",
   subsets: ["latin"],
-});
+  weight: ["400", "500", "700"]
+})
+
+const robotoMono = Roboto_Mono({
+  variable: "--font-roboto-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"]
+})
+
+const robotoCondensed = Roboto_Condensed({
+  variable: "--font-roboto-condensed",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"]
+})
 
 export const metadata: Metadata = {
   title: {
     default: "Lipari Consulting",
-    template: "%s | Lipari Consulting",
+    template: "%s | Lipari Consulting"
   },
-  description: "Il valore in ognuno di noi.",
-};
+  description: "Il valore in ognuno di noi."
+}
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   // TODO: `lang` should follow whatever locale the backend resolves once
   // content is fetched from there instead of the local fixture.
   return (
-    <html lang="it" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">{children}</body>
+    <html
+      lang="it"
+      data-env={process.env.NODE_ENV}
+      className={`${roboto.variable} ${robotoMono.variable} ${robotoCondensed.variable} h-full antialiased`}
+    >
+      <body className="text-brand-blue-950 flex min-h-full flex-col bg-slate-100 font-sans">
+        <ScrollToTop />
+        <BodyOverlay />
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
-  );
+  )
 }
