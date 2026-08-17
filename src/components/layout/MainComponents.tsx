@@ -45,7 +45,7 @@ export function Section({
   return (
     <section
       className={cn(
-        "deborder1 mx-auto grid w-full grid-cols-12 gap-4 gap-y-10 sm:gap-10",
+        "mx-auto grid w-full grid-cols-12 gap-4 gap-y-10 sm:gap-10",
         {
           "px-4 py-20 sm:px-10 sm:py-20 md:py-30 2xl:py-60": !removePadding,
           "min-h-screen": isNullOrUndefined(children) || fullScreen,
@@ -63,10 +63,7 @@ export function Section({
 export function SubSection({ children, className, ...props }: TDivProps) {
   return (
     <div
-      className={cn(
-        "deborder2 relative col-span-12 grid grid-cols-12 gap-4 gap-y-10 sm:gap-10",
-        className
-      )}
+      className={cn("relative col-span-12 grid grid-cols-12 gap-4 gap-y-10 sm:gap-10", className)}
       {...props}
     >
       {children}

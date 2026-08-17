@@ -26,13 +26,10 @@ function HeroGallery({ className, ...props }: TSectionProps) {
       {...props}
       removePadding
     >
-      <div ref={galleryRef} className="deborder1 flex h-fit w-fit items-center">
+      <div ref={galleryRef} className="flex h-fit w-fit items-center">
         <motion.div
           style={{ x: containerX }}
-          className={cn(
-            "deborder2 relative sm:h-screen",
-            "flex w-fit items-start gap-10 sm:gap-20"
-          )}
+          className={cn("relative flex w-fit items-start gap-10 sm:h-screen sm:gap-20")}
         >
           {GALLERY_IMAGES.map((image, index) => (
             <GalleryImage

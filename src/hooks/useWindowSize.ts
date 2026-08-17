@@ -1,19 +1,23 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { COMMON_CONFIG } from "@/constant/commonConfig"
 
 export const useWindowSize = () => {
   const [staticHeight, setStaticHeight] = useState(0)
   const [width, setWidth] = useState(0)
   const [height, setHeight] = useState(0)
 
-  const isMobile = useMemo(() => width < 640, [width])
-  const isSM = useMemo(() => width >= 640, [width])
-  const isMD = useMemo(() => width >= 768, [width])
-  const isLG = useMemo(() => width >= 1024, [width])
-  const isXL = useMemo(() => width >= 1280, [width])
+  const isMobile = useMemo(() => width < COMMON_CONFIG.BREAKPOINT_SM, [width])
+  const isSM = useMemo(() => width >= COMMON_CONFIG.BREAKPOINT_SM, [width])
+  const isMD = useMemo(() => width >= COMMON_CONFIG.BREAKPOINT_MD, [width])
+  const isLG = useMemo(() => width >= COMMON_CONFIG.BREAKPOINT_LG, [width])
+  const isXL = useMemo(() => width >= COMMON_CONFIG.BREAKPOINT_XL, [width])
 
-  const isPortrait = useMemo(() => height > width && width > 640, [width, height])
+  const isPortrait = useMemo(
+    () => height > width && width > COMMON_CONFIG.BREAKPOINT_SM,
+    [width, height]
+  )
 
   const handleWindowResize = useCallback(() => {
     const newWidth = window.innerWidth

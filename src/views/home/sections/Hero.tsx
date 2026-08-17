@@ -33,7 +33,7 @@ export async function Hero() {
         />
       </Section>
       <HeroGallery className="z-10" />
-      <div className="deborder2 absolute inset-0 z-0 overflow-clip">
+      <div className="absolute inset-0 z-0 overflow-clip">
         <HeroColorBends className="sticky top-0 h-screen w-full" />
       </div>
     </div>

@@ -9,6 +9,7 @@ import { useHeaderShow } from "@/hooks/useHeaderShow"
 import { DesktopMenu } from "@/components/layout/header/DesktopMenu"
 import { MobileMenu } from "@/components/layout/header/MobileMenu"
 import type { TNavItem } from "@/components/layout/header/HeaderShell.types"
+import { COMMON_CONFIG } from "@/constant/commonConfig"
 import { cn } from "@/utils"
 
 type THeaderShellProps = {
@@ -31,7 +32,11 @@ export function HeaderShell({ items, labels }: THeaderShellProps) {
       animate={{ y: showHeader ? "0%" : "-100%", opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
-      <Link href="/" aria-label="Lipari Consulting — home" className="group z-100 shrink-0">
+      <Link
+        href="/"
+        aria-label={`${COMMON_CONFIG.APP_NAME} — home`}
+        className="group z-100 shrink-0"
+      >
         <Logo size={48} />
       </Link>
 

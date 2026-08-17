@@ -6,6 +6,7 @@ import { MapPin } from "lucide-react"
 import { MapLibreMap, Marker, setWorkerUrl } from "maplibre-gl"
 import "maplibre-gl/dist/maplibre-gl.css"
 import { locationsMapStyle } from "@/features/home/locationsMapStyle"
+import { COMMON_CONFIG } from "@/constant/commonConfig"
 import type { TLabels } from "@/types/labels.types"
 import { TDivProps } from "@/types/components.types"
 
@@ -65,8 +66,10 @@ function LocationsMap({ labels: cities, className, ...props }: TLocationsMapProp
     const map = new MapLibreMap({
       container: containerRef.current,
       style: locationsMapStyle,
-      center: initialCoords ? [initialCoords.lng, initialCoords.lat] : [12.9, 40.9],
-      zoom: initialCoords ? 16 : 4.3,
+      center: initialCoords
+        ? [initialCoords.lng, initialCoords.lat]
+        : COMMON_CONFIG.MAP_DEFAULT_CENTER,
+      zoom: initialCoords ? COMMON_CONFIG.MAP_CITY_ZOOM : COMMON_CONFIG.MAP_OVERVIEW_ZOOM,
       attributionControl: { compact: true }
     })
     mapRef.current = map
@@ -114,7 +117,11 @@ function LocationsMap({ labels: cities, className, ...props }: TLocationsMapProp
 
     const coords = cities[activeIndex]?.position
     if (coords && mapRef.current) {
-      mapRef.current.flyTo({ center: [coords.lng, coords.lat], zoom: 16, duration: 800 })
+      mapRef.current.flyTo({
+        center: [coords.lng, coords.lat],
+        zoom: COMMON_CONFIG.MAP_CITY_ZOOM,
+        duration: COMMON_CONFIG.MAP_FLY_TO_DURATION_MS
+      })
     }
   }, [activeIndex, cities])
 

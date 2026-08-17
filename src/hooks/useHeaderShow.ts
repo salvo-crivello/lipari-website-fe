@@ -1,4 +1,5 @@
 import { isNotNullOrUndefined } from "@/utils"
+import { COMMON_CONFIG } from "@/constant/commonConfig"
 import { useEffect, useState, useRef, RefObject } from "react"
 
 type TUseHeaderShowProps = {
@@ -36,13 +37,13 @@ export const useHeaderShow = ({ elementRef }: TUseHeaderShowProps = {}): TUseHea
       const scrollQty = Math.abs(scrollY - yOld)
       const scrollWay = scrollY > yOld ? "down" : "up"
 
-      if (scrollQty > 50 && scrollWay === "down") {
+      if (scrollQty > COMMON_CONFIG.HEADER_SCROLL_HIDE_THRESHOLD && scrollWay === "down") {
         setShowHeader(false)
-      } else if (scrollQty > 30 && scrollWay === "up") {
+      } else if (scrollQty > COMMON_CONFIG.HEADER_SCROLL_SHOW_THRESHOLD && scrollWay === "up") {
         setShowHeader(true)
       }
 
-      if (scrollQty > 50) {
+      if (scrollQty > COMMON_CONFIG.HEADER_SCROLL_HIDE_THRESHOLD) {
         yOldRef.current = scrollY
       }
     }

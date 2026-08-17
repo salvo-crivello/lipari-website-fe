@@ -2,6 +2,15 @@ import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
 /**
+ * Determines whether the application is running in development mode.
+ *
+ * @returns `true` when `NODE_ENV` is set to `development`, otherwise `false`.
+ */
+export function isDevelopmentMode() {
+  return process.env.NODE_ENV === "development"
+}
+
+/**
  * Merges conditional Tailwind CSS classes and resolves conflicting utilities.
  *
  * @param inputs - Class names or conditional class values to merge.

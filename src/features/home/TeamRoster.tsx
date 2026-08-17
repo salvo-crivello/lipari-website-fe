@@ -31,7 +31,7 @@ function TeamRoster({ labels: members }: TTeamRosterProps) {
 
   return (
     <div className="relative col-span-12 grid grid-cols-12">
-      <ul className="deborder1 relative col-span-12 grid grid-cols-12 py-20">
+      <ul className="relative col-span-12 grid grid-cols-12 py-20">
         {members.map((member, index) => (
           <li
             key={member.name}
@@ -65,7 +65,7 @@ function TeamRoster({ labels: members }: TTeamRosterProps) {
         ))}
       </ul>
       {active.photo && (
-        <div className="deborder2 absolute top-0 left-0 z-0 grid h-full w-full grid-cols-12 justify-items-end">
+        <div className="absolute top-0 left-0 z-0 grid h-full w-full grid-cols-12 justify-items-end">
           <div className="sticky top-40 col-span-3 col-end-13 ml-auto aspect-3/4 w-full overflow-hidden rounded-sm">
             <Image src={active.photo} alt={active.name} fill className="object-cover" />
           </div>
