@@ -1,11 +1,11 @@
 import { HeaderShell } from "@/components/layout/header/HeaderShell"
-import { NAV_ROUTES } from "@/constant/routes"
+import { ROUTES } from "@/constant/routes"
 import { getLabels } from "@/lib/content-client"
 
 export async function Header() {
   const { nav } = await getLabels()
 
-  const items = NAV_ROUTES.map((item) => ({
+  const items = ROUTES.NAV_ROUTES.map((item) => ({
     href: item.href,
     label: nav[item.navKey]
   }))

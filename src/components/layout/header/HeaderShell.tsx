@@ -8,14 +8,9 @@ import { useWindowSize } from "@/hooks/useWindowSize"
 import { useHeaderShow } from "@/hooks/useHeaderShow"
 import { DesktopMenu } from "@/components/layout/header/DesktopMenu"
 import { MobileMenu } from "@/components/layout/header/MobileMenu"
-import type { TNavItem } from "@/components/layout/header/HeaderShell.types"
+import type { THeaderShellProps } from "@/components/layout/header/HeaderShell.types"
 import { COMMON_CONFIG } from "@/constant/commonConfig"
 import { cn } from "@/utils"
-
-type THeaderShellProps = {
-  items: TNavItem[]
-  labels: string
-}
 
 export function HeaderShell({ items, labels }: THeaderShellProps) {
   const { isLG } = useWindowSize()

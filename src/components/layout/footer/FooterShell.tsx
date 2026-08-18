@@ -1,13 +1,9 @@
 import { Footer as FooterComponent } from "@/components/layout/MainComponents"
-import { COMPLIANCE_ROUTES, LEGAL_ROUTES, NAV_ROUTES, SOCIAL_LINKS } from "@/constant/routes"
+import { ROUTES } from "@/constant/routes"
 import LipariLogo from "@/assets/svg/LipariLogo"
 import { ButtonLink } from "@/components/ui/Button/Button"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
-import type { TLabels } from "@/types/labels.types"
-
-type TFooterShellProps = {
-  labels: TLabels["footer"]
-}
+import type { TFooterShellProps } from "@/components/layout/footer/FooterShell.types"
 
 export function FooterShell({ labels: footer }: TFooterShellProps) {
   const copyright = `© ${new Date().getFullYear()} ${footer.companyName}`
@@ -24,7 +20,7 @@ export function FooterShell({ labels: footer }: TFooterShellProps) {
         />
 
         <nav aria-label="Footer" className="flex flex-col gap-6 sm:col-span-2">
-          {NAV_ROUTES.map((item) => (
+          {ROUTES.NAV_ROUTES.map((item) => (
             <ButtonLink
               key={item.href}
               href={item.href}
@@ -37,7 +33,7 @@ export function FooterShell({ labels: footer }: TFooterShellProps) {
         </nav>
 
         <nav aria-label="Compliance" className="flex flex-col gap-6 sm:col-span-2">
-          {COMPLIANCE_ROUTES.map((route) => (
+          {ROUTES.COMPLIANCE_ROUTES.map((route) => (
             <ButtonLink
               key={route.href}
               href={route.href}
@@ -56,7 +52,7 @@ export function FooterShell({ labels: footer }: TFooterShellProps) {
             disableMotion
           />
           <div className="flex gap-4 gap-x-8 max-sm:flex-col">
-            {SOCIAL_LINKS.map((social) => (
+            {ROUTES.SOCIAL_LINKS.map((social) => (
               <ButtonLink
                 key={social.label}
                 href={social.href}
@@ -80,7 +76,7 @@ export function FooterShell({ labels: footer }: TFooterShellProps) {
         </p>
 
         <nav aria-label="Legal" className="flex gap-6 max-sm:flex-col sm:gap-10">
-          {LEGAL_ROUTES.map((route) => (
+          {ROUTES.LEGAL_ROUTES.map((route) => (
             <ButtonLink
               key={route.href}
               href={route.href}

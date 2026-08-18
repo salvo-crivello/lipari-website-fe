@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
 import Button, { ButtonLink } from "@/components/ui/Button/Button"
 import type { TNavItem } from "@/components/layout/header/HeaderShell.types"
-import { SOCIAL_LINKS } from "@/constant/routes"
+import { ROUTES } from "@/constant/routes"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
 import { typoVariants } from "@/components/ui/brand/Typo/Typo.styles"
 import useRoute from "@/hooks/useRoute"
@@ -78,7 +78,7 @@ export function MobileMenu({ items, labels }: TMobileMenuProps) {
                 className="text-right text-balance text-slate-300"
               />
               <div className="mt-1 flex flex-col items-end gap-4">
-                {SOCIAL_LINKS.map((social) => (
+                {ROUTES.SOCIAL_LINKS.map((social) => (
                   <ButtonLink
                     key={social.label}
                     href={social.href}
