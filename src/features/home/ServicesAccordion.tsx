@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "motion/react"
 import { AccordionItem, AccordionRoot, useAccordionRoot } from "@/components/ui/Accordion/Accordion"
 import { ButtonLink } from "@/components/ui/Button/Button"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
-import { DitherImage } from "@/components/motion/DitherImage"
+import { BrandImage } from "@/components/ui/brand/BrandImage/BrandImage"
 import { ROUTES } from "@/constant/routes"
 import { usePointerScrollEffect } from "@/hooks/usePointerScrollEffect"
 import type { TLabels } from "@/types/labels.types"
@@ -149,8 +149,7 @@ const ServicesImage = ({ labels: areas }: TServicesAccordionProps) => {
             transition={{ duration: 0.4 }}
             className="absolute inset-0"
           >
-            <DitherImage src={activeImage} dithered className="h-full w-full" />
-            <div className="bg-brand-green pointer-events-none absolute inset-0 mix-blend-multiply" />
+            <BrandImage src={activeImage} />
           </motion.div>
         </AnimatePresence>
       </div>
