@@ -19,6 +19,8 @@ async function Methods() {
         color="dark"
         text={description}
         className="col-span-10 col-end-13 md:col-span-8 md:col-end-13 lg:col-span-6 lg:col-end-13 2xl:col-span-4 2xl:col-end-12"
+        splitBy="line"
+        stagger={0.1}
       />
       <MethodsGallery labels={cards} />
     </Section>

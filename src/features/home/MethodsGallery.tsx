@@ -69,7 +69,13 @@ function MethodCard({ card, style }: TMethodCardProps) {
       />
       <div className="flex flex-col gap-2.5">
         <Typo.H3 text={card.title} color={style.title} />
-        <Typo.P text={card.description} color={style.title} className={style.desc} />
+        <Typo.P
+          text={card.description}
+          color={style.title}
+          className={style.desc}
+          splitBy="line"
+          stagger={0.1}
+        />
       </div>
     </motion.div>
   )

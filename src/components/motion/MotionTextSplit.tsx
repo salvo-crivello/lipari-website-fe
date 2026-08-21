@@ -2,14 +2,14 @@
 
 import clsx from "clsx"
 import { motion, useInView, type Variants } from "motion/react"
-import { useMemo, useRef } from "react"
+import { useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 
 export type TMotionTextSplitProps = {
   animateNow?: boolean
   delay?: number
   text: string
   className?: string
-  splitBy?: "word" | "letter"
+  splitBy?: "word" | "letter" | "line"
   whiteSpacePreLine?: boolean
   direction?: "up" | "down"
   stagger?: number
@@ -17,12 +17,16 @@ export type TMotionTextSplitProps = {
   accentWordsClassName?: string
 }
 
+// Exit (hidden) is a hard reset, not an animated transition — a staggered/eased
+// exit lets a fast scroll-out catch children mid-transition (some still fading,
+// some already off), which reads as disordered once the block re-enters. Only
+// the entrance (visible) animates; hidden snaps instantly with duration: 0.
 const childVariants: Record<"up" | "down", Variants> = {
   up: {
     hidden: {
       y: "50%",
       clipPath: "inset(0 0 100% 0)",
-      transition: { ease: "easeIn", duration: 0.3 }
+      transition: { duration: 0 }
     },
     visible: {
       y: "0%",
@@ -34,7 +38,7 @@ const childVariants: Record<"up" | "down", Variants> = {
     hidden: {
       y: "-100%",
       clipPath: "inset(100% 0 0 0)",
-      transition: { ease: "easeIn", duration: 0.3 }
+      transition: { duration: 0 }
     },
     visible: {
       y: "0%",
@@ -42,6 +46,56 @@ const childVariants: Record<"up" | "down", Variants> = {
       transition: { ease: "easeOut", duration: 0.3 }
     }
   }
+}
+
+// "line" mode reveals actual wrapped visual lines, not "\n"-delimited text —
+// wrap boundaries depend on rendered width/font, so they're measured client-side
+// (offsetTop grouping) rather than assumed from the source string.
+const measurerStyle: CSSProperties = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  visibility: "hidden",
+  pointerEvents: "none"
+}
+
+function useMeasuredLines(text: string, enabled: boolean) {
+  const measureRef = useRef<HTMLSpanElement>(null)
+  const [lines, setLines] = useState<string[]>([text])
+
+  useLayoutEffect(() => {
+    if (!enabled) return
+
+    const container = measureRef.current
+    if (!container) return
+
+    const wordEls = Array.from(container.querySelectorAll<HTMLSpanElement>("[data-word]"))
+
+    const measure = () => {
+      const groups: string[][] = []
+      let lastTop: number | null = null
+
+      wordEls.forEach((el) => {
+        const top = el.offsetTop
+        if (lastTop === null || top !== lastTop) {
+          groups.push([])
+          lastTop = top
+        }
+        groups[groups.length - 1].push(el.textContent ?? "")
+      })
+
+      setLines(groups.map((words) => words.join("")))
+    }
+
+    measure()
+
+    const resizeObserver = new ResizeObserver(measure)
+    resizeObserver.observe(container)
+    return () => resizeObserver.disconnect()
+  }, [text, enabled])
+
+  return { measureRef, lines }
 }
 
 export const MotionTextSplit = ({
@@ -59,7 +113,7 @@ export const MotionTextSplit = ({
   const childRef = useRef<HTMLSpanElement>(null)
 
   const defaultInView = useInView(childRef, {
-    margin: "50% 0px -10% 0px",
+    margin: "50% 0px 0px 0px",
     amount: 0.1
   })
 
@@ -68,14 +122,22 @@ export const MotionTextSplit = ({
     [animateNow, defaultInView]
   )
 
-  const lines = whiteSpacePreLine ? text.split("\n") : [text.replace(/\n/g, " ")]
+  const flatText = text.replace(/\n/g, " ")
+  const { measureRef, lines: measuredLines } = useMeasuredLines(flatText, splitBy === "line")
+
+  const lines =
+    splitBy === "line"
+      ? measuredLines
+      : whiteSpacePreLine
+        ? text.split("\n")
+        : [text.replace(/\n/g, " ")]
   const selectedChild = childVariants[direction]
 
   const containerMotionVariants = {
     hidden: {
       transition: {
-        staggerChildren: stagger,
-        delayChildren: delay
+        staggerChildren: 0,
+        delayChildren: 0
       }
     },
     visible: {
@@ -91,40 +153,64 @@ export const MotionTextSplit = ({
       variants={containerMotionVariants}
       initial="hidden"
       animate={startAnimation ? "visible" : "hidden"}
-      className={clsx(className)}
+      className={clsx(splitBy === "line" ? "relative block" : undefined, className)}
     >
-      {lines.map((line, lineIndex) => {
-        const lineChunks = splitBy === "letter" ? [...line] : line.split(" ")
+      {splitBy === "line" && (
+        <span ref={measureRef} style={measurerStyle} aria-hidden="true">
+          {flatText.split(" ").map((word, i) => (
+            <span key={i} data-word>
+              {word}{" "}
+            </span>
+          ))}
+        </span>
+      )}
 
-        return (
-          <span ref={childRef} key={lineIndex} className="block">
-            {lineChunks.map((chunk, i) => {
-              const content = splitBy === "word" ? chunk + " " : chunk
+      {splitBy === "line" ? (
+        <span ref={childRef}>
+          {lines.map((line, lineIndex) => (
+            <motion.span
+              key={lineIndex}
+              variants={selectedChild}
+              className="block p-0 text-wrap will-change-[clip-path,transform]"
+            >
+              {line}
+            </motion.span>
+          ))}
+        </span>
+      ) : (
+        lines.map((line, lineIndex) => {
+          const lineChunks = splitBy === "letter" ? [...line] : line.split(" ")
 
-              const isAccent = accentWords?.some(
-                (word) => word.toLowerCase() === chunk.toLowerCase()
-              )
+          return (
+            <span ref={childRef} key={lineIndex} className="block">
+              {lineChunks.map((chunk, i) => {
+                const content = splitBy === "word" ? chunk + " " : chunk
 
-              return (
-                <motion.span
-                  key={`${lineIndex}-${i}`}
-                  variants={selectedChild}
-                  className={clsx(
-                    "inline-block p-0 will-change-[clip-path,transform]",
-                    splitBy === "word" ? "whitespace-pre" : undefined,
-                    isAccent ? accentWordsClassName : undefined
-                  )}
-                  style={{
-                    width: splitBy === "letter" && chunk === " " ? "0.2em" : "auto"
-                  }}
-                >
-                  {content}
-                </motion.span>
-              )
-            })}
-          </span>
-        )
-      })}
+                const isAccent = accentWords?.some(
+                  (word) => word.toLowerCase() === chunk.toLowerCase()
+                )
+
+                return (
+                  <motion.span
+                    key={`${lineIndex}-${i}`}
+                    variants={selectedChild}
+                    className={clsx(
+                      "inline-block p-0 will-change-[clip-path,transform]",
+                      splitBy === "word" ? "whitespace-pre" : undefined,
+                      isAccent ? accentWordsClassName : undefined
+                    )}
+                    style={{
+                      width: splitBy === "letter" && chunk === " " ? "0.2em" : "auto"
+                    }}
+                  >
+                    {content}
+                  </motion.span>
+                )
+              })}
+            </span>
+          )
+        })
+      )}
     </motion.span>
   )
 }

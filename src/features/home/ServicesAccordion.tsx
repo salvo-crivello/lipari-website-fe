@@ -150,7 +150,7 @@ const ServicesImage = ({ labels: areas }: TServicesAccordionProps) => {
             className="absolute inset-0"
           >
             <DitherImage src={activeImage} dithered className="h-full w-full" />
-            <div className="bg-brand-green absolute inset-0 mix-blend-multiply" />
+            <div className="bg-brand-green pointer-events-none absolute inset-0 mix-blend-multiply" />
           </motion.div>
         </AnimatePresence>
       </div>
