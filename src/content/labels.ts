@@ -171,8 +171,47 @@ export const labels = {
 
   about: {
     hero: {
-      title: "",
-      subtitle: ""
+      title: "Un partner in continua evoluzione"
+    },
+    intro: {
+      eyebrow: "in breve",
+      statement:
+        "Nati nel 2007 con l'obiettivo di affiancare le aziende nei loro percorsi di trasformazione, siamo cresciuti restando fedeli a un approccio su misura: uniamo la consulenza direzionale a quella tecnologica, la flessibilità di una boutique alla capacità di lavorare su progetti enterprise.",
+      paragraph:
+        "Oggi operiamo tra Milano e la Sicilia, e nel tempo estendiamo la nostra offerta a nuovi settori e competenze, affiancando alla consulenza organizzativa quella tecnologica."
+    },
+    missionVision: {
+      eyebrow: "Quello in cui crediamo",
+      missionTitle: "mission",
+      missionText:
+        "Lorem ipsum dolor sit amet consectetur. Neque semper risus magna viverra nulla purus pellentesque pretium. Scelerisque id mauris feugiat suspendisse gravida.",
+      visionTitle: "La nostra vision",
+      visionText:
+        "Lorem ipsum dolor sit amet consectetur. Neque semper risus magna viverra nulla purus pellentesque pretium. Scelerisque id mauris feugiat suspendisse gravida."
+    },
+    timeline: {
+      eyebrow: "traguardi raggiunti durante il viaggio",
+      items: [
+        { year: "2007", description: "Fondazione a Alcamo, da Giovanni Lipari" },
+        { year: "2016", description: "Avvio della collaborazione con l'Università di Palermo" },
+        { year: "2017", description: "10° anniversario — oltre 100 neolaureati assunti" },
+        { year: "2018", description: "Nasce Lipari Technology" },
+        { year: "2022", description: "Lancio Lipari Talent Lab" },
+        { year: "2024", description: "Best Workplaces Italia & Great Place to Work Italia" }
+      ]
+    },
+    leaders: {
+      eyebrow: "Le persone che ci ispirano ogni giorno",
+      title: "Leader board",
+      description:
+        "Lorem ipsum dolor sit amet consectetur. Neque semper risus magna viverra nulla purus pellentesque pretium. Scelerisque id mauris feugiat suspendisse gravida."
+    },
+    contactCta: {
+      eyebrow: "Iniziamo da qui",
+      title: "Parliamo del tuo prossimo progetto.",
+      description:
+        "Ogni trasformazione inizia da una conversazione. Raccontaci le tue esigenze e scopri come possiamo supportarti con competenze strategiche, organizzative e tecnologiche.",
+      cta: "Contatta il nostro team"
     }
   },
 

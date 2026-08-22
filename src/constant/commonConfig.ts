@@ -17,7 +17,14 @@ export abstract class COMMON_CONFIG {
     "FORM",
     "UL",
     "OL",
-    "LI"
+    "LI",
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5",
+    "P",
+    "SPAN"
   ])
 
   // Responsive breakpoints (hooks/useWindowSize.ts)

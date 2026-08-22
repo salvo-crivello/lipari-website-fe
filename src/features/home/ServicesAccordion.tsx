@@ -9,7 +9,7 @@ import { Typo } from "@/components/ui/brand/Typo/Typo"
 import { BrandImage } from "@/components/ui/brand/BrandImage/BrandImage"
 import { ROUTES } from "@/constant/routes"
 import { usePointerScrollEffect } from "@/hooks/usePointerScrollEffect"
-import type { TLabels } from "@/types/labels.types"
+import type { TLabelsHomepageServicesAreas } from "@/types/labels.types"
 import { cn } from "@/utils"
 import { useWindowSize } from "@/hooks/useWindowSize"
 
@@ -24,10 +24,8 @@ const AREA_IMAGES = [
   "/home/careers-cta.png"
 ] as const
 
-type TServiceArea = TLabels["homepage"]["services"]["areas"][number]
-
 type TServicesAccordionProps = {
-  labels: readonly TServiceArea[]
+  labels: readonly TLabelsHomepageServicesAreas[]
 }
 
 function ServicesAccordion({ labels: areas }: TServicesAccordionProps) {

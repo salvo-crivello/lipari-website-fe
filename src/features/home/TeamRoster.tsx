@@ -6,12 +6,10 @@ import { Typo } from "@/components/ui/brand/Typo/Typo"
 import { usePointerScrollEffect } from "@/hooks/usePointerScrollEffect"
 import { cn } from "@/utils"
 import { useWindowSize } from "@/hooks/useWindowSize"
-import type { TLabels } from "@/types/labels.types"
-
-type TTeamMember = TLabels["homepage"]["team"]["members"][number]
+import type { TLabelsHomepageTeamMembers } from "@/types/labels.types"
 
 type TTeamRosterProps = {
-  labels: readonly TTeamMember[]
+  labels: readonly TLabelsHomepageTeamMembers[]
 }
 
 const DATA_SELECTOR = "data-member-index" as const

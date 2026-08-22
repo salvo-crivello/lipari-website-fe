@@ -5,13 +5,11 @@ import { typoVariants } from "@/components/ui/brand/Typo/Typo.styles"
 import Button from "@/components/ui/Button/Button"
 import { useLocationsRoot } from "@/features/home/LocationsMap"
 import { TDivProps } from "@/types/components.types"
-import type { TLabels } from "@/types/labels.types"
+import type { TLabelsHomepageLocationsDetails } from "@/types/labels.types"
 import { cn } from "@/utils"
 
-type TCity = TLabels["homepage"]["locations"]["locationsDetails"][number]
-
 type TLocationsRosterProps = {
-  labels: readonly TCity[]
+  labels: readonly TLabelsHomepageLocationsDetails[]
 } & TDivProps
 
 function LocationsRoster({ labels: cities, className, ...props }: TLocationsRosterProps) {

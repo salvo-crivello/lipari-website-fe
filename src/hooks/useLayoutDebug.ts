@@ -75,7 +75,7 @@ function updateDebugLevels(enabled: boolean, maxDepth: number) {
  */
 export const useLayoutDebug = (): TUseLayoutDebugReturn => {
   const [enabled, setEnabled] = useState(false)
-  const [depth, setDepth] = useState(2)
+  const [depth, setDepth] = useState(3)
 
   const toggle = useCallback(() => setEnabled((current) => !current), [])
   const increaseDepth = useCallback(

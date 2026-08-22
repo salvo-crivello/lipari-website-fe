@@ -4,13 +4,11 @@ import { useRef } from "react"
 import { Blocks, Route, Zap } from "lucide-react"
 import { motion, useScroll, useTransform } from "motion/react"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
-import type { TLabels } from "@/types/labels.types"
+import type { TLabelsHomepageMethodsCards } from "@/types/labels.types"
 import { cn } from "@/utils"
 
-type TMethodCard = TLabels["homepage"]["methods"]["cards"][number]
-
 type TMethodsGalleryProps = {
-  labels: readonly TMethodCard[]
+  labels: readonly TLabelsHomepageMethodsCards[]
 }
 
 // Card visuals aren't in the labels fixture (labels is copy-only) — index-matched
@@ -37,12 +35,12 @@ export default MethodsGallery
 // Sub-components
 // ========================================================================
 
-type TMethodCardProps = {
-  card: TMethodCard
+type TLabelsHomepageMethodsCardsProps = {
+  card: TLabelsHomepageMethodsCards
   style: (typeof CARD_STYLES)[number]
 }
 
-function MethodCard({ card, style }: TMethodCardProps) {
+function MethodCard({ card, style }: TLabelsHomepageMethodsCardsProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: cardRef,

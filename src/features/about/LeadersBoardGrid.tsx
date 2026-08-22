@@ -1,20 +1,14 @@
-"use client"
-import Image from "next/image"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
-import { useWindowSize } from "@/hooks/useWindowSize"
 import type { TLabelsHomepageTeamMembers } from "@/types/labels.types"
+import Image from "next/image"
 
-type TTeamGridProps = {
+type TLeadersBoardGridProps = {
   labels: readonly TLabelsHomepageTeamMembers[]
 }
 
-function TeamGrid({ labels: members }: TTeamGridProps) {
-  const { isMobile } = useWindowSize()
-
-  if (!isMobile) return null
-
+export default function LeadersBoardGrid({ labels: members }: TLeadersBoardGridProps) {
   return (
-    <div className="col-span-12 grid grid-cols-2 gap-x-4 gap-y-10">
+    <div className="col-span-12 mt-20 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-3">
       {members.map((member) => (
         <div key={member.name} className="flex flex-col gap-3">
           {member.photo && (
@@ -22,11 +16,11 @@ function TeamGrid({ labels: members }: TTeamGridProps) {
               <Image src={member.photo} alt={member.name} fill className="object-cover" />
             </div>
           )}
-          <div className="flex flex-col gap-1">
+          <div className="@container flex flex-col gap-1">
             <Typo.Span
               text={member.name}
               color="dark"
-              className="font-condensed text-2xl leading-none font-black text-balance uppercase"
+              className="font-condensed text-2xl leading-none font-black text-balance uppercase md:text-[clamp(2rem,10cqw,20rem)]"
             />
             {member.role && (
               <Typo.Span
@@ -42,5 +36,3 @@ function TeamGrid({ labels: members }: TTeamGridProps) {
     </div>
   )
 }
-
-export default TeamGrid

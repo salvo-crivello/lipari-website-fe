@@ -7,15 +7,17 @@ import { MapLibreMap, Marker, setWorkerUrl } from "maplibre-gl"
 import "maplibre-gl/dist/maplibre-gl.css"
 import { locationsMapStyle } from "@/features/home/locationsMapStyle"
 import { COMMON_CONFIG } from "@/constant/commonConfig"
-import type { TLabels } from "@/types/labels.types"
+import type { TLabelsHomepageLocationsDetails } from "@/types/labels.types"
 import { TDivProps } from "@/types/components.types"
 
-// Turbopack breaks maplibre-gl's bundled worker (drops its sibling-file
-// import, silently killing vector tile loading) — serve it as a static,
-// unbundled file instead. See scripts/copy-maplibre-worker.mjs.
+// Turbopack rompe il worker di maplibre-gl (bug del bundler), la mappa
+// resta vuota senza errori. Fix: serviamo il worker come file statico,
+// non bundlato — vedi scripts/copy-maplibre-worker.mjs.
 setWorkerUrl("/maplibre-gl/maplibre-gl-worker.mjs")
 
-type TCity = TLabels["homepage"]["locations"]["locationsDetails"][number]
+// ========================================================================
+// LocationsRoot
+// ========================================================================
 
 type TLocationsRootContext = {
   activeIndex: number
@@ -47,10 +49,17 @@ export function LocationsRoot({ children, defaultActiveIndex = 0 }: TLocationsRo
   )
 }
 
+// ========================================================================
+// LocationsMap
+// ========================================================================
+
 type TLocationsMapProps = {
-  labels: readonly TCity[]
+  labels: readonly TLabelsHomepageLocationsDetails[]
 } & TDivProps
 
+/**
+ * Interactive map displaying the locations of the cities.
+ */
 function LocationsMap({ labels: cities, className, ...props }: TLocationsMapProps) {
   const { activeIndex, setActiveIndex } = useLocationsRoot()
   const containerRef = useRef<HTMLDivElement>(null)
@@ -101,8 +110,15 @@ function LocationsMap({ labels: cities, className, ...props }: TLocationsMapProp
     return () => {
       resizeObserver.disconnect()
       markersRef.current.forEach((marker) => marker.remove())
-      markerRootsRef.current.forEach((root) => root.unmount())
+
+      // Deferred: unmounting a nested createRoot synchronously here can race
+      // with React's own in-progress render of the outer tree, triggering
+      // "Attempted to synchronously unmount a root while React was already
+      // rendering". Unmount after the current render/commit has settled.
+      const rootsToUnmount = markerRootsRef.current
       markerRootsRef.current = []
+      queueMicrotask(() => rootsToUnmount.forEach((root) => root.unmount()))
+
       map.remove()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

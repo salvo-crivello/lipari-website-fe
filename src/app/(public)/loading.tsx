@@ -8,7 +8,7 @@ const LOGO_WIDTH = 64
 export default function Loading() {
   return (
     <div
-      className="bg-brand-blue-950 flex flex-1 items-center justify-center py-32"
+      className="bg-brand-blue-950 fixed inset-0 z-[110] flex items-center justify-center"
       role="status"
       aria-live="polite"
     >
