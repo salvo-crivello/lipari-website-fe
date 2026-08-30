@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import type { TBrandImageProps } from "./BrandImage.types"
+import { cn } from "@/utils"
 
 export function BrandImage({ src, alt = "", className }: TBrandImageProps) {
   const [hasError, setHasError] = useState(false)
@@ -16,7 +17,7 @@ export function BrandImage({ src, alt = "", className }: TBrandImageProps) {
           src={src}
           alt={alt}
           fill
-          className={className ?? "object-cover grayscale"}
+          className={cn("object-cover grayscale", className)}
           onError={() => setHasError(true)}
         />
       )}

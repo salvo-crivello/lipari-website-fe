@@ -18,7 +18,11 @@ const SM_COLUMN_START_CLASS = ["sm:col-start-1", "sm:col-start-2"] as const
 
 function TimelineGallery({ labels: items }: TTimelineGalleryProps) {
   return (
-    <div className="col-span-12 mt-10 grid grid-cols-1 gap-16 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-0 2xl:mt-20">
+    <div className="relative col-span-12 mt-10 grid grid-cols-1 gap-16 overflow-hidden sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-0 2xl:mt-20">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 -translate-y-20 bg-[linear-gradient(to_right,var(--color-slate-200)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-slate-200)_1px,transparent_1px)] bg-size-[200px_200px]"
+      />
       {items.map((item, index) => {
         const column = COLUMN_PATTERN[index % COLUMN_PATTERN.length]
         const smColumn = index % SM_COLUMN_START_CLASS.length

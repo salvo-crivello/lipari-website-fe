@@ -5,8 +5,8 @@ import { getLabels } from "@/lib/content-client"
 import { ROUTES } from "@/constant/routes"
 
 async function ContactCta() {
-  const { homepage } = await getLabels()
-  const { eyebrow, title, description, cta } = homepage.contactCta
+  const { contactCta } = await getLabels()
+  const { eyebrow, title, description, cta } = contactCta
 
   return (
     <Section>

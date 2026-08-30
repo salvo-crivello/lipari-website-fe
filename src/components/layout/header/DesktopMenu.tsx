@@ -27,7 +27,7 @@ export function DesktopMenu({ items, labels }: TDesktopMenuProps) {
           />
         ))}
       </nav>
-      <Button text={labels} />
+      <Button text={labels} variant={"outline"} />
     </div>
   )
 }

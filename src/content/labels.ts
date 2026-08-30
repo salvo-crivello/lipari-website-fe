@@ -137,13 +137,6 @@ export const labels = {
         }
       ]
     },
-    contactCta: {
-      eyebrow: "Iniziamo da qui",
-      title: "Parliamo del tuo prossimo progetto.",
-      description:
-        "Ogni trasformazione inizia da una conversazione. Raccontaci le tue esigenze e scopri come possiamo supportarti con competenze strategiche, organizzative e tecnologiche.",
-      cta: "Contatta il nostro team"
-    },
     methods: {
       eyebrow: "Il nostro metodo",
       title: 'Consulenza su misura, non "one size fits all".',
@@ -205,14 +198,49 @@ export const labels = {
       title: "Leader board",
       description:
         "Lorem ipsum dolor sit amet consectetur. Neque semper risus magna viverra nulla purus pellentesque pretium. Scelerisque id mauris feugiat suspendisse gravida."
-    },
-    contactCta: {
-      eyebrow: "Iniziamo da qui",
-      title: "Parliamo del tuo prossimo progetto.",
-      description:
-        "Ogni trasformazione inizia da una conversazione. Raccontaci le tue esigenze e scopri come possiamo supportarti con competenze strategiche, organizzative e tecnologiche.",
-      cta: "Contatta il nostro team"
     }
+  },
+
+  servicesPage: {
+    hero: {
+      title: "Dalla strategia all'execution"
+    },
+    intro: {
+      eyebrow: "Cosa facciamo",
+      statement:
+        "Uniamo consulenza direzionale e competenze tecnologiche in un'unica offerta. Lavoriamo su progetti end-to-end o su fasi specifiche, a seconda delle esigenze del cliente, mettendo a disposizione competenze verticali su banking, insurance, GDO, energy e media.",
+      paragraph1:
+        "Ogni intervento viene costruito attorno al contesto specifico del cliente: non proponiamo pacchetti standard, ma una combinazione di competenze e modalità di ingaggio calibrata sul singolo progetto.",
+      paragraph2:
+        "Un team multidisciplinare segue il cliente dalla definizione degli obiettivi fino al monitoraggio dei risultati, garantendo continuità anche quando affianchiamo altri fornitori o system integrator sullo stesso progetto."
+    },
+    pillars: [
+      {
+        eyebrow: "Consulting & Technology",
+        title: "Technology",
+        image: "/services/technology.jpg",
+        description:
+          "Sviluppiamo soluzioni software su misura, dalla progettazione all'implementazione. Lavoriamo su cloud, automazione e integrazione dei sistemi, mettendo la tecnologia al servizio degli obiettivi di business definiti in fase di consulenza."
+      },
+      {
+        eyebrow: "Consulting & Technology",
+        title: "Consulting",
+        image: "/services/consulting.jpg",
+        description:
+          "Progettiamo interventi di governance, analisi organizzativa e supporto decisionale. Affianchiamo i clienti nella definizione di processi, ruoli e strumenti di controllo, con un approccio orientato a risultati misurabili."
+      }
+    ],
+    gammaDiServizi: {
+      title: "Gamma di servizi"
+    }
+  },
+
+  contactCta: {
+    eyebrow: "Iniziamo da qui",
+    title: "Parliamo del tuo prossimo progetto.",
+    description:
+      "Ogni trasformazione inizia da una conversazione. Raccontaci le tue esigenze e scopri come possiamo supportarti con competenze strategiche, organizzative e tecnologiche.",
+    cta: "Contatta il nostro team"
   },
 
   footer: {

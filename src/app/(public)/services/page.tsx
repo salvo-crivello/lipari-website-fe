@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   title: "Services"
 }
 
-export default async function Page() {
-  await new Promise((r) => setTimeout(r, 10000))
+export default function Page() {
   return <ServicesPage />
 }

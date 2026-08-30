@@ -8,21 +8,13 @@ import { ButtonLink } from "@/components/ui/Button/Button"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
 import { BrandImage } from "@/components/ui/brand/BrandImage/BrandImage"
 import { ROUTES } from "@/constant/routes"
+import { AREA_IMAGES } from "@/constant/serviceAreaImages"
 import { usePointerScrollEffect } from "@/hooks/usePointerScrollEffect"
 import type { TLabelsHomepageServicesAreas } from "@/types/labels.types"
 import { cn } from "@/utils"
 import { useWindowSize } from "@/hooks/useWindowSize"
 
 const HOVER_SELECTOR = "data-area-index" as const
-
-const AREA_IMAGES = [
-  "/home/careers-cta.png",
-  "/home/hero-gallery-1.jpeg",
-  "/home/locations-bg.png",
-  "/home/team-maria-castellana.png",
-  "/home/hero-gallery-3.png",
-  "/home/careers-cta.png"
-] as const
 
 type TServicesAccordionProps = {
   labels: readonly TLabelsHomepageServicesAreas[]
