@@ -4,7 +4,7 @@ export const typoVariants = cva("", {
   variants: {
     variant: {
       display:
-        "font-condensed text-6xl leading-none font-bold uppercase text-balance md:text-7xl 2xl:text-9xl",
+        "font-condensed text-5xl leading-none font-bold uppercase text-balance md:text-7xl 2xl:text-9xl",
       sectionTitle:
         "font-condensed text-4xl leading-none font-bold text-balance uppercase lg:text-6xl 2xl:text-8xl",
       sectionStatement: "text-2xl md:text-3xl 2xl:text-4xl font-bold text-pretty",

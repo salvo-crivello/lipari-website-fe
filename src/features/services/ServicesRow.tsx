@@ -8,6 +8,7 @@ import { Typo } from "@/components/ui/brand/Typo/Typo"
 import { ROUTES } from "@/constant/routes"
 import { AREA_IMAGES } from "@/constant/serviceAreaImages"
 import { usePointerScrollEffect } from "@/hooks/usePointerScrollEffect"
+import { useWindowSize } from "@/hooks/useWindowSize"
 import type { TLabelsHomepageServicesAreas } from "@/types/labels.types"
 import { cn } from "@/utils"
 import { BrandImage } from "@/components/ui/brand/BrandImage/BrandImage"
@@ -19,6 +20,7 @@ type TServicesRowProps = {
 }
 
 function ServicesRow({ labels: areas }: TServicesRowProps) {
+  const { isLG, isSM } = useWindowSize()
   const [{ current: hoveredIndex, previous: previousHoveredIndex }, setHover] = useState<{
     current: number | null
     previous: number | null
@@ -39,24 +41,21 @@ function ServicesRow({ labels: areas }: TServicesRowProps) {
       }
     >
       {areas.map((area, index) => {
-        const isActive = hoveredIndex === index
+        // Niente hover effect sotto lg: nessuna transizione dark-bg/opacità.
+        const isActive = isSM && hoveredIndex === index
         const isLast = index === areas.length - 1
         const wasActive = previousHoveredIndex === index && !isActive
 
         let originY: number
         if (isActive) {
           if (previousHoveredIndex === null) {
-            // Nessun hover precedente
             originY = isLast ? 1 : 0
           } else {
-            // C'era già una riga hoverata, il mouse si è spostato su questa
             originY = index > previousHoveredIndex ? 0 : 1
           }
         } else if (wasActive && hoveredIndex !== null) {
-          // Questa riga ERA quella hoverata e l'hover si è spostato su altra riga
           originY = hoveredIndex > previousHoveredIndex ? 1 : 0
         } else {
-          // Default
           originY = isLast ? 1 : 0
         }
 
@@ -64,7 +63,7 @@ function ServicesRow({ labels: areas }: TServicesRowProps) {
           <li
             key={area.slug}
             {...{ [HOVER_SELECTOR]: index }}
-            className="relative border-t-4 border-slate-200 p-6 last:border-b-4 lg:p-10"
+            className="relative border-t-4 border-slate-200 py-6 last:border-b-4 lg:py-10"
           >
             <motion.div
               aria-hidden
@@ -75,62 +74,81 @@ function ServicesRow({ labels: areas }: TServicesRowProps) {
               className="bg-brand-blue-950 absolute inset-y-0 z-0 w-screen"
             />
 
-            <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-20">
-              <div className="flex gap-6 lg:gap-20">
+            <div className="relative z-10 flex flex-col gap-6 md:grid md:grid-cols-[auto_1fr] md:items-start md:gap-x-10 md:gap-y-6 lg:grid-cols-12">
+              <div className="flex gap-6 sm:max-lg:row-span-2 lg:col-span-4 lg:gap-10">
                 <Typo.Span
                   text={String(index + 1)}
                   color={isActive ? "light" : "dark"}
                   className="font-mono text-3xl font-bold"
                 />
-                <motion.div
-                  initial={false}
-                  animate={{ opacity: isActive ? 1 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative size-62 shrink-0 overflow-hidden rounded-sm"
+                <div
+                  className={cn(
+                    "relative isolate aspect-square w-62 shrink-0 overflow-hidden rounded-sm transition-opacity duration-300",
+                    {
+                      "opacity-0": !isActive && isLG,
+                      "opacity-100": isActive && isLG
+                    }
+                  )}
                 >
                   <BrandImage src={AREA_IMAGES[index]} alt="" className="object-cover" />
-                </motion.div>
+                </div>
               </div>
 
-              <div className="flex flex-1 flex-col justify-between gap-6 lg:self-stretch">
+              <div className="flex flex-1 flex-col justify-between gap-6 md:col-start-2 lg:col-span-4 lg:self-stretch">
                 <Typo.Span
                   text={area.title}
                   color={isActive ? "light" : "dark"}
                   className={cn(
-                    "font-condensed text-3xl font-bold uppercase transition-all duration-400 lg:w-138.25 lg:shrink-0",
+                    "font-condensed text-3xl font-bold text-wrap uppercase transition-all duration-400",
                     {
                       "text-slate-100": isActive,
                       "text-slate-900": !isActive
                     }
                   )}
                 />
-                <motion.div
-                  initial={false}
-                  animate={{ opacity: isActive ? 1 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ButtonLink
-                    href={`${ROUTES.SERVICES}/${area.slug}`}
-                    icon={ArrowUpRight}
-                    aria-label={`Vai a ${area.title}`}
-                    text="Read more"
-                    variant="fill"
-                    color="tertiary"
-                    surface="dark"
-                    onClick={(event) => !isActive && event.preventDefault()}
-                  />
-                </motion.div>
+                {isLG && (
+                  <motion.div
+                    initial={false}
+                    animate={{ opacity: isActive ? 1 : 0 }}
+                    transition={{ duration: isActive ? 0.15 : 0.1, delay: isActive ? 0.4 : 0 }}
+                  >
+                    <ButtonLink
+                      href={`${ROUTES.SERVICES}/${area.slug}`}
+                      icon={ArrowUpRight}
+                      aria-label={`Vai a ${area.title}`}
+                      text="Read more"
+                      variant="fill"
+                      color="tertiary"
+                      surface="dark"
+                      onClick={(event) => !isActive && event.preventDefault()}
+                    />
+                  </motion.div>
+                )}
               </div>
 
               <Typo.P
                 text={area.content}
                 color={isActive ? "light" : "dark"}
-                className={cn("transition-all duration-400 lg:w-138.25 lg:shrink-0", {
+                className={cn("transition-all duration-400 md:col-start-2 lg:col-span-4", {
                   "text-slate-400": isActive,
                   "text-slate-900": !isActive
                 })}
                 disableMotion
               />
+
+              {!isLG && (
+                <ButtonLink
+                  href={`${ROUTES.SERVICES}/${area.slug}`}
+                  icon={ArrowUpRight}
+                  aria-label={`Vai a ${area.title}`}
+                  text="Read more"
+                  variant="fill"
+                  color="tertiary"
+                  surface={"light"}
+                  onClick={(event) => !isActive && event.preventDefault()}
+                  className="ml-auto sm:col-span-2"
+                />
+              )}
             </div>
           </li>
         )

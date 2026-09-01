@@ -17,7 +17,7 @@ export function BrandImage({ src, alt = "", className }: TBrandImageProps) {
           src={src}
           alt={alt}
           fill
-          className={cn("object-cover grayscale", className)}
+          className={cn("relative z-0 object-cover grayscale", className)}
           onError={() => setHasError(true)}
         />
       )}
