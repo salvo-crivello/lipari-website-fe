@@ -1,8 +1,20 @@
+import { Main } from "@/components/layout/MainComponents"
+import { Hero } from "@/views/culture-career/sections/Hero"
+import Intro from "./sections/Intro"
+import CultureValues from "./sections/CultureValues"
+import Awards from "./sections/Awards"
+import OpenPositions from "./sections/OpenPositions"
+import ContactCta from "./sections/ContactCta"
+
 export function CultureCareerPage() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center py-32">
-      <h1 className="text-3xl font-semibold">Culture & Career</h1>
-      <p className="mt-2 text-slate-500">Figma frame 483:1654 — pending sections build-out.</p>
-    </main>
+    <Main>
+      <Hero />
+      <Intro />
+      <CultureValues />
+      <Awards />
+      <OpenPositions />
+      <ContactCta />
+    </Main>
   )
 }

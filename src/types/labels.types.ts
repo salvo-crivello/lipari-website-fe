@@ -15,4 +15,7 @@ export type TLabelsHomepageMethodsCards = TLabels["homepage"]["methods"]["cards"
 export type TLabelsHomepageServicesAreas = TLabels["homepage"]["services"]["areas"][number]
 export type TLabelsAboutpageTimelineItems = TLabels["about"]["timeline"]["items"][number]
 export type TLabelsServicespagePillars = TLabels["servicesPage"]["pillars"][number]
+export type TLabelsCultureCareerPageValues = TLabels["cultureCareerPage"]["values"][number]
+export type TLabelsCultureCareerpageAwardsItems =
+  TLabels["cultureCareerPage"]["awards"]["items"][number]
 export type TLabelsFooter = TLabels["footer"]

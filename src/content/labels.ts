@@ -243,6 +243,87 @@ export const labels = {
     cta: "Contatta il nostro team"
   },
 
+  cultureCareerPage: {
+    hero: {
+      title: "Il valore in ognuno di noi"
+    },
+    intro: {
+      eyebrow: "La nostra cultura",
+      statement:
+        "Crediamo nella cultura del talento e nell'attenzione al valore di ogni persona. Con determinazione e perseveranza è possibile sprigionare il proprio potenziale, superare i limiti, esplorare nuove strade e realizzare qualcosa di grande, a prescindere dal punto di partenza.",
+      paragraph:
+        "Costruiamo percorsi di crescita su misura, sviluppiamo competenze manageriali e incoraggiamo l'intraprendenza individuale."
+    },
+    values: [
+      {
+        title: "Sviluppo del talento",
+        image: "/home/hero-gallery-1.jpeg",
+        description:
+          "Offriamo percorsi formativi personalizzati per valorizzare le competenze individuali e sviluppare nuove capacità professionali."
+      },
+      {
+        title: "Valorizzazione personale",
+        image: "/home/team-maria-castellana.png",
+        description:
+          "Riconosciamo l'unicità di ogni persona, offrendo un ambiente che valorizza i talenti e permette di esprimere appieno il proprio potenziale."
+      },
+      {
+        title: "Community",
+        image: "/home/careers-cta.png",
+        description:
+          "Costruiamo una comunità forte e coesa, basata sulla condivisione di conoscenze e sulla collaborazione tra tutti i membri del team."
+      },
+      {
+        title: "Benessere e inclusione",
+        image: "/home/hero-gallery-3.png",
+        description:
+          "Promuoviamo un ambiente di lavoro inclusivo dove il benessere fisico e mentale delle persone è una priorità assoluta."
+      }
+    ],
+    awards: {
+      eyebrow: "Always aiming a little higher.",
+      items: [
+        {
+          image: "/culture-career/awards/campione-della-crescita.png",
+          years: "2021 · 2022 · 2024",
+          title: "Campione della Crescita",
+          subtitle: "Affari e Finanza"
+        },
+        {
+          image: "/culture-career/awards/campione-della-crescita.png",
+          years: "2018 · 2019 · 2020 · 2021",
+          title: "Leader della Crescita",
+          subtitle: "Fatturato e Crescita"
+        },
+        {
+          image: "/culture-career/awards/best-workplaces-millennials.png",
+          years: "Top 20 - 2023",
+          title: "Best Workplaces Italia",
+          subtitle: "For Millennials"
+        },
+        {
+          image: "/culture-career/awards/best-workplaces-millennials.png",
+          years: "Top 20 - 2024",
+          title: "Best Workplaces Italia",
+          subtitle: "150-499 Employees"
+        }
+      ]
+    },
+    openPositions: {
+      eyebrow: "Ti rivedi in noi?",
+      title: "Scopri le opportunità in Lipari Consulting",
+      description:
+        "Ogni azienda ha obiettivi e contesti specifici: per questo progettiamo interventi personalizzati, capaci di adattarsi alle esigenze reali del cliente e di generare valore concreto."
+    },
+    contactCta: {
+      eyebrow: "Hai domande?",
+      title: "Non esitare a contattarci",
+      description:
+        "Il nostro team è sempre a disposizione per aiutarti e rispondere a qualsiasi domanda o richiesta. Ti basta un messaggio.",
+      cta: "Contatta il nostro team"
+    }
+  },
+
   footer: {
     valueStatement: "Il valore in ognuno di noi",
     companyName: "Lipari Consulting & Co SRL",
