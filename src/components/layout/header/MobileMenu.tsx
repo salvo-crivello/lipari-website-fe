@@ -11,13 +11,13 @@ import { AnimatePresence, motion } from "motion/react"
 import { Dispatch, SetStateAction, useEffect } from "react"
 
 type TMobileMenuProps = {
-  items: TNavItem[]
+  navPages: TNavItem[]
   labels: string
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export function MobileMenu({ items, labels, open, setOpen }: TMobileMenuProps) {
+export function MobileMenu({ navPages, labels, open, setOpen }: TMobileMenuProps) {
   const { isCurrentPage } = useRoute()
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export function MobileMenu({ items, labels, open, setOpen }: TMobileMenuProps) {
             aria-label="Main mobile"
             className="flex flex-col items-start justify-start gap-4 sm:col-span-3"
           >
-            {items.map((item) => (
+            {navPages.map((item) => (
               <ButtonLink
                 key={item.href}
                 href={item.href}

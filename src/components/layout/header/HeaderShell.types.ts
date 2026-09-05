@@ -1,9 +1,10 @@
+import type { TLabels } from "@/types/labels.types"
+
 export type TNavItem = {
   href: string
   label: string
 }
 
 export type THeaderShellProps = {
-  items: TNavItem[]
-  labels: string
+  labels: TLabels["nav"]
 }

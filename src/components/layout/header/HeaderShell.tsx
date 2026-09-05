@@ -9,16 +9,22 @@ import { useHeaderShow } from "@/hooks/useHeaderShow"
 import { DesktopMenu } from "@/components/layout/header/DesktopMenu"
 import { MobileMenu } from "@/components/layout/header/MobileMenu"
 import type { THeaderShellProps } from "@/components/layout/header/HeaderShell.types"
+import { ROUTES } from "@/constant/routes"
 import { COMMON_CONFIG } from "@/constant/commonConfig"
 import { cn } from "@/utils"
 import Button from "@/components/ui/Button/Button"
 import { Menu, X } from "lucide-react"
 
-export function HeaderShell({ items, labels }: THeaderShellProps) {
+export function HeaderShell({ labels }: THeaderShellProps) {
   const { isLG } = useWindowSize()
   const headerRef = useRef<HTMLDivElement>(null)
   const { showHeader } = useHeaderShow()
   const [open, setOpen] = useState(false)
+
+  const navPages = ROUTES.NAV_ROUTES.map((page) => ({
+    href: page.href,
+    label: labels[page.navKey as keyof typeof labels]
+  }))
 
   return (
     <>
@@ -40,7 +46,7 @@ export function HeaderShell({ items, labels }: THeaderShellProps) {
         </Link>
 
         {isLG ? (
-          <DesktopMenu items={items} labels={labels} />
+          <DesktopMenu navPages={navPages} labels={labels.cta} />
         ) : (
           <Button
             icon={open ? X : Menu}
@@ -52,7 +58,7 @@ export function HeaderShell({ items, labels }: THeaderShellProps) {
           />
         )}
       </motion.header>
-      <MobileMenu items={items} labels={labels} open={open} setOpen={setOpen} />
+      <MobileMenu navPages={navPages} labels={labels.cta} open={open} setOpen={setOpen} />
     </>
   )
 }
