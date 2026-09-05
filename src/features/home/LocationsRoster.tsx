@@ -28,7 +28,7 @@ function LocationsRoster({ labels: cities, className, ...props }: TLocationsRost
               "col-span-6 w-fit text-left leading-none transition-all duration-300 ease-in-out",
               index === activeIndex
                 ? "text-brand-green translate-x-10"
-                : "translate-x-0 text-slate-400 hover:translate-x-10"
+                : "translate-x-0 cursor-pointer text-slate-400 hover:cursor-pointer"
             )}
             onClick={() => setActiveIndex(index)}
           >

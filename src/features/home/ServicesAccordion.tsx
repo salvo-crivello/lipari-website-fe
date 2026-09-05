@@ -49,7 +49,6 @@ function ServicesAccordionList({ labels: areas }: TServicesAccordionProps) {
     <ul className="col-span-12 mt-10 flex flex-col lg:col-span-8 lg:col-start-6">
       {areas.map((area, index) => {
         const isOpen = area.slug === openId
-        // Niente hover effect sotto lg: solo l'accordion open/close conta.
         const isHovering = isLG && hoveredIndex === index && !isOpen
         const isLast = index === areas.length - 1
         const surface = isHovering ? "dark" : "light"
@@ -94,7 +93,7 @@ function ServicesAccordionList({ labels: areas }: TServicesAccordionProps) {
 
               <AccordionItem.Content className="flex items-end max-sm:flex-col">
                 <Typo.P
-                  text={area.content}
+                  text={area.description}
                   color={surface === "dark" ? "light" : "dark"}
                   className={cn(
                     "mr-10 sm:ml-20 2xl:ml-[50%]",

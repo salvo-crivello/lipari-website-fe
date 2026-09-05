@@ -12,7 +12,7 @@ export type TLabelsHomepageLocationsDetails =
   TLabels["homepage"]["locations"]["locationsDetails"][number]
 export type TLabelsHomepageTeamMembers = TLabels["homepage"]["team"]["members"][number]
 export type TLabelsHomepageMethodsCards = TLabels["homepage"]["methods"]["cards"][number]
-export type TLabelsHomepageServicesAreas = TLabels["homepage"]["services"]["areas"][number]
+export type TLabelsHomepageServicesAreas = TLabels["homepage"]["services"]["services"][number]
 export type TLabelsAboutpageTimelineItems = TLabels["about"]["timeline"]["items"][number]
 export type TLabelsServicespagePillars = TLabels["servicesPage"]["pillars"][number]
 export type TLabelsCultureCareerPageValues = TLabels["cultureCareerPage"]["values"][number]

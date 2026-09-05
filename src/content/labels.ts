@@ -27,41 +27,41 @@ export const labels = {
       description:
         "Ogni azienda ha obiettivi e contesti specifici: per questo progettiamo interventi personalizzati, capaci di adattarsi alle esigenze reali del cliente e di generare valore concreto.",
       cta: "Esplora i nostri servizi",
-      areas: [
+      services: [
         {
           title: "Governance",
           slug: "governance",
-          content:
+          description:
             "Garantiamo il governo efficace dei progetti, assicurando metodo, controllo e trasparenza in ogni fase di delivery."
         },
         {
           title: "Business Intelligence",
           slug: "business-intelligence",
-          content:
+          description:
             "Supportiamo il decision making con soluzioni analitiche avanzate, trasformando i dati in insight strategici per orientare scelte consapevoli."
         },
         {
           title: "Data & Visualization",
           slug: "data-visualization",
-          content:
+          description:
             "Diamo forma ai dati attraverso strumenti di reporting e dashboarding, per rendere immediata la comprensione e l'utilizzo delle informazioni chiave."
         },
         {
           title: "Automation",
           slug: "automation",
-          content:
+          description:
             "Disegniamo e implementiamo soluzioni di automazione – dai processi RPA alle applicazioni AI – per aumentare l'efficienza operativa e liberare tempo e risorse a maggior valore aggiunto."
         },
         {
           title: "Software Development",
           slug: "software-development",
-          content:
+          description:
             "Accompagniamo i clienti lungo l'intero ciclo di vita del software – mobile, web, replatforming – con un approccio ibrido che integra consulenza organizzativa e tecnologica."
         },
         {
           title: "Expertise verticali e di settore",
           slug: "expertise-verticali",
-          content:
+          description:
             "Abbiamo una solida expertise nel Financial Services, dove supportiamo processi complessi, tecnologie abilitanti e compliance normativa: un know-how oggi applicabile anche ad altri settori."
         }
       ]
@@ -352,4 +352,4 @@ export const labels = {
       facebook: "Facebook"
     }
   }
-} as const
+}

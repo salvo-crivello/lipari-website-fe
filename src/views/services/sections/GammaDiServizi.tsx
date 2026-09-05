@@ -1,12 +1,12 @@
 import { Section } from "@/components/layout/MainComponents"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
-import ServicesRow from "@/features/services/ServicesRow"
+import ServicesRowList from "@/features/services/ServicesRowList"
 import { getLabels } from "@/lib/content-client"
 
 async function GammaDiServizi() {
   const { servicesPage, homepage } = await getLabels()
   const { title } = servicesPage.gammaDiServizi
-  const { description, areas } = homepage.services
+  const { description, services } = homepage.services
 
   return (
     <Section>
@@ -18,7 +18,7 @@ async function GammaDiServizi() {
         splitBy="line"
         stagger={0.1}
       />
-      <ServicesRow labels={areas} />
+      <ServicesRowList services={services} />
     </Section>
   )
 }

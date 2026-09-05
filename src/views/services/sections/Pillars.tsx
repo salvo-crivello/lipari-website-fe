@@ -9,7 +9,14 @@ async function Pillars() {
   return (
     <Section>
       {pillars.map((pillar, index) => (
-        <PillarShowcase key={pillar.title} pillar={pillar} index={index} />
+        <PillarShowcase
+          key={pillar.title}
+          eyebrow={pillar.eyebrow}
+          title={pillar.title}
+          image={pillar.image}
+          description={pillar.description}
+          index={index}
+        />
       ))}
     </Section>
   )

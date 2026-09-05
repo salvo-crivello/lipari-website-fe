@@ -29,7 +29,8 @@ function TimelineGallery({ labels: items }: TTimelineGalleryProps) {
         return (
           <TimelineCard
             key={item.year}
-            item={item}
+            year={item.year}
+            description={item.description}
             index={index}
             row={index + 1}
             columnClassName={cn(SM_COLUMN_START_CLASS[smColumn], COLUMN_START_CLASS[column])}
@@ -47,13 +48,14 @@ export default TimelineGallery
 // ========================================================================
 
 type TTimelineCardProps = {
-  item: TLabelsAboutpageTimelineItems
+  year: string
+  description: string
   index: number
   row: number
   columnClassName: string
 }
 
-function TimelineCard({ item, index, row, columnClassName }: TTimelineCardProps) {
+function TimelineCard({ year, description, index, row, columnClassName }: TTimelineCardProps) {
   const { isMobile } = useWindowSize()
   const cardRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
@@ -70,17 +72,17 @@ function TimelineCard({ item, index, row, columnClassName }: TTimelineCardProps)
       className={cn("@container flex flex-col gap-5", columnClassName)}
     >
       <div className="relative aspect-square w-full overflow-hidden rounded-sm">
-        <BrandImage src={`/home/${item.year}.png`} />
+        <BrandImage src={`/home/${year}.png`} />
       </div>
       <Typo.Span
-        text={item.year}
+        text={year}
         color="dark"
         className="font-mono text-[clamp(3rem,40cqw,20rem)] leading-none font-black uppercase"
         splitBy="letter"
         stagger={0.15}
       />
       <Typo.Span
-        text={item.description}
+        text={description}
         color="dark"
         variant="eyebrow"
         className="text-pretty text-slate-500 lg:text-lg"

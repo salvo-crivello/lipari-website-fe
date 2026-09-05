@@ -1,23 +1,25 @@
 import Image from "next/image"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
-import type { TLabelsCultureCareerpageAwardsItems } from "@/types/labels.types"
 
 type TAwardCardProps = {
-  award: TLabelsCultureCareerpageAwardsItems
+  image: string
+  years: string
+  title: string
+  subtitle: string
 }
 
-function AwardCard({ award }: TAwardCardProps) {
+function AwardCard({ image, years, title, subtitle }: TAwardCardProps) {
   return (
     <div className="group flex flex-col gap-10 rounded-md border-2 border-slate-700 px-8 py-10">
       <div className="relative h-33">
         <Image
-          src={award.image}
+          src={image}
           alt=""
           fill
           className="object-contain object-left mix-blend-luminosity transition-opacity duration-300 group-hover:opacity-0"
         />
         <Image
-          src={award.image}
+          src={image}
           alt=""
           fill
           aria-hidden
@@ -25,15 +27,10 @@ function AwardCard({ award }: TAwardCardProps) {
         />
       </div>
       <div className="flex flex-col gap-3">
-        <Typo.H4 text={award.years} color="light" className="text-xs!" />
+        <Typo.H4 text={years} color="light" className="text-xs!" />
         <div>
-          <Typo.Span
-            text={award.title}
-            color="brand"
-            variant={"sectionSubTitle"}
-            className="text-2xl!"
-          />
-          <Typo.P text={award.subtitle} color="light" />
+          <Typo.Span text={title} color="brand" variant={"sectionSubTitle"} className="text-2xl!" />
+          <Typo.P text={subtitle} color="light" />
         </div>
       </div>
     </div>

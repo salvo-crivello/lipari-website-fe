@@ -7,7 +7,7 @@ import ServicesAccordion from "@/features/home/ServicesAccordion"
 
 async function Services() {
   const { homepage } = await getLabels()
-  const { eyebrow, title, description, cta, areas } = homepage.services
+  const { eyebrow, title, description, cta, services } = homepage.services
 
   return (
     <Section className="overflow-x-clip">
@@ -24,7 +24,7 @@ async function Services() {
         splitBy="line"
         stagger={0.1}
       />
-      <ServicesAccordion labels={areas} />
+      <ServicesAccordion labels={services} />
       <ButtonLink
         href={ROUTES.SERVICES}
         text={cta}

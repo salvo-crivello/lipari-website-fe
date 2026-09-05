@@ -25,7 +25,14 @@ async function OpenPositions() {
 
       <div className="col-span-12 mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
         {jobs.map((job) => (
-          <JobCard key={job.slug} job={job} />
+          <JobCard
+            key={job.slug}
+            slug={job.slug}
+            title={job.title}
+            locations={job.locations}
+            tags={job.tags}
+            closed={job.closed}
+          />
         ))}
       </div>
     </Section>

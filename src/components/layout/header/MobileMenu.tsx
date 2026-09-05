@@ -18,9 +18,6 @@ type TMobileMenuProps = {
 
 export function MobileMenu({ items, labels }: TMobileMenuProps) {
   const [open, setOpen] = useState(false)
-  // SSR-safe "have we hydrated on the client yet" check, without the
-  // effect+setState cascade — matches the server's first paint (false) so
-  // hydration can't mismatch, then flips once the client takes over.
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -37,13 +34,6 @@ export function MobileMenu({ items, labels }: TMobileMenuProps) {
     }
   }, [open])
 
-  // Portaled to <body> instead of staying nested inside <motion.header>: the
-  // header's own y-transform (auto-hide on scroll) would otherwise become
-  // this panel's containing block for `position: fixed`, since a transformed
-  // ancestor redefines it — breaking the overlay's viewport-relative
-  // positioning whenever it renders mid-animation. Portaling keeps it a
-  // true sibling, always positioned against the real viewport, genuinely
-  // (not just coincidentally) stacked below the header's own z-100 bar.
   const menu = (
     <AnimatePresence>
       {open && (
