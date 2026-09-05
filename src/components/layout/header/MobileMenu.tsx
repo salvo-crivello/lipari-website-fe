@@ -1,28 +1,23 @@
 "use client"
-import { cn } from "@/utils"
-import { AnimatePresence, motion } from "motion/react"
-import { useEffect, useState, useSyncExternalStore } from "react"
-import { createPortal } from "react-dom"
-import { Menu, X } from "lucide-react"
-import Button, { ButtonLink } from "@/components/ui/Button/Button"
 import type { TNavItem } from "@/components/layout/header/HeaderShell.types"
-import { ROUTES } from "@/constant/routes"
+import { EASE_CUSTOM } from "@/components/motion/motionConstant"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
 import { typoVariants } from "@/components/ui/brand/Typo/Typo.styles"
+import Button, { ButtonLink } from "@/components/ui/Button/Button"
+import { ROUTES } from "@/constant/routes"
 import useRoute from "@/hooks/useRoute"
+import { cn } from "@/utils"
+import { AnimatePresence, motion } from "motion/react"
+import { Dispatch, SetStateAction, useEffect } from "react"
 
 type TMobileMenuProps = {
   items: TNavItem[]
   labels: string
+  open: boolean
+  setOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export function MobileMenu({ items, labels }: TMobileMenuProps) {
-  const [open, setOpen] = useState(false)
-  const mounted = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false
-  )
+export function MobileMenu({ items, labels, open, setOpen }: TMobileMenuProps) {
   const { isCurrentPage } = useRoute()
 
   useEffect(() => {
@@ -34,14 +29,14 @@ export function MobileMenu({ items, labels }: TMobileMenuProps) {
     }
   }, [open])
 
-  const menu = (
-    <AnimatePresence>
+  return (
+    <AnimatePresence mode="wait">
       {open && (
         <motion.div
           initial={{ opacity: 1, y: "-100%" }}
           animate={{ opacity: 1, y: "0%" }}
           exit={{ opacity: 1, y: "-100%" }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
+          transition={{ duration: 0.8, ease: EASE_CUSTOM }}
           className="bg-brand-blue-950 fixed inset-0 z-90 mt-20 flex flex-col p-10 px-4 py-10 sm:grid sm:grid-cols-3 sm:px-10"
         >
           <nav
@@ -95,19 +90,5 @@ export function MobileMenu({ items, labels }: TMobileMenuProps) {
         </motion.div>
       )}
     </AnimatePresence>
-  )
-
-  return (
-    <>
-      <Button
-        icon={open ? X : Menu}
-        variant="ghost"
-        color="primary"
-        aria-label={open ? "Chiudi menu" : "Apri menu"}
-        onClick={() => setOpen((prev) => !prev)}
-        className="relative z-110"
-      />
-      {mounted && createPortal(menu, document.body)}
-    </>
   )
 }
