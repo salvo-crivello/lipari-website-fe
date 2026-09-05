@@ -1,10 +1,10 @@
 export const labels = {
   nav: {
     home: "Home",
-    services: "Services",
-    about: "About",
+    services: "Servizi",
+    about: "Chi Siamo",
     cultureCareer: "Culture & Career",
-    contact: "Contact",
+    contact: "Contatti",
     cta: "Lavora con noi"
   },
 
@@ -175,7 +175,7 @@ export const labels = {
     },
     missionVision: {
       eyebrow: "Quello in cui crediamo",
-      missionTitle: "mission",
+      missionTitle: "La nostra mission",
       missionText:
         "Lorem ipsum dolor sit amet consectetur. Neque semper risus magna viverra nulla purus pellentesque pretium. Scelerisque id mauris feugiat suspendisse gravida.",
       visionTitle: "La nostra vision",
@@ -281,7 +281,7 @@ export const labels = {
       }
     ],
     awards: {
-      eyebrow: "Always aiming a little higher.",
+      eyebrow: "Puntiamo sempre un po' più in alto.",
       items: [
         {
           image: "/culture-career/awards/campione-della-crescita.png",
@@ -331,10 +331,10 @@ export const labels = {
     address: "Ugo Foscolo, 17 - 20099 Sesto San Giovanni (MI)",
     navRoutes: {
       home: "Home",
-      services: "Services",
-      about: "About",
+      services: "Servizi",
+      about: "Chi Siamo",
       cultureCareer: "Culture & Career",
-      contact: "Contact"
+      contact: "Contatti"
     },
     complianceRoutes: {
       whistleBlowing: "Whistleblowing",
