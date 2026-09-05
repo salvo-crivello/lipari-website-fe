@@ -1,6 +1,3 @@
-// Open positions fixture — dynamic list, not copy, so it lives in its own
-// file rather than labels.ts (see docs/content-model.md). Will eventually
-// come from the backend; the shape here is what that response should match.
 export const jobs = [
   {
     slug: "junior-business-consultant",

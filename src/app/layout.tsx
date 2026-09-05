@@ -52,7 +52,7 @@ export default function RootLayout({
     >
       <body className="text-brand-blue-950 flex min-h-full flex-col bg-slate-100 font-sans">
         <ScrollToTop />
-        <BodyOverlay />
+        {/* <BodyOverlay /> */}
         <Header />
         {children}
         <Footer />

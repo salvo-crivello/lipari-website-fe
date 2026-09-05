@@ -49,34 +49,68 @@ function ValuePhoto({ src, className }: { src: string; className?: string }) {
   )
 }
 
+// Mobile can't fit the desktop masonry (no room for a photo beside its own
+// text), so it gets its own staggered rhythm instead: photo alternates
+// left/right per value, with a small vertical nudge on the offset side, and
+// each block keeps the same scroll-parallax direction as its photo's side.
+function ValueRowMobile({
+  value,
+  index
+}: {
+  value: TLabelsCultureCareerPageValues
+  index: number
+}) {
+  const imageOnRight = index % 2 === 1
+
+  return (
+    <div className="flex flex-col gap-6">
+      <ValuePhoto
+        src={value.image}
+        className={cn("aspect-4/3 w-4/5", imageOnRight ? "mt-8 ml-auto" : "mr-auto")}
+      />
+      <ValueBlock value={value} direction={imageOnRight ? "up" : "down"} />
+    </div>
+  )
+}
+
 function ValueShowcase({ values }: TValueShowcaseProps) {
   const [talento, valorizzazione, community, benessere] = values
 
   return (
-    <div className="col-span-12 flex flex-col gap-10 py-20 lg:grid lg:grid-cols-12 lg:gap-x-6 lg:gap-y-40">
-      <ValuePhoto src={talento.image} className="lg:col-span-4 lg:col-start-1" />
-      <ValueBlock value={talento} className="lg:col-span-4 lg:col-start-6" />
+    <>
+      <div className="col-span-12 flex flex-col gap-16 py-20 lg:hidden">
+        {values.map((value, index) => (
+          <ValueRowMobile key={value.title} value={value} index={index} />
+        ))}
+      </div>
 
-      <ValuePhoto src={valorizzazione.image} className="lg:col-span-6 lg:col-start-2" />
-      <div className="flex flex-col justify-between lg:col-span-4 lg:col-end-13">
-        <div className="ml-auto w-100 lg:-translate-y-80">
-          <ValuePhoto src="/home/locations-bg.png" />
+      <div className="col-span-12 hidden py-20 lg:grid lg:grid-cols-12 lg:gap-x-6 lg:gap-y-40">
+        <ValuePhoto src={talento.image} className="lg:col-span-4 lg:col-start-1" />
+        <ValueBlock value={talento} className="lg:col-span-4 lg:col-start-6" />
+
+        <ValuePhoto src={valorizzazione.image} className="lg:col-span-6 lg:col-start-2" />
+        <div className="grid grid-cols-4 gap-x-6 lg:col-span-4 lg:col-end-13">
+          <ValuePhoto
+            src="/home/locations-bg.png"
+            className="col-span-3 col-end-5 -translate-y-20"
+          />
+
+          <ValueBlock value={valorizzazione} direction="up" className="col-span-4" />
         </div>
-        <ValueBlock value={valorizzazione} direction="up" />
-      </div>
 
-      <ValueBlock value={community} className="lg:col-span-4 lg:col-start-2" />
-      <div className="translate-y-60 lg:col-span-4 lg:col-end-12">
-        <ValuePhoto src={community.image} />
-      </div>
+        <ValueBlock value={community} className="lg:col-span-4 lg:col-start-2" />
+        <div className="translate-y-60 lg:col-span-4 lg:col-end-12">
+          <ValuePhoto src={community.image} />
+        </div>
 
-      <ValuePhoto src={benessere.image} className="aspect-3/4 lg:col-span-5 lg:col-start-2" />
-      <ValueBlock
-        value={benessere}
-        className="mt-auto mb-20 lg:col-span-4 lg:col-end-12"
-        direction="up"
-      />
-    </div>
+        <ValuePhoto src={benessere.image} className="aspect-3/4 lg:col-span-5 lg:col-start-2" />
+        <ValueBlock
+          value={benessere}
+          className="mt-auto mb-20 lg:col-span-4 lg:col-end-12"
+          direction="up"
+        />
+      </div>
+    </>
   )
 }
 

@@ -8,7 +8,7 @@ async function Intro() {
 
   return (
     <Section>
-      <Typo.H4 text={eyebrow} color="dark" className="col-span-4 md:col-span-2" />
+      <Typo.H4 text={eyebrow} color="dark" className="col-span-4 text-slate-500 md:col-span-2" />
       <Typo.H3
         color="dark"
         text={statement}

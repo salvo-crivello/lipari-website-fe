@@ -22,7 +22,7 @@ export abstract class ROUTES {
   public static readonly COMPLIANCE_ROUTES = [
     { href: ROUTES.WHISTLEBLOWING, title: "Whistleblowing" },
     { href: ROUTES.CODE_OF_ETHICS, title: "Codice Etico" },
-    { href: ROUTES.GENDER_EQUALITY_POLICY, title: "Politica di Parità di Genere" }
+    { href: ROUTES.GENDER_EQUALITY_POLICY, title: "Parità di Genere" }
   ] as const
 
   public static readonly LEGAL_ROUTES = [

@@ -47,7 +47,7 @@ export function Section({
       className={cn(
         "mx-auto grid w-full grid-cols-12 gap-4 gap-y-10 sm:gap-10",
         {
-          "px-4 py-20 sm:px-10 sm:py-20 md:py-30 2xl:py-60": !removePadding,
+          "max-w-420 px-4 py-20 sm:px-10 sm:py-20 md:py-30 2xl:py-60": !removePadding,
           "min-h-screen": isNullOrUndefined(children) || fullScreen,
           "pt-36 lg:pt-60": fullScreen
         },

@@ -37,6 +37,7 @@ export default ServicesAccordion
 // ========================================================================
 
 function ServicesAccordionList({ labels: areas }: TServicesAccordionProps) {
+  const { isLG } = useWindowSize()
   const { openId } = useAccordionRoot()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
@@ -48,7 +49,8 @@ function ServicesAccordionList({ labels: areas }: TServicesAccordionProps) {
     <ul className="col-span-12 mt-10 flex flex-col lg:col-span-8 lg:col-start-6">
       {areas.map((area, index) => {
         const isOpen = area.slug === openId
-        const isHovering = hoveredIndex === index && !isOpen
+        // Niente hover effect sotto lg: solo l'accordion open/close conta.
+        const isHovering = isLG && hoveredIndex === index && !isOpen
         const isLast = index === areas.length - 1
         const surface = isHovering ? "dark" : "light"
 

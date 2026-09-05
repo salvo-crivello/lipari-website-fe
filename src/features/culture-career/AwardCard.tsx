@@ -25,7 +25,7 @@ function AwardCard({ award }: TAwardCardProps) {
         />
       </div>
       <div className="flex flex-col gap-3">
-        <Typo.H4 text={award.years} color="light" />
+        <Typo.H4 text={award.years} color="light" className="text-xs!" />
         <div>
           <Typo.Span
             text={award.title}

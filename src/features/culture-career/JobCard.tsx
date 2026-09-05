@@ -32,7 +32,12 @@ function JobCard({ job }: TJobCardProps) {
       )}
 
       <div className="flex items-center justify-between gap-4">
-        <Typo.Span text={job.locations.join(" / ")} color="dark" variant={"eyebrow"} />
+        <Typo.Span
+          text={job.locations.join(" · ")}
+          color="dark"
+          variant={"eyebrow"}
+          className="mr-10 text-slate-500 max-sm:text-xs"
+        />
         <ButtonLink
           href={`${ROUTES.CULTURE_CAREER}/${job.slug}`}
           icon={Plus}
@@ -46,7 +51,7 @@ function JobCard({ job }: TJobCardProps) {
         />
       </div>
 
-      <div className="flex flex-1 flex-col justify-between gap-6">
+      <div className="flex flex-1 flex-col justify-between gap-6 max-sm:mt-2">
         <Typo.Span
           text={job.title}
           color="dark"

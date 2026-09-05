@@ -23,7 +23,7 @@ async function ContactCta() {
         href={ROUTES.CONTACT}
         text={cta}
         surface="light"
-        color="tertiary"
+        color="primary"
         variant="fill"
         className="col-span-12 mt-6 justify-self-start max-sm:w-full md:col-span-4 md:col-start-9 md:mt-0 md:justify-self-end"
       />

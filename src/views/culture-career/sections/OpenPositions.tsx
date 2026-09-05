@@ -9,12 +9,12 @@ async function OpenPositions() {
 
   return (
     <Section>
-      <Typo.H2 text={title} color="dark" className="col-span-12 md:col-span-9" />
       <Typo.H4
         text={eyebrow}
         color="dark"
-        className="col-span-4 text-right md:col-span-2 md:col-end-13"
+        className="col-span-4 text-slate-500 md:col-span-2 md:col-end-13 md:text-right"
       />
+      <Typo.H2 text={title} color="dark" className="col-span-12 md:col-span-9" />
       <Typo.P
         color="dark"
         text={description}

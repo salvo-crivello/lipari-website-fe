@@ -11,7 +11,7 @@ async function Locations() {
   return (
     <Section className="bg-brand-blue-950 relative overflow-hidden">
       <LocationsRoot>
-        <Typo.H4 text={eyebrow} className="col-span-4 text-slate-500 md:col-span-2" />
+        <Typo.H4 text={eyebrow} className="col-span-4 text-slate-300 md:col-span-2" />
         <Typo.P
           text={description}
           className="col-span-10 col-end-13 md:col-span-8 md:col-end-13 lg:col-span-6 lg:col-end-13 2xl:col-span-4 2xl:col-end-12"

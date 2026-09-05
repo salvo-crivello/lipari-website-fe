@@ -9,7 +9,7 @@ async function Awards() {
 
   return (
     <Section className="bg-brand-blue-950 py-30!">
-      <Typo.H4 text={eyebrow} color="light" className="col-span-12" />
+      <Typo.H4 text={eyebrow} color="light" className="col-span-12 text-slate-300" />
       <div className="col-span-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((award) => (
           <AwardCard key={`${award.title}-${award.subtitle}`} award={award} />
