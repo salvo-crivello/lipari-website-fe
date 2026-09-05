@@ -1,18 +1,5 @@
 import type { ExpressionSpecification, StyleSpecification } from "maplibre-gl"
 
-/**
- * Same layer structure/detail as OpenFreeMap's "dark" preset (landcover,
- * landuse, water, buildings, full road hierarchy, boundaries, place
- * labels — ported from https://tiles.openfreemap.org/styles/dark, fetched
- * and inspected directly since there's no style-diffing tool) — repainted
- * with this project's brand-blue scale (`app/globals.css`) instead of the
- * preset's neutral grays. No sprite/icons anywhere (place-label dots,
- * one-way arrows) and no text halos — matches the brand's Snazzy Maps
- * source design (Google Maps JS API format, hand-ported since there's no
- * automated converter to MapLibre's style spec): labels.icon off,
- * labels.text.stroke off.
- */
-
 const BRAND_BLUE = {
   100: "#e5e7f1",
   300: "#94a3db",

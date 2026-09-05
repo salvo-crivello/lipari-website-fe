@@ -10,9 +10,6 @@ import { COMMON_CONFIG } from "@/constant/commonConfig"
 import type { TLabelsHomepageLocationsDetails } from "@/types/labels.types"
 import { TDivProps } from "@/types/components.types"
 
-// Turbopack rompe il worker di maplibre-gl (bug del bundler), la mappa
-// resta vuota senza errori. Fix: serviamo il worker come file statico,
-// non bundlato — vedi scripts/copy-maplibre-worker.mjs.
 setWorkerUrl("/maplibre-gl/maplibre-gl-worker.mjs")
 
 // ========================================================================
@@ -111,10 +108,6 @@ function LocationsMap({ labels: cities, className, ...props }: TLocationsMapProp
       resizeObserver.disconnect()
       markersRef.current.forEach((marker) => marker.remove())
 
-      // Deferred: unmounting a nested createRoot synchronously here can race
-      // with React's own in-progress render of the outer tree, triggering
-      // "Attempted to synchronously unmount a root while React was already
-      // rendering". Unmount after the current render/commit has settled.
       const rootsToUnmount = markerRootsRef.current
       markerRootsRef.current = []
       queueMicrotask(() => rootsToUnmount.forEach((root) => root.unmount()))

@@ -3,10 +3,6 @@
 import { useEffect, useRef } from "react"
 import { Color, Mesh, Program, Renderer, Triangle } from "ogl"
 
-// Adapted from reactbits.dev/backgrounds/ColorBends (three.js originally) —
-// ported to ogl to match HeroAurora and avoid a second WebGL dependency.
-// Same "fullscreen triangle + derive uv from gl_FragCoord" trick, no UV
-// attribute needed on the geometry.
 const VERTEX_SHADER = `#version 300 es
 in vec2 position;
 void main() {
@@ -191,8 +187,6 @@ export function HeroColorBends({
     const resizeObserver = new ResizeObserver(resize)
     resizeObserver.observe(container)
 
-    // Target updated on pointermove, then lerped toward each frame in
-    // tick() — same smoothing idiom as HeroAurora's mouse/scroll tracking.
     const pointerTarget = [0, 0]
     function handlePointerMove(event: PointerEvent) {
       if (!container) return

@@ -17,10 +17,6 @@ export type TMotionTextSplitProps = {
   accentWordsClassName?: string
 }
 
-// Exit (hidden) is a hard reset, not an animated transition — a staggered/eased
-// exit lets a fast scroll-out catch children mid-transition (some still fading,
-// some already off), which reads as disordered once the block re-enters. Only
-// the entrance (visible) animates; hidden snaps instantly with duration: 0.
 const childVariants: Record<"up" | "down", Variants> = {
   up: {
     hidden: {
@@ -48,9 +44,6 @@ const childVariants: Record<"up" | "down", Variants> = {
   }
 }
 
-// "line" mode reveals actual wrapped visual lines, not "\n"-delimited text —
-// wrap boundaries depend on rendered width/font, so they're measured client-side
-// (offsetTop grouping) rather than assumed from the source string.
 const measurerStyle: CSSProperties = {
   position: "absolute",
   top: 0,

@@ -9,8 +9,10 @@ export type TMotionTextProgressProps = {
   duration?: number
 }
 
-// Counts up from 0 to the leading number in `text` once it scrolls into
-// view, then re-appends whatever followed the number ("%", "+", " anni", ...)
+/**
+ * Counts up from 0 to the final number in `text` once it scrolls into
+ * view (runs once); any trailing suffix (e.g. "+", "%") stays static.
+ */
 export function MotionTextProgress({ text, className, duration = 1.5 }: TMotionTextProgressProps) {
   const match = text.match(/^(\d+)(.*)$/)
   const target = match ? Number(match[1]) : null
