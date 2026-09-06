@@ -1,8 +1,8 @@
 export const AREA_IMAGES = [
-  "/home/careers-cta.png",
-  "/home/hero-gallery-1.jpeg",
-  "/home/locations-bg.png",
-  "/home/team-maria-castellana.png",
-  "/home/hero-gallery-3.png",
-  "/home/careers-cta.png"
+  "/images/service-governance.jpg",
+  "/images/service-business-intelligence.jpg",
+  "/images/service-data-visualization.jpg",
+  "/images/service-automation.jpg",
+  "/images/service-development.jpg",
+  "/images/service-expertise.jpg"
 ] as const
