@@ -65,7 +65,15 @@ function TeamRoster({ labels: members }: TTeamRosterProps) {
       {active.photo && (
         <div className="absolute top-0 left-0 z-0 grid h-full w-full grid-cols-12 justify-items-end">
           <div className="sticky top-40 col-span-3 col-end-13 ml-auto aspect-3/4 w-full overflow-hidden rounded-sm">
-            <Image src={active.photo} alt={active.name} fill className="object-cover" />
+            <div className="relative size-full">
+              <Image
+                src={active.photo}
+                alt={active.name}
+                fill
+                sizes="25vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       )}

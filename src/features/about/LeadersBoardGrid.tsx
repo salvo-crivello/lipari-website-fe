@@ -13,7 +13,13 @@ export default function LeadersBoardGrid({ labels: members }: TLeadersBoardGridP
         <div key={member.name} className="flex flex-col gap-3">
           {member.photo && (
             <div className="relative aspect-3/4 w-full overflow-hidden rounded-sm">
-              <Image src={member.photo} alt={member.name} fill className="object-cover" />
+              <Image
+                src={member.photo}
+                alt={member.name}
+                fill
+                sizes="(min-width: 1024px) 33vw, 50vw"
+                className="object-cover"
+              />
             </div>
           )}
           <div className="@container flex flex-col gap-1">

@@ -351,5 +351,68 @@ export const labels = {
       instagram: "Instagram",
       facebook: "Facebook"
     }
+  },
+
+  servicesDetailsPages: {
+    governance: {
+      metadata: {
+        title: "Governance",
+        description:
+          "Descrizione dettagliata del servizio di Governance offerto da Lipari Consulting."
+      },
+      pageContent: {
+        title: "Governance"
+      }
+    },
+    ["business-intelligence"]: {
+      metadata: {
+        title: "Business Intelligence",
+        description:
+          "Descrizione dettagliata del servizio di Business Intelligence offerto da Lipari Consulting."
+      },
+      pageContent: {
+        title: "Business Intelligence"
+      }
+    },
+    ["data-visualization"]: {
+      metadata: {
+        title: "Data Visualization",
+        description:
+          "Descrizione dettagliata del servizio di Data Visualization offerto da Lipari Consulting."
+      },
+      pageContent: {
+        title: "Data Visualization"
+      }
+    },
+    ["automation"]: {
+      metadata: {
+        title: "Automation",
+        description:
+          "Descrizione dettagliata del servizio di Automation offerto da Lipari Consulting."
+      },
+      pageContent: {
+        title: "Automation"
+      }
+    },
+    ["software-development"]: {
+      metadata: {
+        title: "Software Development",
+        description:
+          "Descrizione dettagliata del servizio di Software Development offerto da Lipari Consulting."
+      },
+      pageContent: {
+        title: "Software Development"
+      }
+    },
+    ["expertise-verticali"]: {
+      metadata: {
+        title: "Expertise Verticali",
+        description:
+          "Descrizione dettagliata del servizio di Expertise Verticali offerto da Lipari Consulting."
+      },
+      pageContent: {
+        title: "Expertise Verticali"
+      }
+    }
   }
 }

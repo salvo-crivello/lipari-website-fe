@@ -6,8 +6,14 @@ import type { TBrandImageProps } from "./BrandImage.types"
 import { cn } from "@/utils"
 
 const PLACEHOLDER = "/images/placeholder.jpeg"
+const DEFAULT_SIZES = "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
 
-export function BrandImage({ src = PLACEHOLDER, alt = "", className }: TBrandImageProps) {
+export function BrandImage({
+  src = PLACEHOLDER,
+  alt = "",
+  className,
+  sizes = DEFAULT_SIZES
+}: TBrandImageProps) {
   const [hasError, setHasError] = useState(false)
 
   return (
@@ -19,6 +25,7 @@ export function BrandImage({ src = PLACEHOLDER, alt = "", className }: TBrandIma
           src={src}
           alt={alt}
           fill
+          sizes={sizes}
           className={cn("relative z-0 object-cover grayscale", className)}
           onError={() => setHasError(true)}
         />

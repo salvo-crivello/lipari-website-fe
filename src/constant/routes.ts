@@ -36,4 +36,15 @@ export abstract class ROUTES {
     { href: "#", label: "Instagram" },
     { href: "#", label: "Facebook" }
   ] as const
+
+  public static readonly SLUGS_SERVICES = {
+    GOVERNANCE: "governance",
+    BUSINESS_INTELLIGENCE: "business-intelligence",
+    DATA_VISUALIZATION: "data-visualization",
+    AUTOMATION: "automation",
+    SOFTWARE_DEVELOPMENT: "software-development",
+    EXPERTISE_VERTICALI: "expertise-verticali"
+  } as const
 }
+
+export type TSlugServices = (typeof ROUTES.SLUGS_SERVICES)[keyof typeof ROUTES.SLUGS_SERVICES]

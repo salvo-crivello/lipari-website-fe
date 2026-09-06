@@ -10,11 +10,11 @@ export async function Hero() {
 
   return (
     <div className="bg-brand-blue-950 relative">
-      <Section className="relative z-10 min-h-screen grid-rows-[1fr_auto] sm:items-end" fullScreen>
-        <Typo.H1 text={LL.title} className="col-span-12 flex-1 sm:col-span-9" />
+      <Section className="relative z-10 min-h-screen grid-rows-[1fr_auto] lg:items-end" fullScreen>
+        <Typo.H1 text={LL.title} className="col-span-12 flex-1 lg:col-span-9" />
         <Typo.P
           text={LL.subtitle}
-          className="col-span-8 text-right max-sm:col-start-5 sm:col-span-3"
+          className="col-span-8 text-right max-lg:col-start-5 lg:col-span-3"
           splitBy="line"
           stagger={0.1}
         />

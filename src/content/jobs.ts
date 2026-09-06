@@ -12,7 +12,15 @@ export const jobs = [
       "Teamwork",
       "Disponibilità trasferta"
     ],
-    closed: false
+    closed: false,
+    metadata: {
+      title: "Junior Business Consultant",
+      description:
+        "Junior Business Consultant in Lipari Consulting: scopri il ruolo, i requisiti e come candidarti."
+    },
+    pageContent: {
+      title: "Junior Business Consultant"
+    }
   },
   {
     slug: "business-consultant",
@@ -28,7 +36,15 @@ export const jobs = [
       "Teamwork",
       "Disponibilità trasferta"
     ],
-    closed: false
+    closed: false,
+    metadata: {
+      title: "Business Consultant",
+      description:
+        "Business Consultant in Lipari Consulting: scopri il ruolo, i requisiti e come candidarti."
+    },
+    pageContent: {
+      title: "Business Consultant"
+    }
   },
   {
     slug: "junior-developer",
@@ -41,7 +57,15 @@ export const jobs = [
       "Teamwork",
       "Interesse digital transformation"
     ],
-    closed: false
+    closed: false,
+    metadata: {
+      title: "Junior Developer",
+      description:
+        "Junior Developer in Lipari Consulting: scopri il ruolo, i requisiti e come candidarti."
+    },
+    pageContent: {
+      title: "Junior Developer"
+    }
   },
   {
     slug: "mid-senior-developer",
@@ -54,7 +78,15 @@ export const jobs = [
       "Teamwork",
       "Interesse digital transformation"
     ],
-    closed: true
+    closed: true,
+    metadata: {
+      title: "Mid/Senior Developer",
+      description:
+        "Mid/Senior Developer in Lipari Consulting: scopri il ruolo, i requisiti e come candidarti."
+    },
+    pageContent: {
+      title: "Mid/Senior Developer"
+    }
   },
   {
     slug: "account-manager",
@@ -70,6 +102,14 @@ export const jobs = [
       "Teamwork",
       "Disponibilità trasferta"
     ],
-    closed: true
+    closed: true,
+    metadata: {
+      title: "Account Manager",
+      description:
+        "Account Manager in Lipari Consulting: scopri il ruolo, i requisiti e come candidarti."
+    },
+    pageContent: {
+      title: "Account Manager"
+    }
   }
 ]

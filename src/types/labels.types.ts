@@ -19,3 +19,6 @@ export type TLabelsCultureCareerPageValues = TLabels["cultureCareerPage"]["value
 export type TLabelsCultureCareerpageAwardsItems =
   TLabels["cultureCareerPage"]["awards"]["items"][number]
 export type TLabelsFooter = TLabels["footer"]
+export type TLabelsServicesDetailsPages = TLabels["servicesDetailsPages"]
+export type TLabelsServiceDetailPage =
+  TLabelsServicesDetailsPages[keyof TLabelsServicesDetailsPages]

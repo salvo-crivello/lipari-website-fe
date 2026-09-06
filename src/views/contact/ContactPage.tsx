@@ -4,7 +4,7 @@ import { PageInProgress } from "@/components/ui/PageInProgress/PageInProgress"
 export function ContactPage() {
   return (
     <Main>
-      <PageInProgress />
+      <PageInProgress pageName="Contatti" />
     </Main>
   )
 }

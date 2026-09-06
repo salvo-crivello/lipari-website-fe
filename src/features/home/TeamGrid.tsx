@@ -19,7 +19,13 @@ function TeamGrid({ labels: members }: TTeamGridProps) {
         <div key={member.name} className="flex flex-col gap-3">
           {member.photo && (
             <div className="relative aspect-3/4 w-full overflow-hidden rounded-sm">
-              <Image src={member.photo} alt={member.name} fill className="object-cover" />
+              <Image
+                src={member.photo}
+                alt={member.name}
+                fill
+                sizes="50vw"
+                className="object-cover"
+              />
             </div>
           )}
           <div className="flex flex-col gap-1">
