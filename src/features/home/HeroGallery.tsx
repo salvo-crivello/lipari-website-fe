@@ -66,7 +66,13 @@ function GalleryImage({ src, startMarginTop, progress }: TGalleryImageProps) {
       style={{ marginTop }}
       className={cn("relative aspect-3/4 w-65 shrink-0 overflow-hidden rounded-sm sm:w-100")}
     >
-      <Image src={src} alt="" fill className="object-cover" />
+      <Image
+        src={src}
+        alt=""
+        fill
+        sizes="(min-width: 640px) 400px, 260px"
+        className="object-cover"
+      />
     </motion.div>
   )
 }

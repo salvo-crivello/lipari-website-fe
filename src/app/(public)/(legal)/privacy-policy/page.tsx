@@ -1,14 +1,8 @@
 import type { Metadata } from "next"
-
 import { LegalPage } from "@/views/legal/LegalPage"
-import { PageInProgress } from "@/components/ui/PageInProgress/PageInProgress"
 
 export const metadata: Metadata = { title: "Privacy Policy" }
 
 export default function Page() {
-  return (
-    <LegalPage title="Privacy Policy">
-      <PageInProgress />
-    </LegalPage>
-  )
+  return <LegalPage pageName="Privacy Policy" />
 }

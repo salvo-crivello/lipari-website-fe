@@ -1,5 +1,6 @@
 import { labels as fallbackLabels } from "@/content/labels"
 import { jobs as fallbackJobs } from "@/content/jobs"
+import { ROUTES, type TSlugServices } from "@/constant/routes"
 import type { TLabels } from "@/types/labels.types"
 import type { TJob } from "@/types/jobs.types"
 
@@ -20,4 +21,13 @@ export async function getLabels(): Promise<TLabels> {
  */
 export async function getJobs(): Promise<TJob[]> {
   return [...fallbackJobs]
+}
+
+export function isServiceSlug(slug: string): slug is TSlugServices {
+  return Object.values(ROUTES.SLUGS_SERVICES).includes(slug as TSlugServices)
+}
+
+export async function getJobBySlug(slug: string): Promise<TJob | undefined> {
+  const jobs = await getJobs()
+  return jobs.find((job) => job.slug === slug)
 }

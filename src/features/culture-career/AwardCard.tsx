@@ -16,12 +16,14 @@ function AwardCard({ image, years, title, subtitle }: TAwardCardProps) {
           src={image}
           alt=""
           fill
+          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
           className="object-contain object-left mix-blend-luminosity transition-opacity duration-300 group-hover:opacity-0"
         />
         <Image
           src={image}
           alt=""
           fill
+          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
           aria-hidden
           className="object-contain object-left opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         />
