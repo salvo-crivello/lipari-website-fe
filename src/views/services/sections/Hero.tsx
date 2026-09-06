@@ -14,7 +14,7 @@ export async function Hero() {
       </Section>
       <div className="absolute inset-0 z-0">
         <Image src="/services/hero-bg.png" alt="" fill className="object-cover grayscale" />
-        <div className="from-brand-blue-950/0 to-brand-blue-950 absolute inset-0 bg-gradient-to-b" />
+        <div className="from-brand-green/20 to-brand-blue-950 absolute inset-0 bg-gradient-to-b" />
       </div>
     </div>
   )

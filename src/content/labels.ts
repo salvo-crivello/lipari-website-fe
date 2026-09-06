@@ -87,21 +87,25 @@ export const labels = {
         {
           name: "Giovanni Lipari",
           role: "Chief Executive Officer",
-          photo: "/home/hero-gallery-3.png"
+          photo: "/images/team-giovanni-lipari.png"
         },
         {
           name: "Patrizia Manganaro",
           role: "Executive Director",
-          photo: "/home/team-maria-castellana.png"
+          photo: "/images/team-patrizia-manganaro.png"
         },
         {
           name: "Santo Orlando",
           role: "Chief Technology Officer",
-          photo: "/home/hero-gallery-3.png"
+          photo: "/images/team-santo-orlando.png"
         },
-        { name: "Maria Castellana", role: "HR Director", photo: "/home/team-maria-castellana.png" },
-        { name: "Gianvito Parrinello", role: "COO", photo: "/home/hero-gallery-3.png" },
-        { name: "Dario Messina", role: "CFO", photo: "/home/team-maria-castellana.png" }
+        {
+          name: "Maria Castellana",
+          role: "HR Director",
+          photo: "/images/team-maria-castellana.png"
+        },
+        { name: "Gianvito Parrinello", role: "COO", photo: "/images/team-gianvito-parrinello.png" },
+        { name: "Dario Messina", role: "CFO", photo: "/images/team-dario-messina.png" }
       ]
     },
     careersCta: {
