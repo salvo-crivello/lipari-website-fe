@@ -55,7 +55,7 @@ const GALLERY_IMAGES = [
   { src: "/home/hero-gallery-1.jpeg", startMarginTop: 100 },
   { src: "/home/hero-gallery-2.jpeg", startMarginTop: 200 },
   { src: "/home/hero-gallery-3.png", startMarginTop: 300 },
-  { src: "/home/hero-gallery-1.jpeg", startMarginTop: 400 }
+  { src: "/home/hero-gallery-4.jpg", startMarginTop: 400 }
 ] as const
 
 function GalleryImage({ src, startMarginTop, progress }: TGalleryImageProps) {

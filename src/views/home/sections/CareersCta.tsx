@@ -26,7 +26,7 @@ async function CareersCta() {
       </div>
 
       <div className="relative col-span-12 mt-10 aspect-square overflow-hidden rounded-md lg:col-span-4 lg:col-start-9 lg:mt-0 2xl:aspect-4/3">
-        <BrandImage src="/home/careers-cta.png" className="object-cover" />
+        <BrandImage src="/images/culture-community.png" className="object-cover" />
       </div>
     </Section>
   )

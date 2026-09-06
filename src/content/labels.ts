@@ -261,25 +261,21 @@ export const labels = {
     values: [
       {
         title: "Sviluppo del talento",
-        image: "/home/hero-gallery-1.jpeg",
         description:
           "Offriamo percorsi formativi personalizzati per valorizzare le competenze individuali e sviluppare nuove capacità professionali."
       },
       {
         title: "Valorizzazione personale",
-        image: "/home/team-maria-castellana.png",
         description:
           "Riconosciamo l'unicità di ogni persona, offrendo un ambiente che valorizza i talenti e permette di esprimere appieno il proprio potenziale."
       },
       {
         title: "Community",
-        image: "/home/careers-cta.png",
         description:
           "Costruiamo una comunità forte e coesa, basata sulla condivisione di conoscenze e sulla collaborazione tra tutti i membri del team."
       },
       {
         title: "Benessere e inclusione",
-        image: "/home/hero-gallery-3.png",
         description:
           "Promuoviamo un ambiente di lavoro inclusivo dove il benessere fisico e mentale delle persone è una priorità assoluta."
       }

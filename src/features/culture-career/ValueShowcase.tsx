@@ -12,6 +12,13 @@ type TValueShowcaseProps = {
   values: readonly TLabelsCultureCareerPageValues[]
 }
 
+const VALUE_IMAGES = [
+  "/images/culture-talento.jpg",
+  "/images/culture-valorizzazione.jpg",
+  "/images/culture-community.png",
+  "/images/culture-benessere-inclusione.jpg"
+] as const
+
 function ValueBlock({
   title,
   description,
@@ -90,24 +97,27 @@ function ValueShowcase({ values }: TValueShowcaseProps) {
             key={value.title}
             title={value.title}
             description={value.description}
-            image={value.image}
+            image={VALUE_IMAGES[index]}
             index={index}
           />
         ))}
       </div>
 
       <div className="col-span-12 hidden py-20 lg:grid lg:grid-cols-12 lg:gap-x-6 lg:gap-y-40">
-        <ValuePhoto src={talento.image} className="lg:col-span-4 lg:col-start-1" />
+        <ValuePhoto src="/images/culture-talento.jpg" className="lg:col-span-4 lg:col-start-1" />
         <ValueBlock
           title={talento.title}
           description={talento.description}
           className="lg:col-span-4 lg:col-start-6"
         />
 
-        <ValuePhoto src={valorizzazione.image} className="lg:col-span-6 lg:col-start-2" />
+        <ValuePhoto
+          src="/images/culture-valorizzazione.jpg"
+          className="lg:col-span-6 lg:col-start-2"
+        />
         <div className="grid grid-cols-4 gap-x-6 lg:col-span-4 lg:col-end-13">
           <ValuePhoto
-            src="/home/locations-bg.png"
+            src="/images/culture-teamwork.jpeg"
             className="col-span-3 col-end-5 -translate-y-20"
           />
 
@@ -125,10 +135,13 @@ function ValueShowcase({ values }: TValueShowcaseProps) {
           className="lg:col-span-4 lg:col-start-2"
         />
         <div className="translate-y-60 lg:col-span-4 lg:col-end-12">
-          <ValuePhoto src={community.image} />
+          <ValuePhoto src="/images/culture-community.png" />
         </div>
 
-        <ValuePhoto src={benessere.image} className="aspect-3/4 lg:col-span-5 lg:col-start-2" />
+        <ValuePhoto
+          src="/images/culture-benessere-inclusione.jpg"
+          className="aspect-3/4 lg:col-span-5 lg:col-start-2"
+        />
         <ValueBlock
           title={benessere.title}
           description={benessere.description}

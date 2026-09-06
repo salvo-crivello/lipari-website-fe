@@ -1,5 +1,5 @@
 export type TBrandImageProps = {
-  src: string
+  src?: string
   alt?: string
   className?: string
 }

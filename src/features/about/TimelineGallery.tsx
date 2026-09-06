@@ -72,7 +72,7 @@ function TimelineCard({ year, description, index, row, columnClassName }: TTimel
       className={cn("@container flex flex-col gap-5", columnClassName)}
     >
       <div className="relative aspect-square w-full overflow-hidden rounded-sm">
-        <BrandImage src={`/home/${year}.png`} />
+        <BrandImage />
       </div>
       <Typo.Span
         text={year}

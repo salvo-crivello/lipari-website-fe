@@ -5,7 +5,9 @@ import Image from "next/image"
 import type { TBrandImageProps } from "./BrandImage.types"
 import { cn } from "@/utils"
 
-export function BrandImage({ src, alt = "", className }: TBrandImageProps) {
+const PLACEHOLDER = "/images/placeholder.jpeg"
+
+export function BrandImage({ src = PLACEHOLDER, alt = "", className }: TBrandImageProps) {
   const [hasError, setHasError] = useState(false)
 
   return (
