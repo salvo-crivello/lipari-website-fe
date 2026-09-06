@@ -15,25 +15,33 @@ export async function Hero() {
         <Typo.P
           text={LL.subtitle}
           className="col-span-8 text-right max-sm:col-start-5 sm:col-span-3"
+          splitBy="line"
+          stagger={0.1}
         />
       </Section>
       <Section className="relative z-10">
-        <Typo.H4 text={LL.caption} className="col-span-4 md:col-span-2" />
+        <Typo.H4 text={LL.caption} className="col-span-4 text-slate-300 md:col-span-2" />
         <Typo.H3
           className="col-span-12 md:col-span-10 2xl:col-span-9 2xl:col-start-4"
           text={LL.heading1}
+          splitBy="line"
+          stagger={0.1}
         />
         <Typo.P
           className="col-span-10 max-md:col-end-13 md:col-span-5 md:col-start-3 2xl:col-span-3 2xl:col-start-4"
           text={LL.paragraph1}
+          splitBy="line"
+          stagger={0.1}
         />
         <Typo.P
           className="col-span-10 max-md:col-end-13 md:col-span-5 md:col-start-8 md:row-start-3 2xl:col-span-3 2xl:col-start-7"
           text={LL.paragraph2}
+          splitBy="line"
+          stagger={0.1}
         />
       </Section>
       <HeroGallery className="z-10" />
-      <div className="deborder2 absolute inset-0 z-0 overflow-clip">
+      <div className="absolute inset-0 z-0 overflow-clip">
         <HeroColorBends className="sticky top-0 h-screen w-full" />
       </div>
     </div>

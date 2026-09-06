@@ -1,0 +1,31 @@
+body[data-debug="true"] [data-debug-level="1"] {
+  outline: 2px solid red;
+}
+
+body[data-debug="true"] [data-debug-level="2"] {
+  outline: 1px solid orange;
+}
+
+body[data-debug="true"] [data-debug-level="3"] {
+  outline: 1px solid yellow;
+}
+
+body[data-debug="true"] [data-debug-level="4"] {
+  outline: 1px solid lime;
+}
+
+body[data-debug="true"] [data-debug-level="5"] {
+  outline: 1px solid cyan;
+}
+
+body[data-debug="true"] [data-debug-level="6"] {
+  outline: 1px solid blue;
+}
+
+body[data-debug="true"] [data-debug-level="7"] {
+  outline: 1px solid violet;
+}
+
+body[data-debug="true"] [data-debug-level="8"] {
+  outline: 1px solid magenta;
+}

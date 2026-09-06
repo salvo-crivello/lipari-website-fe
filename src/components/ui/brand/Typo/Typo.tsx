@@ -21,13 +21,35 @@ function createTypo<T extends TTypoTag>(tag: T) {
     className,
     text,
     disableMotion = false,
+    animateNow,
+    delay,
+    splitBy,
+    whiteSpacePreLine,
+    direction,
+    stagger,
+    accentWords,
+    accentWordsClassName,
     ...props
   }: TTypo): ReactElement {
     const Tag = tag as TTypoTag
 
     return (
       <Tag className={cn(typoVariants({ variant, color }), className)} {...props}>
-        {!disableMotion && isNotBlankOrEmpty(text) ? <MotionTextSplit text={text} /> : text}
+        {!disableMotion && isNotBlankOrEmpty(text) ? (
+          <MotionTextSplit
+            text={text}
+            animateNow={animateNow}
+            delay={delay}
+            splitBy={splitBy}
+            whiteSpacePreLine={whiteSpacePreLine}
+            direction={direction}
+            stagger={stagger}
+            accentWords={accentWords}
+            accentWordsClassName={accentWordsClassName}
+          />
+        ) : (
+          text
+        )}
       </Tag>
     )
   }

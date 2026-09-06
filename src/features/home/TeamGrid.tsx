@@ -2,12 +2,10 @@
 import Image from "next/image"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
 import { useWindowSize } from "@/hooks/useWindowSize"
-import type { TLabels } from "@/types/labels.types"
-
-type TTeamMember = TLabels["homepage"]["team"]["members"][number]
+import type { TLabelsHomepageTeamMembers } from "@/types/labels.types"
 
 type TTeamGridProps = {
-  labels: readonly TTeamMember[]
+  labels: readonly TLabelsHomepageTeamMembers[]
 }
 
 function TeamGrid({ labels: members }: TTeamGridProps) {

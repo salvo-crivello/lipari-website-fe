@@ -6,15 +6,15 @@ import { MapPin } from "lucide-react"
 import { MapLibreMap, Marker, setWorkerUrl } from "maplibre-gl"
 import "maplibre-gl/dist/maplibre-gl.css"
 import { locationsMapStyle } from "@/features/home/locationsMapStyle"
-import type { TLabels } from "@/types/labels.types"
+import { COMMON_CONFIG } from "@/constant/commonConfig"
+import type { TLabelsHomepageLocationsDetails } from "@/types/labels.types"
 import { TDivProps } from "@/types/components.types"
 
-// Turbopack breaks maplibre-gl's bundled worker (drops its sibling-file
-// import, silently killing vector tile loading) — serve it as a static,
-// unbundled file instead. See scripts/copy-maplibre-worker.mjs.
 setWorkerUrl("/maplibre-gl/maplibre-gl-worker.mjs")
 
-type TCity = TLabels["homepage"]["locations"]["locationsDetails"][number]
+// ========================================================================
+// LocationsRoot
+// ========================================================================
 
 type TLocationsRootContext = {
   activeIndex: number
@@ -46,10 +46,17 @@ export function LocationsRoot({ children, defaultActiveIndex = 0 }: TLocationsRo
   )
 }
 
+// ========================================================================
+// LocationsMap
+// ========================================================================
+
 type TLocationsMapProps = {
-  labels: readonly TCity[]
+  labels: readonly TLabelsHomepageLocationsDetails[]
 } & TDivProps
 
+/**
+ * Interactive map displaying the locations of the cities.
+ */
 function LocationsMap({ labels: cities, className, ...props }: TLocationsMapProps) {
   const { activeIndex, setActiveIndex } = useLocationsRoot()
   const containerRef = useRef<HTMLDivElement>(null)
@@ -65,8 +72,10 @@ function LocationsMap({ labels: cities, className, ...props }: TLocationsMapProp
     const map = new MapLibreMap({
       container: containerRef.current,
       style: locationsMapStyle,
-      center: initialCoords ? [initialCoords.lng, initialCoords.lat] : [12.9, 40.9],
-      zoom: initialCoords ? 16 : 4.3,
+      center: initialCoords
+        ? [initialCoords.lng, initialCoords.lat]
+        : COMMON_CONFIG.MAP_DEFAULT_CENTER,
+      zoom: initialCoords ? COMMON_CONFIG.MAP_CITY_ZOOM : COMMON_CONFIG.MAP_OVERVIEW_ZOOM,
       attributionControl: { compact: true }
     })
     mapRef.current = map
@@ -98,8 +107,11 @@ function LocationsMap({ labels: cities, className, ...props }: TLocationsMapProp
     return () => {
       resizeObserver.disconnect()
       markersRef.current.forEach((marker) => marker.remove())
-      markerRootsRef.current.forEach((root) => root.unmount())
+
+      const rootsToUnmount = markerRootsRef.current
       markerRootsRef.current = []
+      queueMicrotask(() => rootsToUnmount.forEach((root) => root.unmount()))
+
       map.remove()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -114,7 +126,11 @@ function LocationsMap({ labels: cities, className, ...props }: TLocationsMapProp
 
     const coords = cities[activeIndex]?.position
     if (coords && mapRef.current) {
-      mapRef.current.flyTo({ center: [coords.lng, coords.lat], zoom: 16, duration: 800 })
+      mapRef.current.flyTo({
+        center: [coords.lng, coords.lat],
+        zoom: COMMON_CONFIG.MAP_CITY_ZOOM,
+        duration: COMMON_CONFIG.MAP_FLY_TO_DURATION_MS
+      })
     }
   }, [activeIndex, cities])
 

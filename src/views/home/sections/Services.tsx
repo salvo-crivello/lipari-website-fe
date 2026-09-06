@@ -7,11 +7,11 @@ import ServicesAccordion from "@/features/home/ServicesAccordion"
 
 async function Services() {
   const { homepage } = await getLabels()
-  const { eyebrow, title, description, cta, areas } = homepage.services
+  const { eyebrow, title, description, cta, services } = homepage.services
 
   return (
     <Section className="overflow-x-clip">
-      <Typo.H4 text={eyebrow} color="dark" className="col-span-4 md:col-span-2" />
+      <Typo.H4 text={eyebrow} color="dark" className="col-span-4 text-slate-500 md:col-span-2" />
       <Typo.H2
         color="dark"
         text={title}
@@ -21,8 +21,10 @@ async function Services() {
         color="dark"
         text={description}
         className="col-span-10 col-end-13 md:col-span-8 md:col-end-13 lg:col-span-6 lg:col-end-13 2xl:col-span-4 2xl:col-end-12"
+        splitBy="line"
+        stagger={0.1}
       />
-      <ServicesAccordion labels={areas} />
+      <ServicesAccordion labels={services} />
       <ButtonLink
         href={ROUTES.SERVICES}
         text={cta}

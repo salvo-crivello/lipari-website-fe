@@ -1,7 +1,7 @@
-import Image from "next/image"
 import { Section } from "@/components/layout/MainComponents"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
 import { ButtonLink } from "@/components/ui/Button/Button"
+import { BrandImage } from "@/components/ui/brand/BrandImage/BrandImage"
 import { getLabels } from "@/lib/content-client"
 import { ROUTES } from "@/constant/routes"
 
@@ -26,9 +26,7 @@ async function CareersCta() {
       </div>
 
       <div className="relative col-span-12 mt-10 aspect-square overflow-hidden rounded-md lg:col-span-4 lg:col-start-9 lg:mt-0 2xl:aspect-4/3">
-        <Image src="/home/careers-cta.png" alt="" fill className="object-cover" />
-
-        <div className="bg-brand-green absolute inset-0 mix-blend-multiply" />
+        <BrandImage src="/images/culture-community.png" className="object-cover" />
       </div>
     </Section>
   )

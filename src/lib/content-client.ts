@@ -1,5 +1,7 @@
 import { labels as fallbackLabels } from "@/content/labels"
+import { jobs as fallbackJobs } from "@/content/jobs"
 import type { TLabels } from "@/types/labels.types"
+import type { TJob } from "@/types/jobs.types"
 
 /**
  * Server-side fetcher, called from Server Components / generateMetadata.
@@ -10,4 +12,12 @@ import type { TLabels } from "@/types/labels.types"
  */
 export async function getLabels(): Promise<TLabels> {
   return fallbackLabels
+}
+
+/**
+ * Same fixture-today/backend-tomorrow contract as getLabels(), but for the
+ * dynamic open-positions list rather than copy.
+ */
+export async function getJobs(): Promise<TJob[]> {
+  return [...fallbackJobs]
 }

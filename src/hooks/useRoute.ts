@@ -1,6 +1,5 @@
 "use client"
 
-import { ROUTES } from "@/constant/routes"
 import { usePathname } from "next/navigation"
 
 type TUseRoute = {
@@ -16,15 +15,13 @@ export default function useRoute(): TUseRoute {
   const pathname = usePathname()
 
   /**
-   * Checks whether the given route is the current page or a parent route
-   * of the current pathname.
+   * Checks whether the given route is exactly the current pathname.
    *
    * @param href - The route path to check.
-   * @returns `true` if the route is currently active, otherwise `false`.
+   * @returns `true` if the route is exactly the current pathname, otherwise `false`.
    */
   function isCurrentPage(href: string): boolean {
-    if (href === ROUTES.HOME) return pathname === ROUTES.HOME
-    return pathname === href || pathname.startsWith(`${href}/`)
+    return pathname === href
   }
 
   return { isCurrentPage }

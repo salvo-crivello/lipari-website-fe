@@ -3,10 +3,13 @@ import { Roboto, Roboto_Condensed, Roboto_Mono } from "next/font/google"
 
 import { Footer } from "@/components/layout/Footer"
 import { Header } from "@/components/layout/Header"
+import { DebugLayout } from "@/components/debug-layout/DebugLayout"
 
 import "./globals.css"
 import { BodyOverlay } from "@/components/layout/MainComponents"
 import { ScrollToTop } from "@/components/motion/ScrollToTop"
+import { isDevelopmentMode } from "@/utils"
+import { COMMON_CONFIG } from "@/constant/commonConfig"
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -28,8 +31,8 @@ const robotoCondensed = Roboto_Condensed({
 
 export const metadata: Metadata = {
   title: {
-    default: "Lipari Consulting",
-    template: "%s | Lipari Consulting"
+    default: COMMON_CONFIG.APP_NAME,
+    template: `%s | ${COMMON_CONFIG.APP_NAME}`
   },
   description: "Il valore in ognuno di noi."
 }
@@ -49,10 +52,11 @@ export default function RootLayout({
     >
       <body className="text-brand-blue-950 flex min-h-full flex-col bg-slate-100 font-sans">
         <ScrollToTop />
-        <BodyOverlay />
+        {/* <BodyOverlay /> */}
         <Header />
         {children}
         <Footer />
+        {isDevelopmentMode() && <DebugLayout />}
       </body>
     </html>
   )

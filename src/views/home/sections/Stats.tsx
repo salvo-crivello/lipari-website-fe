@@ -9,7 +9,7 @@ async function Stats() {
 
   return (
     <Section className="bg-brand-blue-950">
-      <Typo.H4 text={eyebrow} className="col-span-4 md:col-span-2" />
+      <Typo.H4 text={eyebrow} className="col-span-4 text-slate-300 md:col-span-2" />
       <Typo.H3 text={quote} className="col-span-12 md:col-span-10 md:col-start-3 2xl:col-span-7" />
 
       <div className="col-span-12 mt-10 grid grid-cols-2 gap-x-10 gap-y-16 md:col-span-10 md:col-start-3 lg:mt-16 lg:grid-cols-9">

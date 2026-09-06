@@ -1,10 +1,10 @@
 export const labels = {
   nav: {
     home: "Home",
-    services: "Services",
-    about: "About",
+    services: "Servizi",
+    about: "Chi Siamo",
     cultureCareer: "Culture & Career",
-    contact: "Contact",
+    contact: "Contatti",
     cta: "Lavora con noi"
   },
 
@@ -27,41 +27,41 @@ export const labels = {
       description:
         "Ogni azienda ha obiettivi e contesti specifici: per questo progettiamo interventi personalizzati, capaci di adattarsi alle esigenze reali del cliente e di generare valore concreto.",
       cta: "Esplora i nostri servizi",
-      areas: [
+      services: [
         {
           title: "Governance",
           slug: "governance",
-          content:
+          description:
             "Garantiamo il governo efficace dei progetti, assicurando metodo, controllo e trasparenza in ogni fase di delivery."
         },
         {
           title: "Business Intelligence",
           slug: "business-intelligence",
-          content:
+          description:
             "Supportiamo il decision making con soluzioni analitiche avanzate, trasformando i dati in insight strategici per orientare scelte consapevoli."
         },
         {
           title: "Data & Visualization",
           slug: "data-visualization",
-          content:
+          description:
             "Diamo forma ai dati attraverso strumenti di reporting e dashboarding, per rendere immediata la comprensione e l'utilizzo delle informazioni chiave."
         },
         {
           title: "Automation",
           slug: "automation",
-          content:
+          description:
             "Disegniamo e implementiamo soluzioni di automazione – dai processi RPA alle applicazioni AI – per aumentare l'efficienza operativa e liberare tempo e risorse a maggior valore aggiunto."
         },
         {
           title: "Software Development",
           slug: "software-development",
-          content:
+          description:
             "Accompagniamo i clienti lungo l'intero ciclo di vita del software – mobile, web, replatforming – con un approccio ibrido che integra consulenza organizzativa e tecnologica."
         },
         {
           title: "Expertise verticali e di settore",
           slug: "expertise-verticali",
-          content:
+          description:
             "Abbiamo una solida expertise nel Financial Services, dove supportiamo processi complessi, tecnologie abilitanti e compliance normativa: un know-how oggi applicabile anche ad altri settori."
         }
       ]
@@ -87,21 +87,25 @@ export const labels = {
         {
           name: "Giovanni Lipari",
           role: "Chief Executive Officer",
-          photo: "/home/hero-gallery-3.png"
+          photo: "/images/team-giovanni-lipari.png"
         },
         {
           name: "Patrizia Manganaro",
           role: "Executive Director",
-          photo: "/home/team-maria-castellana.png"
+          photo: "/images/team-patrizia-manganaro.png"
         },
         {
           name: "Santo Orlando",
           role: "Chief Technology Officer",
-          photo: "/home/hero-gallery-3.png"
+          photo: "/images/team-santo-orlando.png"
         },
-        { name: "Maria Castellana", role: "HR Director", photo: "/home/team-maria-castellana.png" },
-        { name: "Gianvito Parrinello", role: "COO", photo: "/home/hero-gallery-3.png" },
-        { name: "Dario Messina", role: "CFO", photo: "/home/team-maria-castellana.png" }
+        {
+          name: "Maria Castellana",
+          role: "HR Director",
+          photo: "/images/team-maria-castellana.png"
+        },
+        { name: "Gianvito Parrinello", role: "COO", photo: "/images/team-gianvito-parrinello.png" },
+        { name: "Dario Messina", role: "CFO", photo: "/images/team-dario-messina.png" }
       ]
     },
     careersCta: {
@@ -137,13 +141,6 @@ export const labels = {
         }
       ]
     },
-    contactCta: {
-      eyebrow: "Iniziamo da qui",
-      title: "Parliamo del tuo prossimo progetto.",
-      description:
-        "Ogni trasformazione inizia da una conversazione. Raccontaci le tue esigenze e scopri come possiamo supportarti con competenze strategiche, organizzative e tecnologiche.",
-      cta: "Contatta il nostro team"
-    },
     methods: {
       eyebrow: "Il nostro metodo",
       title: 'Consulenza su misura, non "one size fits all".',
@@ -171,8 +168,159 @@ export const labels = {
 
   about: {
     hero: {
-      title: "",
-      subtitle: ""
+      title: "Un partner in continua evoluzione"
+    },
+    intro: {
+      eyebrow: "in breve",
+      statement:
+        "Nati nel 2007 con l'obiettivo di affiancare le aziende nei loro percorsi di trasformazione, siamo cresciuti restando fedeli a un approccio su misura: uniamo la consulenza direzionale a quella tecnologica, la flessibilità di una boutique alla capacità di lavorare su progetti enterprise.",
+      paragraph:
+        "Oggi operiamo tra Milano e la Sicilia, e nel tempo estendiamo la nostra offerta a nuovi settori e competenze, affiancando alla consulenza organizzativa quella tecnologica."
+    },
+    missionVision: {
+      eyebrow: "Quello in cui crediamo",
+      missionTitle: "La nostra mission",
+      missionText:
+        "Lorem ipsum dolor sit amet consectetur. Neque semper risus magna viverra nulla purus pellentesque pretium. Scelerisque id mauris feugiat suspendisse gravida.",
+      visionTitle: "La nostra vision",
+      visionText:
+        "Lorem ipsum dolor sit amet consectetur. Neque semper risus magna viverra nulla purus pellentesque pretium. Scelerisque id mauris feugiat suspendisse gravida."
+    },
+    timeline: {
+      eyebrow: "traguardi raggiunti durante il viaggio",
+      items: [
+        { year: "2007", description: "Fondazione a Alcamo, da Giovanni Lipari" },
+        { year: "2016", description: "Avvio della collaborazione con l'Università di Palermo" },
+        { year: "2017", description: "10° anniversario — oltre 100 neolaureati assunti" },
+        { year: "2018", description: "Nasce Lipari Technology" },
+        { year: "2022", description: "Lancio Lipari Talent Lab" },
+        { year: "2024", description: "Best Workplaces Italia & Great Place to Work Italia" }
+      ]
+    },
+    leaders: {
+      eyebrow: "Le persone che ci ispirano ogni giorno",
+      title: "Leader board",
+      description:
+        "Lorem ipsum dolor sit amet consectetur. Neque semper risus magna viverra nulla purus pellentesque pretium. Scelerisque id mauris feugiat suspendisse gravida."
+    }
+  },
+
+  servicesPage: {
+    hero: {
+      title: "Dalla strategia all'execution"
+    },
+    intro: {
+      eyebrow: "Cosa facciamo",
+      statement:
+        "Uniamo consulenza direzionale e competenze tecnologiche in un'unica offerta. Lavoriamo su progetti end-to-end o su fasi specifiche, a seconda delle esigenze del cliente, mettendo a disposizione competenze verticali su banking, insurance, GDO, energy e media.",
+      paragraph1:
+        "Ogni intervento viene costruito attorno al contesto specifico del cliente: non proponiamo pacchetti standard, ma una combinazione di competenze e modalità di ingaggio calibrata sul singolo progetto.",
+      paragraph2:
+        "Un team multidisciplinare segue il cliente dalla definizione degli obiettivi fino al monitoraggio dei risultati, garantendo continuità anche quando affianchiamo altri fornitori o system integrator sullo stesso progetto."
+    },
+    pillars: [
+      {
+        eyebrow: "Consulting & Technology",
+        title: "Technology",
+        image: "/services/technology.jpg",
+        description:
+          "Sviluppiamo soluzioni software su misura, dalla progettazione all'implementazione. Lavoriamo su cloud, automazione e integrazione dei sistemi, mettendo la tecnologia al servizio degli obiettivi di business definiti in fase di consulenza."
+      },
+      {
+        eyebrow: "Consulting & Technology",
+        title: "Consulting",
+        image: "/services/consulting.jpg",
+        description:
+          "Progettiamo interventi di governance, analisi organizzativa e supporto decisionale. Affianchiamo i clienti nella definizione di processi, ruoli e strumenti di controllo, con un approccio orientato a risultati misurabili."
+      }
+    ],
+    gammaDiServizi: {
+      title: "Gamma di servizi"
+    }
+  },
+
+  contactCta: {
+    eyebrow: "Iniziamo da qui",
+    title: "Parliamo del tuo prossimo progetto.",
+    description:
+      "Ogni trasformazione inizia da una conversazione. Raccontaci le tue esigenze e scopri come possiamo supportarti con competenze strategiche, organizzative e tecnologiche.",
+    cta: "Contatta il nostro team"
+  },
+
+  cultureCareerPage: {
+    hero: {
+      title: "Il valore in ognuno di noi"
+    },
+    intro: {
+      eyebrow: "La nostra cultura",
+      statement:
+        "Crediamo nella cultura del talento e nell'attenzione al valore di ogni persona. Con determinazione e perseveranza è possibile sprigionare il proprio potenziale, superare i limiti, esplorare nuove strade e realizzare qualcosa di grande, a prescindere dal punto di partenza.",
+      paragraph:
+        "Costruiamo percorsi di crescita su misura, sviluppiamo competenze manageriali e incoraggiamo l'intraprendenza individuale."
+    },
+    values: [
+      {
+        title: "Sviluppo del talento",
+        description:
+          "Offriamo percorsi formativi personalizzati per valorizzare le competenze individuali e sviluppare nuove capacità professionali."
+      },
+      {
+        title: "Valorizzazione personale",
+        description:
+          "Riconosciamo l'unicità di ogni persona, offrendo un ambiente che valorizza i talenti e permette di esprimere appieno il proprio potenziale."
+      },
+      {
+        title: "Community",
+        description:
+          "Costruiamo una comunità forte e coesa, basata sulla condivisione di conoscenze e sulla collaborazione tra tutti i membri del team."
+      },
+      {
+        title: "Benessere e inclusione",
+        description:
+          "Promuoviamo un ambiente di lavoro inclusivo dove il benessere fisico e mentale delle persone è una priorità assoluta."
+      }
+    ],
+    awards: {
+      eyebrow: "Puntiamo sempre un po' più in alto.",
+      items: [
+        {
+          image: "/culture-career/awards/campione-della-crescita.png",
+          years: "2021 · 2022 · 2024",
+          title: "Campione della Crescita",
+          subtitle: "Affari e Finanza"
+        },
+        {
+          image: "/culture-career/awards/campione-della-crescita.png",
+          years: "2018 · 2019 · 2020 · 2021",
+          title: "Leader della Crescita",
+          subtitle: "Fatturato e Crescita"
+        },
+        {
+          image: "/culture-career/awards/best-workplaces-millennials.png",
+          years: "Top 20 - 2023",
+          title: "Best Workplaces Italia",
+          subtitle: "For Millennials"
+        },
+        {
+          image: "/culture-career/awards/best-workplaces-millennials.png",
+          years: "Top 20 - 2024",
+          title: "Best Workplaces Italia",
+          subtitle: "150-499 Employees"
+        }
+      ]
+    },
+    openPositions: {
+      eyebrow: "Ti rivedi in noi?",
+      title: "Scopri le opportunità in Lipari Consulting",
+      description:
+        "Ogni azienda ha obiettivi e contesti specifici: per questo progettiamo interventi personalizzati, capaci di adattarsi alle esigenze reali del cliente e di generare valore concreto."
+    },
+    contactCta: {
+      eyebrow: "Hai domande?",
+      title: "Non esitare a contattarci",
+      description:
+        "Il nostro team è sempre a disposizione per aiutarti e rispondere a qualsiasi domanda o richiesta. Ti basta un messaggio.",
+      cta: "Contatta il nostro team"
     }
   },
 
@@ -183,10 +331,10 @@ export const labels = {
     address: "Ugo Foscolo, 17 - 20099 Sesto San Giovanni (MI)",
     navRoutes: {
       home: "Home",
-      services: "Services",
-      about: "About",
+      services: "Servizi",
+      about: "Chi Siamo",
       cultureCareer: "Culture & Career",
-      contact: "Contact"
+      contact: "Contatti"
     },
     complianceRoutes: {
       whistleBlowing: "Whistleblowing",
@@ -204,4 +352,4 @@ export const labels = {
       facebook: "Facebook"
     }
   }
-} as const
+}

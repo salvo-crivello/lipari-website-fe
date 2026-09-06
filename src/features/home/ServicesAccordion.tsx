@@ -6,28 +6,18 @@ import { AnimatePresence, motion } from "motion/react"
 import { AccordionItem, AccordionRoot, useAccordionRoot } from "@/components/ui/Accordion/Accordion"
 import { ButtonLink } from "@/components/ui/Button/Button"
 import { Typo } from "@/components/ui/brand/Typo/Typo"
-import { DitherImage } from "@/components/motion/DitherImage"
+import { BrandImage } from "@/components/ui/brand/BrandImage/BrandImage"
 import { ROUTES } from "@/constant/routes"
+import { AREA_IMAGES } from "@/constant/serviceAreaImages"
 import { usePointerScrollEffect } from "@/hooks/usePointerScrollEffect"
-import type { TLabels } from "@/types/labels.types"
+import type { TLabelsHomepageServicesAreas } from "@/types/labels.types"
 import { cn } from "@/utils"
 import { useWindowSize } from "@/hooks/useWindowSize"
 
 const HOVER_SELECTOR = "data-area-index" as const
 
-const AREA_IMAGES = [
-  "/home/careers-cta.png",
-  "/home/hero-gallery-1.jpeg",
-  "/home/locations-bg.png",
-  "/home/team-maria-castellana.png",
-  "/home/hero-gallery-3.png",
-  "/home/careers-cta.png"
-] as const
-
-type TServiceArea = TLabels["homepage"]["services"]["areas"][number]
-
 type TServicesAccordionProps = {
-  labels: readonly TServiceArea[]
+  labels: readonly TLabelsHomepageServicesAreas[]
 }
 
 function ServicesAccordion({ labels: areas }: TServicesAccordionProps) {
@@ -47,6 +37,7 @@ export default ServicesAccordion
 // ========================================================================
 
 function ServicesAccordionList({ labels: areas }: TServicesAccordionProps) {
+  const { isLG } = useWindowSize()
   const { openId } = useAccordionRoot()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
@@ -58,7 +49,7 @@ function ServicesAccordionList({ labels: areas }: TServicesAccordionProps) {
     <ul className="col-span-12 mt-10 flex flex-col lg:col-span-8 lg:col-start-6">
       {areas.map((area, index) => {
         const isOpen = area.slug === openId
-        const isHovering = hoveredIndex === index && !isOpen
+        const isHovering = isLG && hoveredIndex === index && !isOpen
         const isLast = index === areas.length - 1
         const surface = isHovering ? "dark" : "light"
 
@@ -102,7 +93,7 @@ function ServicesAccordionList({ labels: areas }: TServicesAccordionProps) {
 
               <AccordionItem.Content className="flex items-end max-sm:flex-col">
                 <Typo.P
-                  text={area.content}
+                  text={area.description}
                   color={surface === "dark" ? "light" : "dark"}
                   className={cn(
                     "mr-10 sm:ml-20 2xl:ml-[50%]",
@@ -149,8 +140,7 @@ const ServicesImage = ({ labels: areas }: TServicesAccordionProps) => {
             transition={{ duration: 0.4 }}
             className="absolute inset-0"
           >
-            <DitherImage src={activeImage} dithered className="h-full w-full" />
-            <div className="bg-brand-green absolute inset-0 mix-blend-multiply" />
+            <BrandImage src={activeImage} />
           </motion.div>
         </AnimatePresence>
       </div>

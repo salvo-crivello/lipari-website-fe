@@ -5,17 +5,17 @@ import type { TNavItem } from "@/components/layout/header/HeaderShell.types"
 import useRoute from "@/hooks/useRoute"
 
 type TDesktopMenuProps = {
-  items: TNavItem[]
+  navPages: TNavItem[]
   labels: string
 }
 
-export function DesktopMenu({ items, labels }: TDesktopMenuProps) {
+export function DesktopMenu({ navPages, labels }: TDesktopMenuProps) {
   const { isCurrentPage } = useRoute()
 
   return (
     <div className="flex flex-1 items-center justify-end gap-10">
       <nav aria-label="Main" className="flex items-center gap-10">
-        {items.map((item) => (
+        {navPages.map((item) => (
           <ButtonLink
             key={item.href}
             href={item.href}
@@ -27,7 +27,7 @@ export function DesktopMenu({ items, labels }: TDesktopMenuProps) {
           />
         ))}
       </nav>
-      <Button text={labels} />
+      <Button text={labels} variant={"outline"} />
     </div>
   )
 }

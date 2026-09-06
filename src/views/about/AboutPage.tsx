@@ -1,8 +1,20 @@
+import { Main } from "@/components/layout/MainComponents"
+import { Hero } from "@/views/about/sections/Hero"
+import Intro from "./sections/Intro"
+import MissionVision from "./sections/MissionVision"
+import Timeline from "./sections/Timeline"
+import ContactCta from "./sections/ContactCta"
+import LeadersBoard from "./sections/LeadersBoard"
+
 export function AboutPage() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center py-32">
-      <h1 className="text-3xl font-semibold">About</h1>
-      <p className="mt-2 text-slate-500">Figma frame 476:1263 — pending sections build-out.</p>
-    </main>
+    <Main>
+      <Hero />
+      <Intro />
+      <MissionVision />
+      <Timeline />
+      <LeadersBoard />
+      <ContactCta />
+    </Main>
   )
 }

@@ -5,8 +5,8 @@ import { getLabels } from "@/lib/content-client"
 import { ROUTES } from "@/constant/routes"
 
 async function ContactCta() {
-  const { homepage } = await getLabels()
-  const { eyebrow, title, description, cta } = homepage.contactCta
+  const { contactCta } = await getLabels()
+  const { eyebrow, title, description, cta } = contactCta
 
   return (
     <Section>
@@ -16,12 +16,14 @@ async function ContactCta() {
         color="dark"
         text={description}
         className="col-span-10 col-end-13 md:col-span-6 md:col-start-7 lg:col-span-5 lg:col-start-8 2xl:col-span-4 2xl:col-start-9"
+        splitBy="line"
+        stagger={0.1}
       />
       <ButtonLink
         href={ROUTES.CONTACT}
         text={cta}
         surface="light"
-        color="tertiary"
+        color="primary"
         variant="fill"
         className="col-span-12 mt-6 justify-self-start max-sm:w-full md:col-span-4 md:col-start-9 md:mt-0 md:justify-self-end"
       />

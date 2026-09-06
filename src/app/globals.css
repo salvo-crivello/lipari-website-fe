@@ -35,6 +35,8 @@
   --font-condensed: var(--font-roboto-condensed);
 
   --text-md: 1rem;
+
+  --ease-custom: cubic-bezier(0.54, 0.01, 0, 1);
 }
 
 body {
