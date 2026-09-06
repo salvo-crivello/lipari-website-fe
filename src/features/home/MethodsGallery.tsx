@@ -36,6 +36,9 @@ const CARD_STYLES = [
   }
 ] as const
 
+const Y_BASE_DESKTOP = 60
+const Y_STEP_DESKTOP = 30
+
 function MethodsGallery({ labels: cards }: TMethodsGalleryProps) {
   return (
     <div className="col-span-12 mt-10 grid gap-6 lg:mt-16 lg:grid-cols-3 2xl:mt-20">
@@ -91,18 +94,24 @@ function MethodCard({
   const rotation = isMobile ? rotationMobile : -4
   const stagger = isMobile ? 0 : index * 0.18
 
+  const yStart = isMobile ? 40 : Y_BASE_DESKTOP + index * Y_STEP_DESKTOP
+
   const rotateZ = useTransform(
     scrollYProgress,
     [stagger, 0.7 + stagger * 0.6, 1],
     [rotation * 2, rotation * 0.8, 0]
   )
-  const y = useTransform(scrollYProgress, [stagger, 0.7 + stagger * 0.6, 1], [40, 8, 0])
+  const y = useTransform(
+    scrollYProgress,
+    [stagger, 0.7 + stagger * 0.6, 1],
+    [yStart, yStart * 0.2, 0]
+  )
   const scale = useTransform(scrollYProgress, [stagger, 1], [0.96, 1])
 
   return (
     <motion.div
       ref={cardRef}
-      style={{ rotateZ, y, scale }}
+      style={isMobile ? { rotateZ, y, scale } : { y }}
       className={cn("flex flex-col gap-6 rounded-sm p-6 lg:gap-10 lg:p-8 2xl:p-10", bg)}
     >
       <Icon
